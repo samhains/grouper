@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: myflix_development
+  database: grouper_development
   pool: 5
   username: zazou
   password: 
@@ -9,7 +9,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: myflix_test
+  database: grouper_test
   pool: 5
   username: zazou
   password: 
