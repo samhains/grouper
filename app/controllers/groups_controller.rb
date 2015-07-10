@@ -19,6 +19,18 @@ class GroupsController < ApplicationController
     end
   end
   
+  def show
+    @group = Group.find(params[:id])
+    @posts = @group.posts
+  end
+
+  def join
+    @group = Group.find(params[:group_id])
+    current_user.groups << @group 
+    current_user.save
+    render 'groups/show' 
+  end
+
   private
 
   def group_params

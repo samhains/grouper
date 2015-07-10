@@ -2,21 +2,34 @@ require 'rails_helper'
 
 describe GroupsController do
 
+  let(:user) { Fabricate(:user) }
+  let(:group) { Fabricate(:group) }
+  before { set_current_user user}
+
   describe 'GET #new' do
     it_behaves_like "requires sign in" do
       let(:action) { post :create }
     end
 
     it "sets @group instance variable" do
-      set_current_user
       get :new
       expect(assigns(:group)).to be_instance_of(Group)
     end
   end
 
-  describe 'POST #create' do
+  describe 'PUT #join' do
+    
+    it_behaves_like "requires sign in" do
+      let(:action) { put :join, group_id: group.id }
+    end
 
-    before { set_current_user }
+    it "associates a user with a group" do
+      put :join, group_id: group.id 
+      expect(group.reload.users).to include(user)
+    end
+  end
+
+  describe 'POST #create' do
 
     it_behaves_like "requires sign in" do
       let(:action) { post :create }
@@ -59,4 +72,28 @@ describe GroupsController do
       end
     end
   end
+
+  describe "GET #show" do
+
+    it_behaves_like "requires sign in" do
+      let(:action) { get :show, id: group.id  }
+    end
+
+    it "sets @posts to posts of the group" do
+      post1 = Fabricate(:post, group: group)
+      post2 = Fabricate(:post, group: group)
+
+      get :show, id: group.id
+      expect(assigns(:posts)).to include(post1, post2)
+    end
+
+    it "sets @posts in reverse chronological order" do
+      post1 = Fabricate(:post, group: group, created_at: 2.weeks.ago)
+      post2 = Fabricate(:post, group: group, created_at: 1.weeks.ago)
+      post3 = Fabricate(:post, group: group, created_at: 3.weeks.ago)
+      get :show, id: group.id
+      expect(assigns(:posts)).to eq([post2, post1, post3])
+    end
+  end
+
 end
