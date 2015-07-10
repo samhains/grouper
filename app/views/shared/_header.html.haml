@@ -1,20 +1,25 @@
-%section#top-header.row.navbar.navbar-default
+%section.row.navbar.navbar-default.container-fluid
   .col-md-2.navbar-header
     = link_to "GROUPER", root_path, class: 'navbar-brand'
   %ul.col-md-4.clearfix.nav.navbar-nav
-    %li= link_to "Friends"
-    %li= link_to "Groups"
-  #user_links.pull-right
-    %ul.nav.navbar-nav.navbar-right
-      %li.dropdown
-        %a(href="#" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" data-target="#")
-          Welcome, Sam Hains
-          %span.caret
-        %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
-          %li
-            =link_to "Account"
-          %li
-            =link_to "Plan and Billing"
-          %li
-            =link_to "Sign Out", logout_path
+    -if logged_in?
+      %li= link_to "Friends"
+      %li= link_to "Groups"
+    -else
+      %li= link_to "Register", register_path
+      %li= link_to "Sign In", login_path
+  -if logged_in?
+    #user_links.pull-right
+      %ul.nav.navbar-nav.navbar-right
+        %li.dropdown
+          %a(href="#" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" data-target="#")
+            Welcome, Sam Hains
+            %span.caret
+          %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
+            %li
+              =link_to "Account"
+            %li
+              =link_to "Plan and Billing"
+            %li
+              =link_to "Sign Out", logout_path
 

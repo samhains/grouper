@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'welcome#index'
+
+  root 'users#portal'
 
   get '/login', to: "sessions#new"
   post '/login', to: "sessions#create"
@@ -7,5 +8,10 @@ Rails.application.routes.draw do
   get '/logout', to: "sessions#destroy"
  
   resources :users, only: [:create, :show]
+  resources :groups do
+    member do
+      resources :posts, except: [:new]
+    end
+  end
 
 end

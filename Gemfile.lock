@@ -32,6 +32,7 @@ GEM
     autoprefixer-rails (5.2.1)
       execjs
       json
+    bcrypt (3.1.10)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -64,6 +65,9 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.7)
     execjs (2.5.2)
+    fabrication (2.13.2)
+    faker (1.4.3)
+      i18n (~> 0.5)
     haml (4.0.6)
       tilt
     haml-rails (0.9.0)
@@ -185,6 +189,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
+  bcrypt (~> 3.1.7)
   better_errors
   binding_of_caller
   bootstrap-sass
@@ -192,6 +197,8 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.0.0)
   database_cleaner (= 1.2.0)
+  fabrication
+  faker
   haml-rails (>= 0.3.4)
   jbuilder (~> 2.0)
   jquery-rails

@@ -7,6 +7,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'bootstrap_form'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
+gem 'bcrypt', '~> 3.1.7'
 
 gem 'jquery-rails'
 gem 'turbolinks'
@@ -29,6 +30,8 @@ group :development, :test do
 end
 
 group :test do
+  gem 'fabrication'
+  gem 'faker'
   gem 'database_cleaner', '1.2.0'
   gem 'shoulda-matchers'
   gem "launchy"
