@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :username
   validates_uniqueness_of :username
 
+  def belongs_to_group?(group_id)
+    self.groups.include?(Group.find(group_id))
+  end
+
 end

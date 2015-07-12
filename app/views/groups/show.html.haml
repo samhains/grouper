@@ -1,0 +1,24 @@
+.section.container
+  .row
+    .col-sm-10.col-sm-offset-1
+
+      %h1=@group.name
+      -if current_user.belongs_to_group?(@group.id)
+        =link_to group_join_path(@group), method: :put do
+          %button.btn.btn-default 
+              %span.glyphicon.glyphicon-plus 
+                Join Group
+      -else 
+        =link_to group_leave_path(@group), method: :destroy do
+          %button.btn.btn-default 
+              %span.glyphicon.glyphicon-plus 
+                Leave Group
+      %br
+      %br
+      -if current_user.belongs_to_group?(@group.id)
+        =render @posts
+        =bootstrap_form_for @post do |f|
+          =f.text_field :title
+          =f.text_area :body
+          =f.submit "Submit Post"
+        

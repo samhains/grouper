@@ -6,6 +6,21 @@ describe GroupsController do
   let(:group) { Fabricate(:group) }
   before { set_current_user user}
 
+  describe 'GET #index' do
+    it_behaves_like "requires sign in" do
+      let(:action) { get :index }
+    end
+
+    it "sets @groups to all users groups" do
+      group2 = Fabricate(:group)
+      user.groups << group
+      user.groups << group2
+      user.save
+      get :index
+      expect(assigns(:groups)).to include(group, group2)
+    end
+  end
+
   describe 'GET #new' do
     it_behaves_like "requires sign in" do
       let(:action) { post :create }
@@ -26,6 +41,11 @@ describe GroupsController do
     it "associates a user with a group" do
       put :join, group_id: group.id 
       expect(group.reload.users).to include(user)
+    end
+
+    it "redirects user to the group path" do
+      put :join, group_id: group.id 
+      expect(response).to redirect_to(group_path(group))
     end
   end
 
@@ -93,6 +113,27 @@ describe GroupsController do
       post3 = Fabricate(:post, group: group, created_at: 3.weeks.ago)
       get :show, id: group.id
       expect(assigns(:posts)).to eq([post2, post1, post3])
+    end
+
+    it "sets @post" do
+      get :show, id: group.id
+      expect(assigns(:post)).to be_instance_of(Post)
+    end
+  end
+
+  describe "delete #leave" do
+    before do 
+      user.groups << group
+      user.save
+      delete :leave, group_id: group.id 
+    end
+
+    it "removes the current users association with group" do
+      expect(user.reload.groups).to_not include(group)
+    end
+
+    it "redirects user to the root path" do
+      expect(response).to redirect_to root_path
     end
   end
 

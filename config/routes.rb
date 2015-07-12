@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :show]
   resources :groups do
     put '/join', to: "groups#join"
+    delete '/leave', to: "groups#leave"
     member do
       resources :posts, except: [:new, :index]
     end

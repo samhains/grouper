@@ -1,7 +1,9 @@
 class GroupsController < ApplicationController 
   before_action :require_user
+  before_action :find_group, only: [:leave, :join]
 
   def index
+    @groups = current_user.groups
   end
 
   def new
@@ -22,16 +24,25 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @posts = @group.posts
+    @post = Post.new
   end
 
   def join
-    @group = Group.find(params[:group_id])
     current_user.groups << @group 
     current_user.save
-    render 'groups/show' 
+    flash[:success] = "Welcome to #{ @group.name }"
+    redirect_to group_path(@group)
+  end
+
+  def leave
+    current_user.groups.delete @group
+    redirect_to root_path
   end
 
   private
+  def find_group
+    @group = Group.find(params[:group_id])
+  end
 
   def group_params
     params.require(:group).permit(:name)
