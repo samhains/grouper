@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   end
 
   def portal
+    @groups = current_user.groups
   end
 
   private

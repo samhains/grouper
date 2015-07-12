@@ -1,7 +1,24 @@
 require 'rails_helper'
 
 describe UsersController do
+  describe "GET #portal" do
+    it_behaves_like "requires sign in" do
+      let(:action) { get :portal }
+    end
 
+    it "sets @groups to all users groups" do
+      user = Fabricate(:user)
+      set_current_user user
+      group = Fabricate(:group)
+      group2 = Fabricate(:group)
+      user.groups << group
+      user.groups << group2
+      user.save
+      get :portal
+      expect(assigns(:groups)).to include(group, group2)
+    end
+
+  end
 
   describe "GET #new" do
     it "redirects to the portal page if user already logged in" do

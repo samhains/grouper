@@ -1,5 +1,9 @@
 .container
+  .header
+    .h2 ALL GROUPS
+  %br
   -@groups.each do |group|
     .span8
-      %h4 #{ group.name }
-      %small #{ group.description }
+      =link_to group_path(group) do
+        %h4 #{ group.name }
+        %small #{ group.description }

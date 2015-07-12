@@ -3,16 +3,16 @@
     .col-sm-10.col-sm-offset-1
 
       %h1=@group.name
-      -if current_user.belongs_to_group?(@group.id)
+      -unless current_user.belongs_to_group?(@group.id)
         =link_to group_join_path(@group), method: :put do
           %button.btn.btn-default 
-              %span.glyphicon.glyphicon-plus 
-                Join Group
+            %span.glyphicon.glyphicon-plus 
+              Join Group
       -else 
-        =link_to group_leave_path(@group), method: :destroy do
+        =link_to group_leave_path(@group), method: :delete do
           %button.btn.btn-default 
-              %span.glyphicon.glyphicon-plus 
-                Leave Group
+            %span.glyphicon.glyphicon-minus
+              Leave Group
       %br
       %br
       -if current_user.belongs_to_group?(@group.id)

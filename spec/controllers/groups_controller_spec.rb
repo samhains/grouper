@@ -7,15 +7,8 @@ describe GroupsController do
   before { set_current_user user}
 
   describe 'GET #index' do
-    it_behaves_like "requires sign in" do
-      let(:action) { get :index }
-    end
-
-    it "sets @groups to all users groups" do
+    it "sets @groups variable " do
       group2 = Fabricate(:group)
-      user.groups << group
-      user.groups << group2
-      user.save
       get :index
       expect(assigns(:groups)).to include(group, group2)
     end

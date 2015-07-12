@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
   before_action :find_group, only: [:leave, :join]
 
   def index
-    @groups = current_user.groups
+    @groups = Group.all
   end
 
   def new

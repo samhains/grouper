@@ -4,7 +4,9 @@
   %ul.col-md-4.clearfix.nav.navbar-nav
     -if logged_in?
       %li= link_to "Friends"
-      %li= link_to "Groups"
+
+      %li= link_to "Groups", groups_path
+
     -else
       %li= link_to "Register", register_path
       %li= link_to "Sign In", login_path
