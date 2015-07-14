@@ -21,10 +21,11 @@ describe UsersController do
     end
 
     it "sets @posts to most recent posts" do
-      new_post = Fabricate(:post)
-      new_post2 = Fabricate(:post)
+      new_post = Fabricate(:post, created_at: 1.week.ago)
+      new_post2 = Fabricate(:post, created_at: 2.weeks.ago)
       group2.posts << new_post2
       group.posts << new_post
+      get :portal
       expect(assigns(:posts)).to eq([new_post, new_post2])
     end
 
