@@ -2,26 +2,27 @@
   .row
     .col-sm-10.col-sm-offset-1
 
-      %h1=@group.name
-      -unless current_user.belongs_to_group?(@group.id)
-        =link_to group_join_path(@group), method: :put do
-          %button.btn.btn-default 
-            %span.glyphicon.glyphicon-plus 
-              Join Group
-      -else 
-        =link_to group_leave_path(@group), method: :delete do
-          %button.btn.btn-default 
-            %span.glyphicon.glyphicon-minus
-              Leave Group
+      %h1
+        =@group.name
+        -unless current_user.belongs_to_group?(@group.id)
+          =link_to group_join_path(@group), method: :put do
+            %button.btn.btn-default.pull-right 
+              %span.glyphicon.glyphicon-plus 
+                Join Group
+        -else 
+          =link_to group_leave_path(@group), method: :delete do
+            %button.btn.btn-default.pull-right 
+              %span.glyphicon.glyphicon-minus
+                Leave Group
         %br
         %br
-        .well
-          =bootstrap_form_for [@group, @post] do |f|
-            =f.text_field :title, placeholder: 'Enter title', hide_label: true
-            =f.text_area :body, placeholder: 'Write something...',  hide_label: true
-            =f.submit "Post"
+        -if current_user.belongs_to_group?(@group.id)
+          .well
+            =bootstrap_form_for [@group, @post] do |f|
+              =f.text_field :title, placeholder: 'Enter title', hide_label: true
+              =f.text_area :body, placeholder: 'Write something...',  hide_label: true
+              =f.submit "Post"
       %br
       %br
-      -if current_user.belongs_to_group?(@group.id)
         =render @posts
         

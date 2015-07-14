@@ -9,7 +9,7 @@ class PostsController < ApplicationController
     @posts = @group.posts
     @comment = Comment.new
 
-    if @post.save
+    if current_user.belongs_to_group?(@group.id) && @post.save
       flash[:success] = "Post created!"
       redirect_to group_path(@group)
     else

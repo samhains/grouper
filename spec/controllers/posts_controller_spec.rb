@@ -18,12 +18,19 @@ describe PostsController do
       expect(assigns(:post)).to be_instance_of(Post)
     end
 
+    it "does not save to database if user is not a member of group" do
+      post :create, group_id: group.id, post: Fabricate.attributes_for(:post)
+      expect(Post.count).to eq(0)
+    end
+
     context "valid input " do
       before do
+        user.groups << group
         post :create, group_id: group.id, post: Fabricate.attributes_for(:post, user: nil) 
       end
 
       it "saves post to database" do
+        
         expect(Post.count).to eq(1)
       end
 
