@@ -69,6 +69,15 @@ describe User do
 
       expect(user.recent_posts).to_not include(older_post, older_post2)
     end
+
+    it "returns them in reverse chronological order" do
+      newest_post = Fabricate(:post, created_at: 1.week.ago)
+      newer_post = Fabricate(:post, created_at: 2.week.ago)
+      new_post = Fabricate(:post, created_at: 3.week.ago)
+
+      group.posts << [new_post, newer_post, newest_post]
+      expect(user.recent_posts).to eq([newest_post, newer_post, new_post])
+    end
   end
 end
 
