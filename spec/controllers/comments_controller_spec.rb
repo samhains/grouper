@@ -8,14 +8,14 @@ describe CommentsController do
 
     it_behaves_like "requires sign in" do
       let (:action) do
-        post :create, post_id: new_post.id, comment: Fabricate.attributes_for(:comment)
+        post :create, post_id: new_post.id, group_id: group.id, comment: Fabricate.attributes_for(:comment)
       end
     end
 
     context "valid input" do
       before do
         set_current_user user
-        post :create, post_id: new_post.id, comment: Fabricate.attributes_for(:comment)
+        post :create, post_id: new_post.id, group_id: group.id, comment: Fabricate.attributes_for(:comment)
       end
 
       it "creates @comment" do
@@ -43,7 +43,7 @@ describe CommentsController do
     context "invalid input" do
       before do
         set_current_user user
-        post :create, post_id: new_post.id, comment: { body: nil } 
+        post :create, post_id: new_post.id, group_id: group.id, comment: { body: nil } 
       end
 
       it "does not save to database" do

@@ -8,13 +8,12 @@ Rails.application.routes.draw do
   get '/logout', to: "sessions#destroy"
  
   resources :users, only: [:create, :show]
-
-  resources :posts, except: [:new, :index] do
-      resources :comments, except: [:new, :index, :show]
-  end
   resources :groups do
     put '/join', to: "groups#join"
     delete '/leave', to: "groups#leave"
+    resources :posts, except: [:new, :index] do
+        resources :comments, except: [:new, :index, :show]
+    end
   end
 
 end
