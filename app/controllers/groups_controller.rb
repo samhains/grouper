@@ -25,6 +25,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @posts = @group.posts
     @post = Post.new
+    @comment = Comment.new
   end
 
   def join

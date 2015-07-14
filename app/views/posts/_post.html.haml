@@ -1,4 +1,20 @@
 .div.span8.well
   %h3=post.title
+  %div
+    =link_to post.user.name
+    %span  #{ post.created_at.strftime ("%b %e, %l:%M %p") }
+  %br
   %p.lead #{post.body}
-  %em.quiet by #{post.user.username} @ #{post.created_at}
+  -if post.body
+    %br
+    %br
+  -#=render 'comments/_comment',  post.comments
+  = bootstrap_form_for @comment, url: comments_path(id: post.id) do |f|
+    -f.text_field :body, placeholder:"enter comment here" , hide_label: true 
+  .list-group
+    -post.comments.each do |comment| 
+      .list-group-item 
+        =link_to comment.user.name
+        %span.list-group-item-text #{comment.body} 
+        %div
+          %small #{time_ago_in_words comment.created_at }

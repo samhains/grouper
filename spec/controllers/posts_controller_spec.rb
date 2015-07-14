@@ -55,8 +55,8 @@ describe PostsController do
         expect(flash[:danger]).to_not be_nil
       end
 
-      it "renders groups/new form" do
-        expect(response).to render_template 'groups/new'
+      it "renders groups/show form" do
+        expect(response).to render_template 'groups/show'
       end
     end
   end

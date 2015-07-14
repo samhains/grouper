@@ -6,13 +6,15 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     @post.group = @group
+    @posts = @group.posts
+    @comment = Comment.new
 
     if @post.save
       flash[:success] = "Post created!"
       redirect_to group_path(@group)
     else
       flash[:danger] = "There was a problem with your Post!"
-      render 'groups/new'
+      render 'groups/show'
     end
   end
 
