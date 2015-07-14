@@ -20,6 +20,7 @@ class UsersController < ApplicationController
 
   def portal
     @groups = current_user.groups
+    @posts = current_user.recent_posts
   end
 
   private

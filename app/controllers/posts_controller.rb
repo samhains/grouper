@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :require_user
-  before_action :set_group, only: [:create]
+  before_action :set_group, only: [:create, :destroy]
 
   def create
     @post = Post.new(post_params)
@@ -20,7 +20,6 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    @group = @post.group
     @post.destroy if current_user.created_post?(@post.id)
     flash[:success] = "You have deleted your post!"
     redirect_to group_path(@group)
@@ -28,7 +27,7 @@ class PostsController < ApplicationController
 
   private
   def set_group
-    @group = Group.find(params[:id])
+    @group = Group.find(params[:group_id])
   end
 
   def post_params

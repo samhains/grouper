@@ -17,7 +17,7 @@
       %br
       -if current_user.belongs_to_group?(@group.id)
         =render @posts
-        =bootstrap_form_for @post do |f|
+        =bootstrap_form_for [@group, @post] do |f|
           =f.text_field :title
           =f.text_area :body
           =f.submit "Submit Post"

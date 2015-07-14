@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
   def created_post?(post_id)
     Post.find(post_id).user == self
   end
+
+  def recent_posts
+    Post.where(group_id: self.groups)
+  end
 end

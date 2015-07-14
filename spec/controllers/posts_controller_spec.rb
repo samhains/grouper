@@ -10,17 +10,17 @@ describe PostsController do
     before { set_current_user user }
 
     it_behaves_like "requires sign in" do
-      let(:action) { post :create, id: group.id }
+      let(:action) { post :create, group_id: group.id }
     end
 
     it "sets @post instance variable" do
-      post :create, id: group.id, post: Fabricate.attributes_for(:post, user: nil)
+      post :create, group_id: group.id, post: Fabricate.attributes_for(:post, user: nil)
       expect(assigns(:post)).to be_instance_of(Post)
     end
 
     context "valid input " do
       before do
-        post :create, id: group.id, post: Fabricate.attributes_for(:post, user: nil) 
+        post :create, group_id: group.id, post: Fabricate.attributes_for(:post, user: nil) 
       end
 
       it "saves post to database" do
@@ -45,7 +45,7 @@ describe PostsController do
     end
 
     context "invalid input " do
-      before { post :create, id: group.id, post: { body: 'hey' } }
+      before { post :create, group_id: group.id, post: { body: 'hey' } }
 
       it "does not save post to database" do
         expect(Post.count).to eq(0) 
@@ -69,28 +69,28 @@ describe PostsController do
     end
 
     it_behaves_like "requires sign in" do
-      let(:action) { delete :destroy, id: new_post.id }
+      let(:action) { delete :destroy, group_id: group.id, id: new_post.id }
     end
 
 
     it "sets successful flash message" do
-      delete :destroy, id: new_post.id 
+      delete :destroy, group_id: group.id, id: new_post.id 
       expect(flash[:success]).to_not be_nil
     end
 
     it "redirects to group path" do
-      delete :destroy, id: new_post.id
+      delete :destroy, group_id: group.id, id: new_post.id
       expect(response).to redirect_to group_path(group)
     end
 
     it "does not delete if user did not create post" do
-      delete :destroy, id: new_post.id
+      delete :destroy, group_id: group.id, id: new_post.id
     end
 
     it "deletes post from database if user created it" do
       user.posts << new_post
       user.save
-      delete :destroy, id: new_post.id
+      delete :destroy, group_id: group.id, id: new_post.id
       expect(Post.count).to eq(0)
     end
   end

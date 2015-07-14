@@ -1,18 +1,18 @@
 .div.span8.well
   -if current_user.created_post?(post.id)
-    =link_to post_path(post), method: :delete, data: { confirm: "Are you sure?" },  class:'remove-link-color' do
+    =link_to group_post_path(@group, post), method: :delete, data: { confirm: "Are you sure?" },  class:'remove-link-color' do
       %span.glyphicon.glyphicon-remove.pull-right
   %h3=post.title
   %div
     =link_to post.user.name
-    %span  #{ post.created_at.strftime ("%b %e, %l:%M %p") }
+    %span  #{ post.clean_time}
   %br
   %p.lead #{post.body}
   -if post.body
     %br
     %br
   -#=render 'comments/_comment',  post.comments
-  = bootstrap_form_for @comment, url: comments_path(id: post.id) do |f|
+  = bootstrap_form_for @comment, url: group_post_comments_path( @group, post, @comment) do |f|
     -f.text_field :body, placeholder:"enter comment here" , hide_label: true 
   .list-group
     -post.comments.each do |comment| 

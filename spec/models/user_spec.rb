@@ -38,5 +38,10 @@ describe User do
       expect(User.first.created_post?(new_post.id)).to eq(false)
     end
   end
+
+  describe "#recent_posts" do
+    it "gets all of the posts from groups user is involved with"
+    it "limits the posts to 10"
+  end
 end
 
