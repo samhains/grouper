@@ -1,6 +1,7 @@
 .container
   .header
     .h2 ALL GROUPS
+    =button_to "Create Group", new_group_path, method: :get, class: 'btn btn-default'
   %br
   -@groups.each do |group|
     .span8

@@ -1,12 +1,17 @@
-%section.container
-  %header
-    %h1 PORTAL
-  =button_to "Create Group", new_group_path, method: :get, class: 'btn btn-default'
-  .header
-    %h2 MY GROUPS
-  -@groups.each do |group|
-    .span8
-      =link_to group_path(group) do
-        %h4 #{ group.name }
-        %small #{ group.description }
-  =render @posts
+.container
+  %section.container
+    %header
+
+  %section.container.row
+    .container
+      .col-md-8
+        =render @posts
+
+      .col-md-4.well
+        .header
+          %h2 MY GROUPS
+        -@groups.each do |group|
+          .span8
+            =link_to group_path(group) do
+              %h4 #{ group.name }
+              %small #{ group.description }
