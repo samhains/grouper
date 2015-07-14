@@ -57,6 +57,18 @@ describe User do
       end
       expect(user.recent_posts.count).to eq(10)
     end
+
+    it "returns only the 10 most recent" do
+      older_post = Fabricate(:post, created_at: 1.week.ago)
+      older_post2 = Fabricate(:post, created_at: 1.week.ago)
+
+      12.times do
+        new_post = Fabricate(:post, user: user, created_at: 1.day.ago)
+        group.posts << new_post
+      end
+
+      expect(user.recent_posts).to_not include(older_post, older_post2)
+    end
   end
 end
 

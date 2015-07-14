@@ -16,6 +16,6 @@ class User < ActiveRecord::Base
   end
 
   def recent_posts
-    Post.where(group_id: self.groups).limit(10)
+    Post.where(group_id: self.groups).order('created_at').limit(10)
   end
 end

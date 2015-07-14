@@ -13,9 +13,12 @@ describe UsersController do
       group2 = Fabricate(:group)
       user.groups << group
       user.groups << group2
-      user.save
       get :portal
       expect(assigns(:groups)).to include(group, group2)
+    end
+
+    it "sets @posts to most recent posts" do
+      
     end
 
   end
