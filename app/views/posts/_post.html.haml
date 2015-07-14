@@ -1,6 +1,6 @@
 .div.span8.well
   -if current_user.created_post?(post.id)
-    =link_to group_post_path(@group, post), method: :delete, data: { confirm: "Are you sure?" },  class:'remove-link-color' do
+    =link_to group_post_path(post.group, post), method: :delete, data: { confirm: "Are you sure?" },  class:'remove-link-color' do
       %span.glyphicon.glyphicon-remove.pull-right
   %h3=post.title
   %div
@@ -12,7 +12,7 @@
     %br
     %br
   -#=render 'comments/_comment',  post.comments
-  = bootstrap_form_for @comment, url: group_post_comments_path( @group, post, @comment) do |f|
+  = bootstrap_form_for @comment, url: group_post_comments_path( post.group, post, @comment) do |f|
     -f.text_field :body, placeholder:"enter comment here" , hide_label: true 
   .list-group
     -post.comments.each do |comment| 
