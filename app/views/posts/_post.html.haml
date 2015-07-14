@@ -2,8 +2,9 @@
   -if current_user.created_post?(post.id)
     =link_to group_post_path(post.group, post), method: :delete, data: { confirm: "Are you sure?" },  class:'remove-link-color' do
       %span.glyphicon.glyphicon-remove.pull-right
-    %h3
-      =post.title
+  %h3
+    =post.title
+    - if portal
       %small in 
       =link_to post.group do
         %small #{ post.group.name }
