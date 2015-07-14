@@ -18,6 +18,14 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post = Post.find(params[:id])
+    @group = @post.group
+    @post.destroy if current_user.created_post?(@post.id)
+    flash[:success] = "You have deleted your post!"
+    redirect_to group_path(@group)
+  end
+
   private
   def set_group
     @group = Group.find(params[:id])

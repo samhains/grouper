@@ -11,4 +11,7 @@ class User < ActiveRecord::Base
     self.groups.include?(Group.find(group_id))
   end
 
+  def created_post?(post_id)
+    Post.find(post_id).user == self
+  end
 end

@@ -1,4 +1,7 @@
 .div.span8.well
+  -if current_user.created_post?(post.id)
+    =link_to post_path(post), method: :delete, data: { confirm: "Are you sure?" },  class:'remove-link-color' do
+      %span.glyphicon.glyphicon-remove.pull-right
   %h3=post.title
   %div
     =link_to post.user.name
