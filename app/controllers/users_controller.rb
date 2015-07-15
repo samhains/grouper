@@ -29,13 +29,12 @@ class UsersController < ApplicationController
     @recent_discussions = Discussion.order('last_updated DESC').limit(5)
     @posts = current_user.recent_posts
     @comment = Comment.new
-   
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :username, :password)
+    params.require(:user).permit(:name, :username, :password, :bio)
   end
 end
 

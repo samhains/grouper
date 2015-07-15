@@ -13,7 +13,7 @@
   
   %div
     =link_to post.user.name, user_path(post.user)
-    %span  #{ post.clean_time}
+    %span  #{ clean_time(post.created_at) }
   %br
   %p.lead #{post.body}
   -if post.body

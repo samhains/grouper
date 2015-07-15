@@ -4,7 +4,4 @@ class Post < ActiveRecord::Base
   has_many :comments
   validates_presence_of :user, :discussion
 
-  def clean_time
-    created_at.strftime ("%b %e, %l:%M %p") 
-  end
 end

@@ -1,7 +1,12 @@
 .container
   %section.container.row
     .col-md-4.well
-      #{ @user.name }
+      %h3 #{ @user.name }
+      %em #{ @user.bio }
+      %br
+      %br
+      %p Joined Garp on #{ clean_time(@user.created_at) }
+      %p Total posts: #{ @user.posts.count} 
     .col-md-8
       .well
         %h4 #{ @user.name }'s Recent Posts
