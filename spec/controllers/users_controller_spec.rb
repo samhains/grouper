@@ -44,6 +44,8 @@ describe UsersController do
       expect(assigns(:posts)).to eq([new_post, new_post2])
     end
 
+    it "sets @comment"
+    it "sets @recent_discussions"
   end
 
   describe "GET #new" do

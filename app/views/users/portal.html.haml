@@ -18,14 +18,27 @@
                 %br
         
         %br
-        .row.well
-          %h3.header-bottom-padding.text-center  Recent Activity
-          -@recent_discussions.each do |discussion|
-            .span8
-              =link_to discussion_path(discussion) do
-                %button.btn.btn-default.btn-lg.btn-block #{ discussion.name }
-                %br
-
+        -if @recent_discussions
+          .row.well
+            %h3.header-bottom-padding.text-center  Recent Activity
+            -@recent_discussions.each do |discussion|
+              .span8
+                =link_to discussion_path(discussion) do
+                  %button.btn.btn-default.btn-lg.btn-block 
+                    =discussion.name 
+                    -unless discussion.posts.empty?
+                      %p
+                        %small.text-muted #{ discussion.last_post_author }, #{ time_ago_in_words discussion.last_updated } ago
     -else
       .span8.well
-        %h1.text-center You haven't joined any discussions yet!
+        %h2.text-center You haven't joined any discussions yet!
+      .span8.well
+        %h3.header-bottom-padding.text-center  Recent Activity
+        -@recent_discussions.each do |discussion|
+          .span8
+            =link_to discussion_path(discussion) do
+              %button.btn.btn-default.btn-lg.btn-block 
+                =discussion.name 
+                -unless discussion.posts.empty?
+                  %small.text-muted  last post by #{ discussion.last_post_author }, #{ time_ago_in_words discussion.last_updated } ago
+          %br

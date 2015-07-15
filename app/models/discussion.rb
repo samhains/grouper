@@ -6,7 +6,9 @@ class Discussion < ActiveRecord::Base
   validates_presence_of :name, :description
 
   def last_post_author
-    posts.first.user.name
+    unless posts.empty?
+      posts.first.user.name
+    end
   end
 
 end

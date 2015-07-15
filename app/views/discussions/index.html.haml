@@ -11,5 +11,5 @@
         %h4  
           =discussion.name
           %small #{ discussion.description }
-        -if discussion.last_updated
-          %small last updated at  #{ time_ago_in_words(discussion.last_updated) } by #{ discussion.last_post_author }
+      -if discussion.last_updated
+        %small last updated at  #{ time_ago_in_words(discussion.last_updated) } by #{ discussion.last_post_author }
