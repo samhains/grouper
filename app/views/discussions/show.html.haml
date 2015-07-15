@@ -8,12 +8,12 @@
           =link_to discussion_join_path(@discussion), method: :put do
             %button.btn.btn-default.pull-right 
               %span.glyphicon.glyphicon-plus 
-                Join Discussion
+                Join Thread
         -else 
           =link_to discussion_leave_path(@discussion), method: :delete do
             %button.btn.btn-default.pull-right 
               %span.glyphicon.glyphicon-minus
-                Leave Discussion
+                Leave Thread
         %br
         %br
         -if current_user.belongs_to_discussion?(@discussion.id)

@@ -1,7 +1,7 @@
 .container
   .header
-    .h2 ALL GROUPS
-    =button_to "Create Discussion", new_discussion_path, method: :get, class: 'btn btn-default'
+    .h2 ALL THREADS
+    =button_to "Create Thread", new_discussion_path, method: :get, class: 'btn btn-default'
   %br
   -@discussions.each do |discussion|
     .span8
