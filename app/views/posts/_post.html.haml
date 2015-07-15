@@ -2,6 +2,7 @@
   -if current_user.created_post?(post.id)
     =link_to discussion_post_path(post.discussion, post), method: :delete, data: { confirm: "Are you sure?" },  class:'remove-link-color' do
       %span.glyphicon.glyphicon-remove.pull-right
+  
   %h3
     =post.title
     - if page == 'portal'
@@ -22,10 +23,10 @@
   -unless page == 'user_profile'
     = bootstrap_form_for @comment, url: discussion_post_comments_path( post.discussion, post, @comment) do |f|
       -f.text_field :body, placeholder:"enter comment here" , hide_label: true 
-    .list-discussion
+    .list-group
       -post.comments.each do |comment| 
-        .list-discussion-item 
+        .list-group-item 
           =link_to comment.user.name
-          %span.list-discussion-item-text #{comment.body} 
+          %span.list-group-item-text #{comment.body} 
           %div
             %small #{time_ago_in_words comment.created_at }

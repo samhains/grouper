@@ -3,18 +3,21 @@
     .col-sm-10.col-sm-offset-1
 
       %h1
-        =@discussion.name
-        -unless current_user.belongs_to_discussion?(@discussion.id)
-          =link_to discussion_join_path(@discussion), method: :put do
-            %button.btn.btn-default.pull-right 
-              %span.glyphicon.glyphicon-plus 
-                Join Thread
-        -else 
-          =link_to discussion_leave_path(@discussion), method: :delete do
-            %button.btn.btn-default.pull-right 
-              %span.glyphicon.glyphicon-minus
-                Leave Thread
-        %br
+        .row
+          .col-md-10
+            =@discussion.name
+            %small #{ @discussion.description }
+          .col-md-2
+            -unless current_user.belongs_to_discussion?(@discussion.id)
+              =link_to discussion_join_path(@discussion), method: :put do
+                %button.btn.btn-default.pull-right.button-top-padding
+                  %span.glyphicon.glyphicon-plus 
+                    Join Thread
+            -else 
+              =link_to discussion_leave_path(@discussion), method: :delete do
+                %button.btn.btn-default.pull-right.button-top-padding
+                  %span.glyphicon.glyphicon-minus
+                    Leave Thread
         %br
         -if current_user.belongs_to_discussion?(@discussion.id)
           .well

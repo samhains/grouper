@@ -10,6 +10,8 @@ class PostsController < ApplicationController
     @comment = Comment.new
 
     if current_user.belongs_to_discussion?(@discussion.id) && @post.save
+      @discussion.last_updated = Time.now
+      @discussion.save
       flash[:success] = "Post created!"
       redirect_to discussion_path(@discussion)
     else

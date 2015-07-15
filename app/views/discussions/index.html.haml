@@ -1,10 +1,15 @@
 .container
   .header
-    .h2 ALL THREADS
-    =button_to "Create Thread", new_discussion_path, method: :get, class: 'btn btn-default'
+    .h2 
+      %span ALL THREADS
+      =link_to new_discussion_path do
+        %button.btn.btn-default.pull-right Create Thread
   %br
   -@discussions.each do |discussion|
-    .span8
-      =link_to discussion_path(discussion) do
-        %h4 #{ discussion.name }
-        %small #{ discussion.description }
+    .span8.well
+      =link_to discussion_path(discussion), class: 'black-link' do
+        %h4  
+          =discussion.name
+          %small #{ discussion.description }
+        -if discussion.last_updated
+          %small last updated at  #{ time_ago_in_words(discussion.last_updated) } by #{ discussion.last_post_author }

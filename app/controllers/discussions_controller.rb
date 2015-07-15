@@ -46,6 +46,6 @@ class DiscussionsController < ApplicationController
   end
 
   def discussion_params
-    params.require(:discussion).permit(:name)
+    params.require(:discussion).permit(:name, :description)
   end
 end

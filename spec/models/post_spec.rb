@@ -6,5 +6,4 @@ describe Post do
   it { should belong_to(:discussion) }
   it { should validate_presence_of(:user) }
   it { should validate_presence_of(:discussion) }
-  it { should validate_presence_of(:title) }
 end
