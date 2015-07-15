@@ -3,7 +3,7 @@ class DiscussionsController < ApplicationController
   before_action :find_discussion, only: [:leave, :join]
 
   def index
-    @discussions = Discussion.all
+    @discussions = Discussion.all.order('last_updated DESC')
   end
 
   def new

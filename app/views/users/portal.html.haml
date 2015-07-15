@@ -5,24 +5,27 @@
   %section.container.row
     .container
     -if current_user.discussions.count > 0
-      .col-md-8
+      .col-lg-8.col-md-12.col-sm-12
         =render @posts, page: 'portal'
 
-      .col-md-4.well
-        -#.header
-          -#%h2 MY GROUPS
-        -@discussions.each do |discussion|
-          .span8
-            =link_to discussion_path(discussion) do
-              %button.btn.btn-default.btn-lg.btn-block #{ discussion.name }
-              %br
-              -#%small #{ discussion.description }
+      .col-lg-4.fixed.hidden-md.hidden-xs.hidden-sm
+        .row.well
+          %h3.header-bottom-padding.text-center My Threads
+          -@discussions.each do |discussion|
+            .span8
+              =link_to discussion_path(discussion) do
+                %button.btn.btn-default.btn-lg.btn-block #{ discussion.name }
+                %br
+        
+        %br
+        .row.well
+          %h3.header-bottom-padding.text-center  Recent Activity
+          -@recent_discussions.each do |discussion|
+            .span8
+              =link_to discussion_path(discussion) do
+                %button.btn.btn-default.btn-lg.btn-block #{ discussion.name }
+                %br
+
     -else
       .span8.well
         %h1.text-center You haven't joined any discussions yet!
-        -#-@recent_discussions.each do |discussion|
-          -#.span8
-            -#=link_to discussion_path(discussion) do
-              -#%button.btn.btn-default.btn-lg.btn-block #{ discussion.name }
-              -#%br
-              -#%small #{ discussion.description }

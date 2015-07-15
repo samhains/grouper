@@ -26,6 +26,7 @@ class UsersController < ApplicationController
 
   def portal
     @discussions = current_user.discussions
+    @recent_discussions = Discussion.order('last_updated DESC').limit(5)
     @posts = current_user.recent_posts
     @comment = Comment.new
    
