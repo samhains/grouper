@@ -2,15 +2,15 @@ class CommentsController < ApplicationController
   before_action :require_user
   def create
     @post = Post.find(params[:post_id])
-    @group = @post.group
+    @discussion = @post.discussion
     @comment = Comment.new(comment_params)
     @comment.user = current_user
     @comment.post = @post
     if @comment.save
-      redirect_to group_path(@group)
+      redirect_to discussion_path(@discussion)
     else
       flash[:danger] = "Your comment needs text"
-      render 'groups/show'
+      render 'discussions/show'
     end
   end
 

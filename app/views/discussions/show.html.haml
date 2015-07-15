@@ -3,26 +3,25 @@
     .col-sm-10.col-sm-offset-1
 
       %h1
-        =@group.name
-        -unless current_user.belongs_to_group?(@group.id)
-          =link_to group_join_path(@group), method: :put do
+        =@discussion.name
+        -unless current_user.belongs_to_discussion?(@discussion.id)
+          =link_to discussion_join_path(@discussion), method: :put do
             %button.btn.btn-default.pull-right 
               %span.glyphicon.glyphicon-plus 
-                Join Group
+                Join Discussion
         -else 
-          =link_to group_leave_path(@group), method: :delete do
+          =link_to discussion_leave_path(@discussion), method: :delete do
             %button.btn.btn-default.pull-right 
               %span.glyphicon.glyphicon-minus
-                Leave Group
+                Leave Discussion
         %br
         %br
-        -if current_user.belongs_to_group?(@group.id)
+        -if current_user.belongs_to_discussion?(@discussion.id)
           .well
-            =bootstrap_form_for [@group, @post] do |f|
+            =bootstrap_form_for [@discussion, @post] do |f|
               =f.text_field :title, placeholder: 'Enter title', hide_label: true
               =f.text_area :body, placeholder: 'Write something...',  hide_label: true
               =f.submit "Post"
       %br
       %br
-        =render @posts, portal: false
-        
+        =render @posts, page: 'discussion'

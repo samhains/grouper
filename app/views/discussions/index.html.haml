@@ -1,0 +1,10 @@
+.container
+  .header
+    .h2 ALL GROUPS
+    =button_to "Create Discussion", new_discussion_path, method: :get, class: 'btn btn-default'
+  %br
+  -@discussions.each do |discussion|
+    .span8
+      =link_to discussion_path(discussion) do
+        %h4 #{ discussion.name }
+        %small #{ discussion.description }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150714163854) do
+ActiveRecord::Schema.define(version: 20150715185107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,15 +27,15 @@ ActiveRecord::Schema.define(version: 20150714163854) do
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
-  create_table "group_users", force: true do |t|
+  create_table "discussion_users", force: true do |t|
     t.integer "user_id"
-    t.integer "group_id"
+    t.integer "discussion_id"
   end
 
-  add_index "group_users", ["group_id"], name: "index_group_users_on_group_id", using: :btree
-  add_index "group_users", ["user_id"], name: "index_group_users_on_user_id", using: :btree
+  add_index "discussion_users", ["discussion_id"], name: "index_discussion_users_on_discussion_id", using: :btree
+  add_index "discussion_users", ["user_id"], name: "index_discussion_users_on_user_id", using: :btree
 
-  create_table "groups", force: true do |t|
+  create_table "discussions", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -43,18 +43,18 @@ ActiveRecord::Schema.define(version: 20150714163854) do
     t.integer  "user_id"
   end
 
-  add_index "groups", ["user_id"], name: "index_groups_on_user_id", using: :btree
+  add_index "discussions", ["user_id"], name: "index_discussions_on_user_id", using: :btree
 
   create_table "posts", force: true do |t|
     t.string   "title"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "group_id"
+    t.integer  "discussion_id"
     t.text     "body"
   end
 
-  add_index "posts", ["group_id"], name: "index_posts_on_group_id", using: :btree
+  add_index "posts", ["discussion_id"], name: "index_posts_on_discussion_id", using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20150714163854) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "bio"
   end
 
 end

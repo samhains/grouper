@@ -1,30 +1,45 @@
 require 'rails_helper'
 
 describe UsersController do
-  describe "GET #portal" do
-    let (:group) { Fabricate(:group) }
-    let (:group2) { Fabricate(:group) }
-    let (:user) { Fabricate(:user) }
+  let (:discussion) { Fabricate(:discussion) }
+  let (:discussion2) { Fabricate(:discussion) }
+  let (:user) { Fabricate(:user) }
 
+  describe "GET #show" do
+    it_behaves_like "requires sign in" do
+      let(:action) { get :show, id: user.id }
+    end
+
+    before { set_current_user user }
+    
+    it "sets @posts" do
+      new_post = Fabricate(:post, user: user)
+      new_post2 = Fabricate(:post, user: user)
+      get :show, id: user.id
+      expect(assigns[:posts]).to include(new_post, new_post2)
+    end
+  end
+
+  describe "GET #portal" do
     before do
       set_current_user user
-      user.groups << [group, group2]
+      user.discussions << [discussion, discussion2]
     end
 
     it_behaves_like "requires sign in" do
       let(:action) { get :portal }
     end
 
-    it "sets @groups to all users groups" do
+    it "sets @discussions to all users discussions" do
       get :portal
-      expect(assigns(:groups)).to include(group, group2)
+      expect(assigns(:discussions)).to include(discussion, discussion2)
     end
 
     it "sets @posts to most recent posts" do
       new_post = Fabricate(:post, created_at: 1.week.ago)
       new_post2 = Fabricate(:post, created_at: 2.weeks.ago)
-      group2.posts << new_post2
-      group.posts << new_post
+      discussion2.posts << new_post2
+      discussion.posts << new_post
       get :portal
       expect(assigns(:posts)).to eq([new_post, new_post2])
     end

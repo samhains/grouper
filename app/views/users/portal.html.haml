@@ -4,14 +4,25 @@
 
   %section.container.row
     .container
+    -if current_user.discussions.count > 0
       .col-md-8
-        =render @posts, portal: true
+        =render @posts, page: 'portal'
 
       .col-md-4.well
-        .header
-          %h2 MY GROUPS
-        -@groups.each do |group|
+        -#.header
+          -#%h2 MY GROUPS
+        -@discussions.each do |discussion|
           .span8
-            =link_to group_path(group) do
-              %h4 #{ group.name }
-              %small #{ group.description }
+            =link_to discussion_path(discussion) do
+              %button.btn.btn-default.btn-lg.btn-block #{ discussion.name }
+              %br
+              -#%small #{ discussion.description }
+    -else
+      .span8.well
+        %h1.text-center You haven't joined any discussions yet!
+        -#-@recent_discussions.each do |discussion|
+          -#.span8
+            -#=link_to discussion_path(discussion) do
+              -#%button.btn.btn-default.btn-lg.btn-block #{ discussion.name }
+              -#%br
+              -#%small #{ discussion.description }

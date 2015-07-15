@@ -1,0 +1,9 @@
+.container
+  %section.container.row
+    .col-md-4.well
+      #{ @user.name }
+    .col-md-8
+      .well
+        %h4 #{ @user.name }'s Recent Posts
+      =render @posts, page: 'user_profile'
+

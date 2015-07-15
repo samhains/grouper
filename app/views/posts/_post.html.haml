@@ -1,17 +1,17 @@
 .div.span8.well
   -if current_user.created_post?(post.id)
-    =link_to group_post_path(post.group, post), method: :delete, data: { confirm: "Are you sure?" },  class:'remove-link-color' do
+    =link_to discussion_post_path(post.discussion, post), method: :delete, data: { confirm: "Are you sure?" },  class:'remove-link-color' do
       %span.glyphicon.glyphicon-remove.pull-right
   %h3
     =post.title
-    - if portal
+    - if page == 'portal'
       %small in 
-      =link_to post.group do
-        %small #{ post.group.name }
+      =link_to post.discussion do
+        %small #{ post.discussion.name }
   -#%span in
   
   %div
-    =link_to post.user.name
+    =link_to post.user.name, user_path(post.user)
     %span  #{ post.clean_time}
   %br
   %p.lead #{post.body}
@@ -19,12 +19,13 @@
     %br
     %br
   -#=render 'comments/_comment',  post.comments
-  = bootstrap_form_for @comment, url: group_post_comments_path( post.group, post, @comment) do |f|
-    -f.text_field :body, placeholder:"enter comment here" , hide_label: true 
-  .list-group
-    -post.comments.each do |comment| 
-      .list-group-item 
-        =link_to comment.user.name
-        %span.list-group-item-text #{comment.body} 
-        %div
-          %small #{time_ago_in_words comment.created_at }
+  -unless page == 'user_profile'
+    = bootstrap_form_for @comment, url: discussion_post_comments_path( post.discussion, post, @comment) do |f|
+      -f.text_field :body, placeholder:"enter comment here" , hide_label: true 
+    .list-discussion
+      -post.comments.each do |comment| 
+        .list-discussion-item 
+          =link_to comment.user.name
+          %span.list-discussion-item-text #{comment.body} 
+          %div
+            %small #{time_ago_in_words comment.created_at }

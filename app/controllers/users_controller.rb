@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user, only: [:portal]
+  before_action :require_user, only: [:portal, :show]
 
   def new
     redirect_to root_path if logged_in?
@@ -18,8 +18,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = User.find(params[:id])
+    @posts = @user.posts
+ 
+  end
+
   def portal
-    @groups = current_user.groups
+    @discussions = current_user.discussions
     @posts = current_user.recent_posts
     @comment = Comment.new
    
