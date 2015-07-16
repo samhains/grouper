@@ -1,5 +1,5 @@
 Fabricator(:message) do
   text { Faker::Lorem.sentence }
   body { Faker::Lorem.paragraph }
-  user
+  author { Fabricate(:user) }
 end
