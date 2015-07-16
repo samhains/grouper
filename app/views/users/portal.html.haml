@@ -10,17 +10,15 @@
 
       .col-lg-4.fixed.hidden-md.hidden-xs.hidden-sm
         .row.well
-          %h3.header-bottom-padding.text-center My Threads
+          %h4.header-bottom-padding.text-center My Threads
           -@discussions.each do |discussion|
             .span8
               =link_to discussion_path(discussion) do
                 %button.btn.btn-default.btn-lg.btn-block #{ discussion.name }
-                %br
         
-        %br
         -if @recent_discussions
           .row.well
-            %h3.header-bottom-padding.text-center  Recent Activity
+            %h4.header-bottom-padding.text-center  Recent Activity
             -@recent_discussions.each do |discussion|
               .span8
                 =link_to discussion_path(discussion) do
