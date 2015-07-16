@@ -1,0 +1,23 @@
+.section.container
+  .row
+    .col-sm-8.col-sm-offset-2
+
+      %h1
+        .row
+          .col-md-10
+            #{ @message.subject }
+            =link_to user_path(@message.author) do
+              %small from: #{ @message.author.name }
+          .col-md-2
+      %br
+      =link_to user_path(@receiver), class: 'black-link' do
+        %small to: #{ @receiver.name }
+      %br
+      .row.well
+        %br
+        #{ @message.body }
+        %br
+        %br
+      =link_to new_message_path do
+        %button.btn.btn-default.pull-right.button-top-padding
+          Reply
