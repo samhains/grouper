@@ -4,8 +4,6 @@
       = link_to "GARP", root_path, class: 'navbar-brand'
     %ul.col-md-4.clearfix.nav.navbar-nav
       -if logged_in?
-        %li= link_to "Friends"
-
         %li= link_to "Threads", discussions_path
 
       -else
@@ -19,10 +17,6 @@
               Welcome, #{ current_user.name }
               %span.caret
             %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
-              %li
-                =link_to "Account"
-              %li
-                =link_to "Plan and Billing"
               %li
                 =link_to "Sign Out", logout_path
 
