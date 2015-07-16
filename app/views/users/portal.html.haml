@@ -4,7 +4,7 @@
 
   %section.container.row
     .container
-    -if current_user.discussions.count > 0
+    -if logged_in? && current_user.discussions.count > 0
       .col-lg-8.col-md-12.col-sm-12
         =render @posts, page: 'portal'
 
