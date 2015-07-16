@@ -15,7 +15,7 @@
     =link_to post.user.name, user_path(post.user)
     %span  #{ clean_time(post.created_at) }
   %br
-  %p.lead #{post.body}
+  %p.lead #{post.body_html}
   -if post.body
     %br
     %br
@@ -27,6 +27,6 @@
       -post.comments.each do |comment| 
         .list-group-item 
           =link_to comment.user.name
-          %span.list-group-item-text #{comment.body} 
+          %span.list-group-item-text #{comment.body_html} 
           %div
             %small #{time_ago_in_words comment.created_at }

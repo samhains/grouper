@@ -8,7 +8,7 @@ gem 'bootstrap_form'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'bcrypt', '~> 3.1.7'
-
+gem "auto_html"
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
