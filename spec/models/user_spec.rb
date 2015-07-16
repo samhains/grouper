@@ -66,7 +66,8 @@ describe User do
     end
 
     it "gets all of the posts from discussions user is involved with" do
-      new_post2 = Fabricate(:post)
+      user2 = Fabricate(:user)
+      new_post2 = Fabricate(:post, user: user2)
       discussion2.posts << new_post2
       discussion.posts << new_post
       expect(user.reload.recent_posts).to include(new_post, new_post2)

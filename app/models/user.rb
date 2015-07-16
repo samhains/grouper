@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
+  has_many :message_users
+  has_many :messages, through: :message_users
   has_many :discussion_users
   has_many :discussions, through: :discussion_users
   has_many :posts, ->{ order('created_at DESC') }

@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   post '/login', to: "sessions#create"
   get '/register', to: "users#new"
   get '/logout', to: "sessions#destroy"
- 
+  get '/inbox', to: "messages#index"
+
+  resources :messages, except: [:destroy, :index]
   resources :users, only: [:create, :show]
   resources :discussions do
     put '/join', to: "discussions#join"
