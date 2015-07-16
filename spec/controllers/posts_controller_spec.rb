@@ -7,8 +7,10 @@ describe PostsController do
 
   describe 'POST #create' do
 
-    before { set_current_user user }
-
+    before do
+      set_current_user user 
+      @request.env['HTTP_REFERER'] = discussion_path(discussion)
+    end
     it_behaves_like "requires sign in" do
       let(:action) { post :create, discussion_id: discussion.id }
     end
@@ -52,7 +54,10 @@ describe PostsController do
     end
 
     context "invalid input " do
-      before { post :create, discussion_id: discussion.id, post: { body: 'hey' } }
+      before do
+        post :create, discussion_id: discussion.id, post: { body: 'hey' } 
+        @request.env['HTTP_REFERER'] = discussion_path(discussion)
+      end
 
       it "does not save post to database" do
         expect(Post.count).to eq(0) 
@@ -73,6 +78,7 @@ describe PostsController do
 
     before do 
       set_current_user user
+      @request.env['HTTP_REFERER'] = discussion_path(discussion)
     end
 
     it_behaves_like "requires sign in" do

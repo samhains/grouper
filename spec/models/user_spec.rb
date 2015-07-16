@@ -10,6 +10,7 @@ describe User do
 
   let(:user) { Fabricate(:user) }
   let(:new_post) { Fabricate(:post) }
+  let(:new_comment) { Fabricate(:comment) }
   let(:discussion) { Fabricate(:discussion) }
   let(:discussion2) { Fabricate(:discussion) }
 
@@ -25,9 +26,22 @@ describe User do
     end
   end
 
+  describe "#created_comment?" do
+    it "returns true if the user created the comment" do
+      user.comments << new_comment
+      user.save
+      expect(User.first.created_comment?(new_comment.id)).to eq(true)
+    end
+
+    it "returns false if the user did not create the new_comment" do
+      user.save
+      expect(User.first.created_comment?(new_comment.id)).to eq(false)
+    end
+  end
+
 
   describe "#created_post?" do
-    it "returns true if the user created the post" do
+    it "returns true if the user created the comment" do
       user.posts << new_post
       user.save
       expect(User.first.created_post?(new_post.id)).to eq(true)

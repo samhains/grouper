@@ -24,7 +24,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy if current_user.created_post?(@post.id)
     flash[:success] = "You have deleted your post!"
-    redirect_to discussion_path(@discussion)
+    redirect_to :back
   end
 
   private

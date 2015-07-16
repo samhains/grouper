@@ -12,4 +12,5 @@ class Comment < ActiveRecord::Base
     link :target => "_blank", :rel => "nofollow"
     simple_format
   end
+
 end

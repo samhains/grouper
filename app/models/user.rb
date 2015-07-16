@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
     Post.find(post_id).user == self
   end
 
+  def created_comment?(comment_id)
+   Comment.find(comment_id).user == self  
+  end
+  
   def recent_posts
     Post.where(discussion_id: self.discussions).order('created_at DESC').limit(10)
   end
