@@ -14,7 +14,7 @@
           -@discussions.each do |discussion|
             .span8
               =link_to discussion_path(discussion) do
-                %button.btn.btn-default.btn-lg.btn-block #{ discussion.name }
+                %button.btn.btn-default.btn-md.btn-block #{ discussion.name }
         
         -if @recent_discussions
           .row.well
@@ -22,7 +22,7 @@
             -@recent_discussions.each do |discussion|
               .span8
                 =link_to discussion_path(discussion) do
-                  %button.btn.btn-default.btn-lg.btn-block 
+                  %button.btn.btn-default.btn-md.btn-block 
                     =discussion.name 
                     -unless discussion.posts.empty?
                       %p

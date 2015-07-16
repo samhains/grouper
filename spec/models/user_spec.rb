@@ -53,10 +53,18 @@ describe User do
     end
   end
 
+
+  describe "#recent_discussions" do
+  end
+
+  describe "#discussion_feed" do
+  end
+
   describe "#recent_posts" do
     before do
       user.discussions << [discussion, discussion2]
     end
+
     it "gets all of the posts from discussions user is involved with" do
       new_post2 = Fabricate(:post)
       discussion2.posts << new_post2
@@ -69,6 +77,7 @@ describe User do
         new_post = Fabricate(:post, user: user)
         discussion.posts << new_post
       end
+
       expect(user.recent_posts.count).to eq(10)
     end
 
@@ -85,10 +94,9 @@ describe User do
     end
 
     it "returns them in reverse chronological order" do
-      newest_post = Fabricate(:post, created_at: 1.week.ago)
-      newer_post = Fabricate(:post, created_at: 2.week.ago)
-      new_post = Fabricate(:post, created_at: 3.week.ago)
-
+      newest_post = Fabricate(:post, created_at: 1.week.ago, user: user)
+      newer_post = Fabricate(:post, created_at: 2.week.ago, user: user)
+      new_post = Fabricate(:post, created_at: 3.week.ago, user: user)
       discussion.posts << [new_post, newer_post, newest_post]
       expect(user.recent_posts).to eq([newest_post, newer_post, new_post])
     end

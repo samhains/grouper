@@ -18,7 +18,18 @@ class User < ActiveRecord::Base
   def created_comment?(comment_id)
    Comment.find(comment_id).user == self  
   end
-  
+
+  def discussion_feed
+    discussions.limit(10)
+  end
+
+  def recent_discussions
+    recent_discussions_count = 6 - discussions.count
+    if recent_discussions_count > 0
+      return Discussion.where('last_updated IS NOT NULL').order('last_updated DESC').limit(recent_discussions_count)
+    end
+  end
+
   def recent_posts
     Post.where(discussion_id: self.discussions).order('created_at DESC').limit(10)
   end

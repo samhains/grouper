@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe UsersController do
-  let (:discussion) { Fabricate(:discussion) }
-  let (:discussion2) { Fabricate(:discussion) }
+  let (:discussion) { Fabricate(:discussion, last_updated: 1.hour.ago) }
+  let (:discussion2) { Fabricate(:discussion, last_updated: 2.hour.ago) }
   let (:user) { Fabricate(:user) }
 
   describe "GET #show" do
@@ -44,8 +44,15 @@ describe UsersController do
       expect(assigns(:posts)).to eq([new_post, new_post2])
     end
 
-    it "sets @comment"
-    it "sets @recent_discussions"
+    it "sets @comment" do
+      get :portal
+      expect(assigns(:comment)).to be_instance_of(Comment)
+    end
+
+    it "sets @recent_discussions" do
+      get :portal
+      expect(assigns(:recent_discussions)).to eq([discussion, discussion2])
+    end
   end
 
   describe "GET #new" do
