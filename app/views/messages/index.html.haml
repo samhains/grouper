@@ -25,7 +25,7 @@
               %td
                 =link_to message.subject, message_path(message), class: 'black-link'
               %td 
-                =link_to "#{message.author.name} (#{message.author.username})", message_path(message), class:'black-link'
+                =link_to "#{message.author.name} (#{message.author.username})", user_path(message.author), class:'black-link'
               %td 
                 = clean_time message.created_at
     .col-lg-2

@@ -16,6 +16,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'spring',        group: :development
 gem 'haml-rails', '>= 0.3.4' 
+gem 'react-rails', '~> 1.0'
+
 
 group :development do
   gem 'thin'
