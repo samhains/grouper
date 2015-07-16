@@ -5,8 +5,9 @@
         %header
           %h1 New Message
         %br
-        =f.label 'To:'
-        =text_field_tag :receiver_id, nil, class: 'form-group form-control'
+        -#=f.label 'To:'
+        -#=text_field_tag :receiver_id, nil, class: 'form-group form-control'
+        =react_component('SearchContainer')
         =f.text_field :subject
         =f.text_area :body
         =f.submit "Send"
