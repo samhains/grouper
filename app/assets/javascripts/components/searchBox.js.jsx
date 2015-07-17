@@ -7,12 +7,11 @@ var SearchBox = React.createClass({
   render(){
     return (
       <div>
-        <input 
+        <input className="form-control"
           onChange={this.handleInput} 
           value={this.props.filterText}
           ref="filterTextInput"> 
         </input>
-        <button>Search</button>
       </div>
       );
   }

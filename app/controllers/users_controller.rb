@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def search
-    @users = User.search_by_name(params[:user_id])
+    @users = User.search_by_name(params[:name])
     respond_to do |format| 
       format.html
       format.js { render json: @users }

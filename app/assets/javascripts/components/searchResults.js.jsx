@@ -4,11 +4,11 @@ var SearchResults = React.createClass({
       function(user){
         var newThing = user;
         return (
-          <SearchResult user={newThing}/>  
+          <SearchResult handleClick={this.props.handleClick} user={newThing}/>  
         );
-      });
+      }.bind(this));
     return (<div>
-              <ul className="list-group">{searchResults}</ul>
+              <ul className=" absolute-results list-group">{searchResults}</ul>
             </div>
            );
   }

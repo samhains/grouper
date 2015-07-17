@@ -12,6 +12,7 @@ module Grouper
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    config.react.addons = true # defaults to false
     config.react.jsx_transform_options = {
       harmony: true
     }
