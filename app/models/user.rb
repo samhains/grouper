@@ -9,6 +9,11 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :username
   validates_uniqueness_of :username
 
+  def self.search_by_name(query)
+    return [] if query.blank?
+    where(["LOWER(name) LIKE ?", "%#{query.downcase}%"]).order('created_at DESC')
+  end
+
   def belongs_to_discussion?(discussion_id)
     self.discussions.include?(Discussion.find(discussion_id))
   end

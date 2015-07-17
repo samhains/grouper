@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   get '/inbox', to: "messages#index"
 
   resources :messages, except: [:destroy, :index]
-  resources :users, only: [:create, :show]
+  resources :users, only: [:create, :show] do
+    collection do
+      get 'search' 
+    end
+  end
   resources :discussions do
     put '/join', to: "discussions#join"
     delete '/leave', to: "discussions#leave"

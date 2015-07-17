@@ -12,7 +12,7 @@ var SearchContainer = React.createClass({
     $.ajax({
       
       url: '/users/search.js',
-      data: {title: input},
+      data: {name: input},
       success: function(data){
         jsonData = JSON.parse(data);
         this.setState({users: jsonData}); 

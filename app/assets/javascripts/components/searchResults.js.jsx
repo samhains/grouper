@@ -1,10 +1,10 @@
 var SearchResults = React.createClass({
   render(){
-    var searchResults = this.props.videos.map(
-      function(video){
-        var newThing = video;
+    var searchResults = this.props.users.map(
+      function(user){
+        var newThing = user;
         return (
-          <SearchResult video={newThing}/>  
+          <SearchResult user={newThing}/>  
         );
       });
     return (<div>

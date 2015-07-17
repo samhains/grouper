@@ -6,6 +6,14 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def search
+    @users = User.search_by_name(params[:user_id])
+    respond_to do |format| 
+      format.html
+      format.js { render json: @users }
+    end
+  end
+
   def create
     @user = User.new(user_params)
     if @user.save

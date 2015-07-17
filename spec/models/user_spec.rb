@@ -14,6 +14,31 @@ describe User do
   let(:discussion) { Fabricate(:discussion) }
   let(:discussion2) { Fabricate(:discussion) }
 
+  describe ".search_by_name" do
+    it "returns array of users that contain query in their name" do
+      sam = Fabricate(:user, name: "Sam Hains")
+      sam2 = Fabricate(:user, name: "Sam Dean")
+      expect(User.search_by_name('Sa')).to include(sam, sam2)
+    end
+
+    it "is case insensitive" do
+      sam = Fabricate(:user, name: "Sam Hains")
+      sam2 = Fabricate(:user, name: "Sam Dean")
+      expect(User.search_by_name('sa')).to include(sam, sam2)
+    end
+
+    it "return users for partially matching query string" do
+      sam = Fabricate(:user, name: "Sam Hains")
+      sam2 = Fabricate(:user, name: "Sam Dean")
+      expect(User.search_by_name('am').count).to eq(2)
+    end
+
+    it "does not return users that do not contain query in name" do
+      ben = Fabricate(:user, name: "Ben Jones")
+      expect(User.search_by_name('sa')).to_not include(ben)
+    end
+  end
+
   describe "#belongs_to_discussion?" do
     it "returns true if user belongs to discussion" do
       user.discussions << discussion

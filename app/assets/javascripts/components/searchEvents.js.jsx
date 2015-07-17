@@ -8,7 +8,7 @@ var SearchEvents = React.createClass({
   getInitialState(){
     return {
       filterText: '',
-      videos: []
+      users: []
     };
   },
   handleInput(input) {
@@ -18,16 +18,16 @@ var SearchEvents = React.createClass({
     });
     $.ajax({
       
-      url: '/videos/search.js',
+      url: '/users/search.js',
       data: {title: input},
       success: function(data){
         jsonData = JSON.parse(data);
-        this.setState({videos: jsonData}); 
+        this.setState({users: jsonData}); 
       }
     });
   },
   render(){
-    return (<SearchResults videos={this.state.videos}/>);
+    return (<SearchResults users={this.state.users}/>);
   }
 
 });
