@@ -13,12 +13,21 @@ describe User do
   let(:new_comment) { Fabricate(:comment) }
   let(:discussion) { Fabricate(:discussion) }
   let(:discussion2) { Fabricate(:discussion) }
+  let(:sender) { Fabricate(:user) }
+  let(:receiver) { Fabricate(:user) }
+  let(:message) { Fabricate(:message, author: sender) }
 
   describe ".search_by_name" do
     it "returns array of users that contain query in their name" do
       sam = Fabricate(:user, name: "Sam Hains")
       sam2 = Fabricate(:user, name: "Sam Dean")
       expect(User.search_by_name('Sa')).to include(sam, sam2)
+    end
+
+    it "returns array of users that contain query in their username" do
+      sam = Fabricate(:user, username: "sdhains")
+      sam2 = Fabricate(:user, username: "2_sdhains")
+      expect(User.search_by_name('sdhai')).to include(sam, sam2)
     end
 
     it "is case insensitive" do
@@ -39,6 +48,34 @@ describe User do
     end
   end
 
+
+  describe "#is_read?" do
+    before do
+      sender_message = MessageUser.create(message: message, placeholder: "Sent", is_read: true, user_id: sender.id)
+      receiver_message = MessageUser.create(message: message, placeholder: "Inbox", is_read: false, user_id: receiver.id)
+    end
+
+    it "returns true if the message has been read" do
+      expect(sender.is_read?(message, "Sent")).to eq(true)
+    end
+
+    it "returns false if the message has not been read" do
+      expect(receiver.is_read?(message, "Inbox")).to eq(false)
+    end
+
+  end
+
+  describe "#mark_as_read" do
+    it "marks the unread message as read" do
+      sender_message = MessageUser.create(message: message, placeholder: "Sent", is_read: true, user_id: sender.id)
+      receiver_message = MessageUser.create(message: message, placeholder: "Inbox", is_read: false, user_id: receiver.id)
+
+      expect(receiver.is_read?(message, "Inbox")).to eq(false)
+      receiver.mark_as_read(message)
+      expect(receiver.is_read?(message, "Inbox")).to eq(true)
+    end
+
+  end
   describe "#belongs_to_discussion?" do
     it "returns true if user belongs to discussion" do
       user.discussions << discussion

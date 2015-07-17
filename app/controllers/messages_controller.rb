@@ -1,17 +1,18 @@
 class MessagesController < ApplicationController
   before_action :require_user
+  before_action :get_message, only: [:show]
 
   def index
-    @inbox_messages = current_user.message_users.where(placeholder: "Inbox").map(&:message).reverse
+    @inbox_messages = current_user.get_messages('Inbox')
   end
   
   def sent
-    @sent_messages = current_user.message_users.where(placeholder: "Sent").map(&:message).reverse
+    @sent_messages = current_user.get_messages('Sent')
   end
 
   def show
-    @message = Message.find(params[:id])
-    @receiver = MessageUser.where(message: @message, placeholder: "Inbox").first.user
+    current_user.mark_as_read(@message)
+    @receiver = @message.get_receiver
   end
 
   def create
@@ -19,8 +20,16 @@ class MessagesController < ApplicationController
     receiver = User.find_by(username: params[:username]) if has_receiver? params
     respond_to do |format| 
       if receiver && @message.save 
-        @receiver_message_user = MessageUser.create(message: @message, user_id: receiver.id, placeholder: "Inbox", is_read: false)
-        @sender_message_user = MessageUser.create(message: @message, user_id: current_user.id, placeholder: "Sent", is_read: true)
+        @receiver_message_user = MessageUser.create(
+          message: @message, 
+          user_id: receiver.id, 
+          placeholder: "Inbox", 
+          is_read: false)
+        @sender_message_user = MessageUser.create(
+          message: @message, 
+          user_id: current_user.id, 
+          placeholder: "Sent", 
+          is_read: true)
         flash[:success] = "Your message has been sent!"
         format.html { redirect_to inbox_path } 
         format.json {  render json: @message  }
@@ -37,10 +46,14 @@ class MessagesController < ApplicationController
   end
 
   private
+  def get_message 
+    @message = Message.find(params[:id])
+  end
 
   def has_receiver?(params)
     params.has_key?(:username) && !params[:username].empty?
   end
+
   def message_params
     params.require(:message).permit(:subject, :body, :user)
   end

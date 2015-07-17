@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   def self.search_by_name(query)
     return [] if query.blank?
-    where(["LOWER(name) LIKE ?", "%#{query.downcase}%"]).order('created_at DESC')
+    where("LOWER(name) LIKE ? OR LOWER(username) LIKE ?", "%#{query.downcase}%", "%#{query.downcase}%").order('created_at DESC')
   end
 
   def belongs_to_discussion?(discussion_id)
@@ -22,12 +22,30 @@ class User < ActiveRecord::Base
     Post.find(post_id).user == self
   end
 
+  def is_read?(message, placeholder)
+    
+    message = MessageUser.where(user: self, placeholder: placeholder, message: message).first
+    message.is_read? if message
+  end
+
   def created_comment?(comment_id)
    Comment.find(comment_id).user == self  
   end
 
+  def get_messages(placeholder)
+    message_users.where(placeholder: placeholder).order('created_at DESC').map(&:message)
+  end
+
   def discussion_feed
     discussions.limit(10)
+  end
+
+  def mark_as_read(message)
+    message_user =  message.message_users.where(is_read: false, user_id: self).first
+    if message_user &&  !message_user.is_read 
+      message_user.is_read = true
+      message_user.save
+    end
   end
 
   def recent_discussions
