@@ -24,7 +24,7 @@ class MessagesController < ApplicationController
         format.json {  render json: @message  }
       else
         flash[:danger] = "There was a problem with your message!"
-        format.html
+        format.html { render 'messages/new' }
         format.json { render template: 'messages/new.html.haml', status: 400 }
       end
     end
