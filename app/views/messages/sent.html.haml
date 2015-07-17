@@ -6,14 +6,14 @@
       %h1
         .row
           .col-md-10
-            Inbox
-            =link_to sent_path do
-              %small Sent
+            Sent
+            =link_to inbox_path do
+              %small Inbox
           .col-md-2
             =link_to new_message_path do
               %button.btn.btn-default.pull-right.button-top-padding
                 %span.glyphicon.glyphicon-plus 
                   New Message
       %br
-      =render 'messages/message_table', messages: @inbox_messages
+      =render 'messages/message_table', messages: @sent_messages
     .col-lg-2

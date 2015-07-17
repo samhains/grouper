@@ -26,7 +26,7 @@ describe MessagesController do
       let (:receiver) { Fabricate(:user) }
 
       before do
-        post :create, receiver_id: receiver.id,  message: Fabricate.attributes_for(:message, author:nil)
+        post :create, username: receiver.username,  message: Fabricate.attributes_for(:message, author:nil)
       end
       
       it "saves message to database" do

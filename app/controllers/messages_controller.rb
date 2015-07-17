@@ -2,11 +2,13 @@ class MessagesController < ApplicationController
   before_action :require_user
 
   def index
-    @inbox_messages = current_user.message_users.where(placeholder: "Inbox").map(&:message)
-    #get all inbox messages for current user
-    #current_user.message_users.where(placeholder: "Sent").map(&:message)
+    @inbox_messages = current_user.message_users.where(placeholder: "Inbox").map(&:message).reverse
   end
   
+  def sent
+    @sent_messages = current_user.message_users.where(placeholder: "Sent").map(&:message).reverse
+  end
+
   def show
     @message = Message.find(params[:id])
     @receiver = MessageUser.where(message: @message, placeholder: "Inbox").first.user
