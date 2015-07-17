@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.new(message_params.merge!(author: current_user))
-    receiver = User.find_by(username: params[:username]) if has_receiver? params
+    receiver = get_receiver
     respond_to do |format| 
       if receiver && @message.save 
         @receiver_message_user = MessageUser.create(
@@ -46,6 +46,10 @@ class MessagesController < ApplicationController
   end
 
   private
+  def get_receiver
+    User.find_by(username: params[:username]) if has_receiver? params
+  end
+
   def get_message 
     @message = Message.find(params[:id])
   end
