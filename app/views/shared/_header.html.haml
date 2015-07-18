@@ -4,7 +4,7 @@
       = link_to "GARP", root_path, class: 'navbar-brand'
     %ul.col-md-4.clearfix.nav.navbar-nav
       -if logged_in?
-        %li= link_to "Threads", discussions_path
+        %li= link_to "Threads", all_path
         %li= link_to "Inbox (#{current_user.unread_email_count})", inbox_path
 
       -else

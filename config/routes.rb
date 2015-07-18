@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get '/logout', to: "sessions#destroy"
   get '/inbox', to: "messages#index"
   get '/sent', to: "messages#sent"
-  get '/my_threads', to: "discussions#my_discussions"
+  get '/my', to: "discussions#my_discussions"
+  get '/all', to: "discussions#index"
   get '/user/edit', to: "users#edit"
   patch '/user/edit', to: "users#update"
 
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
       get 'search' 
     end
   end
-  resources :discussions do
+  resources :discussions, except: [:index] do
     put '/join', to: "discussions#join"
     delete '/leave', to: "discussions#leave"
     resources :posts, except: [:new, :index] do
