@@ -14,5 +14,8 @@
         %h4  
           =discussion.name
           %small #{ discussion.description }
-      -if discussion.last_updated
-        %small last updated at  #{ time_ago_in_words(discussion.last_updated) } by #{ discussion.last_post_author }
+      %small last updated at  #{ time_ago_in_words(discussion.last_updated) }  
+      -if discussion.last_post_author
+        %small by
+        =link_to user_path(discussion.last_post_author) do
+          %small.remove-link-color #{ discussion.last_post_author.name }

@@ -7,7 +7,7 @@ class Discussion < ActiveRecord::Base
 
   def last_post_author
     unless posts.empty?
-      posts.first.user.name
+      posts.first.user
     end
   end
 

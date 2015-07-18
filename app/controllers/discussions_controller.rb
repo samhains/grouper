@@ -19,6 +19,7 @@ class DiscussionsController < ApplicationController
 
   def create
     @discussion = Discussion.new(discussion_params)
+    @discussion.last_updated = Time.now
     if @discussion.save
       flash[:success] = "New Discussion Created!"
       redirect_to discussion_path(@discussion)
