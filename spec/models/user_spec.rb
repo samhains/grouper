@@ -48,6 +48,26 @@ describe User do
     end
   end
 
+  describe "get_discussions" do
+    let(:user) { Fabricate(:user) }
+    let(:discussion1) { Fabricate(:discussion, last_updated: 2.days.ago) }
+    let(:discussion2) { Fabricate(:discussion, last_updated: 1.day.ago) }
+    let(:discussion3) { Fabricate(:discussion) }
+
+    before { user.discussions << [discussion1, discussion2] }
+    
+    it "gets a list of all of the discussions threads the user belongs to" do
+      expect(user.get_discussions).to include(discussion1, discussion2)
+    end
+
+    it "does not return discussions that the user is not involved with" do
+      expect(user.get_discussions).to_not include(discussion3)
+    end
+
+    it "returns the discussions in reverse last_updated order" do
+      expect(user.get_discussions).to eq([discussion2, discussion1])
+    end
+  end
 
   describe "#is_read?" do
     before do

@@ -14,6 +14,14 @@ describe DiscussionsController do
     end
   end
 
+  describe 'GET #my_discussions' do
+    it "sets @my_discussions variable" do
+      user.discussions << discussion
+      get :my_discussions
+      expect(assigns(:discussions)).to include(discussion)
+    end
+  end
+
   describe 'GET #new' do
     it_behaves_like "requires sign in" do
       let(:action) { post :create }

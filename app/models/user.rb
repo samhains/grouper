@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
     where("LOWER(name) LIKE ? OR LOWER(username) LIKE ?", "%#{query.downcase}%", "%#{query.downcase}%").order('created_at DESC')
   end
 
+  def get_discussions
+    Discussion.where(id: discussions).order('last_updated DESC')
+  end
+
   def unread_email_count
     MessageUser.where(is_read: false, user: self, placeholder: "Inbox").count
   end

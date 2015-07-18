@@ -17,6 +17,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
+p {
+  img {
+  width:100%;
+ }
+}
+
 .remove-link-color {
   color: grey;
 }

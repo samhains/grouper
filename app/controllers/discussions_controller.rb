@@ -1,9 +1,16 @@
 class DiscussionsController < ApplicationController 
   before_action :require_user
   before_action :find_discussion, only: [:leave, :join]
+  
+  #Thread was a reserved word so discussion was used for controller stuff
+  #for the purpose of this app threads and discussions are the same thing
 
   def index
     @discussions = Discussion.all.order('last_updated DESC')
+  end
+
+  def my_discussions
+    @discussions = current_user.get_discussions
   end
 
   def new
