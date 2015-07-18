@@ -7,7 +7,10 @@
     -if logged_in? && current_user.discussions.count > 0
       .col-lg-8.col-md-12.col-sm-12
         =render @posts, page: 'portal'
-
+        =link_to_previous_page @posts, 'Previous'
+        =link_to_next_page @posts, 'Next'
+        -#-if more_pages(params[:offset])
+          -#=link_to "next page", root_path(offset: offset_calculate(params[:offset]))
       .col-lg-4.fixed.hidden-md.hidden-xs.hidden-sm
         .row.well
           %h4.header-bottom-padding.text-center My Threads
@@ -41,3 +44,5 @@
                   %small.text-muted by #{ discussion.last_post_author.name }
                 %small.text-muted, #{ time_ago_in_words discussion.last_updated } ago
       %br
+%script
+  $('.infinite-scroll').jscroll();

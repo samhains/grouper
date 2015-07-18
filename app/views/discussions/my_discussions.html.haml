@@ -2,7 +2,7 @@
   .header
     .h2 
       %span MY THREADS
-      =link_to discussions_path do
+      =link_to all_path do
         %small ALL THREADS
       =link_to new_discussion_path do
         %button.btn.btn-default.pull-right Create Thread
@@ -14,5 +14,8 @@
         %h4  
           =discussion.name
           %small #{ discussion.description }
-      -if discussion.last_updated
-        %small last updated at  #{ time_ago_in_words(discussion.last_updated) } by #{ discussion.last_post_author }
+      %small last updated at  #{ time_ago_in_words(discussion.last_updated) } 
+      -if discussion.last_post_author
+        by #{ discussion.last_post_author.name }
+  =link_to_previous_page @discussions, 'Previous', class: 'pull-right'
+  =link_to_next_page @discussions, 'Next', class: 'pull-right' 

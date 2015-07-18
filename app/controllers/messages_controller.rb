@@ -3,11 +3,11 @@ class MessagesController < ApplicationController
   before_action :get_message, only: [:show]
 
   def index
-    @inbox_messages = current_user.get_messages('Inbox')
+    set_messages('Inbox')
   end
   
   def sent
-    @sent_messages = current_user.get_messages('Sent')
+    set_messages('Sent')
   end
 
   def show
@@ -48,6 +48,12 @@ class MessagesController < ApplicationController
   private
   def get_receiver
     User.find_by(username: params[:username]) if has_receiver? params
+  end
+
+  def set_messages(placeholder)
+    messages = current_user.get_messages(placeholder)
+    @messages_paginated = messages.page params[:page]
+    @messages = @messages_paginated.map(&:message)
   end
 
   def get_message 

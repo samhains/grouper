@@ -41,11 +41,7 @@ class User < ActiveRecord::Base
   end
 
   def get_messages(placeholder)
-    message_users.where(placeholder: placeholder).order('created_at DESC').map(&:message)
-  end
-
-  def discussion_feed
-    discussions.limit(10)
+    message_users.where(placeholder: placeholder).order('created_at DESC')
   end
 
   def mark_as_read(message)
@@ -63,8 +59,5 @@ class User < ActiveRecord::Base
     end
   end
 
-  def recent_posts
-    Post.where(discussion_id: self.discussions).order('created_at DESC').limit(10)
-  end
 
 end

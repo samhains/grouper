@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
   include AutoHtml
+  paginates_per 6
   belongs_to :user
   belongs_to :discussion
   has_many :comments

@@ -20,3 +20,6 @@
         =link_to user_path(discussion.last_post_author) do
           %small.remove-link-color #{ discussion.last_post_author.name }
         %small last updated at  #{ time_ago_in_words(discussion.last_updated) } 
+  =link_to_previous_page @discussions, 'Previous', class: 'pull-right'
+  =link_to_next_page @discussions, 'Next', class: 'pull-right' 
+  %br

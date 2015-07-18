@@ -6,11 +6,11 @@ class DiscussionsController < ApplicationController
   #for the purpose of this app threads and discussions are the same thing
 
   def index
-    @discussions = Discussion.all.order('last_updated DESC')
+    @discussions = Discussion.all.order('last_updated DESC').page params[:page]
   end
 
   def my_discussions
-    @discussions = current_user.get_discussions
+    @discussions = current_user.get_discussions.page params[:page]
   end
 
   def new

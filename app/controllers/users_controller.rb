@@ -50,10 +50,9 @@ class UsersController < ApplicationController
   end
 
   def portal
-    
-    @discussions = current_user.discussion_feed
+    @discussions = current_user.discussions.limit(10)
     @recent_discussions = current_user.recent_discussions
-    @posts = current_user.recent_posts
+    @posts = Post.where(discussion_id: current_user.discussions).order('created_at DESC').page params[:page]
     @comment = Comment.new
   end
 

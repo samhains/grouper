@@ -15,5 +15,7 @@
                 %span.glyphicon.glyphicon-plus 
                   New Message
       %br
-      =render 'messages/message_table', messages: @sent_messages, placeholder: "Sent"
+      =render 'messages/message_table', messages: @messages, placeholder: "Sent"
+      =link_to_previous_page @messages_paginated, 'Previous', class: 'pull-right'
+      =link_to_next_page @messages_paginated, 'Next', class: 'pull-right' 
     .col-lg-2

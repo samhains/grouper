@@ -16,5 +16,6 @@
 //= require bootstrap-sprockets
 //= require react
 //= require react_ujs
+//= require jquery.jscroll.min
 //= require components
 //= require_tree .

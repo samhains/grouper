@@ -13,7 +13,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
-
+gem 'kaminari'
 gem 'spring',        group: :development
 gem 'haml-rails', '>= 0.3.4' 
 gem 'react-rails', '~> 1.0'
