@@ -5,7 +5,7 @@
   
   %h3
     =post.title
-    - if page == 'portal'
+    - if page == 'portal' || page == 'user_profile'
       %small in 
       =link_to post.discussion do
         %small #{ post.discussion.name }

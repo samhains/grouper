@@ -20,6 +20,53 @@ describe UsersController do
     end
   end
 
+  describe "GET #edit" do
+    it "sets @user to current_user" do
+      set_current_user user
+      get :edit
+      expect(assigns[:user]).to eq(user)
+    end
+
+  end
+
+  describe "PUT #update" do
+
+    before { set_current_user user }
+
+    it "sets @user to current_user" do
+      put :update, user: Fabricate.attributes_for(:user)
+      expect(assigns[:user]).to eq(user)
+    end
+
+    context "validation successful" do
+      before do
+        put :update, user: { bio: 'new bio' }
+      end
+      it "updates @user with new params" do
+        expect(User.first.bio).to eq('new bio')
+      end
+
+      it "sets flash notice if successfully updated" do
+        expect(flash[:success]).to_not be_nil
+      end
+
+      it "redirects to user profile" do
+        expect(response).to redirect_to user_path(user)
+      end
+    end
+
+    context "validation unsuccessful" do
+      before { put :update, user: { username: nil } }
+      it "does not update user" do
+        expect(User.first.username).to_not be_nil
+      end
+
+      it "renders edit page" do
+        expect(response).to render_template 'users/edit'
+      end
+    end
+  end
+
   describe "GET #portal" do
     before do
       set_current_user user

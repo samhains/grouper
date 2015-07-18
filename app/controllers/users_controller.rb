@@ -1,9 +1,26 @@
 class UsersController < ApplicationController
-  before_action :require_user, only: [:portal, :show]
+  before_action :require_user, except: [:new, :create]
 
   def new
     redirect_to root_path if logged_in?
     @user = User.new
+  end
+
+  def edit
+    @user = current_user
+  end
+
+
+  def update
+    @user = current_user
+    @user.update(user_params)
+    if @user.save
+      flash[:success] = "User has been updated successfully"
+      redirect_to user_path(@user)
+    else
+      render 'edit'
+    end
+
   end
 
   def search
