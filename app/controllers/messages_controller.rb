@@ -12,7 +12,7 @@ class MessagesController < ApplicationController
 
   def show
     current_user.mark_as_read(@message)
-    @receiver = @message.get_receiver
+    @receiver = @message.receiver
   end
 
   def create

@@ -1,4 +1,4 @@
-.navbar.navbar-default.navbar-fixed-top.hidden-sm.hidden-xs
+.navbar.navbar-default.navbar-fixed-top
   .container
     .col-md-2.navbar-header
       = link_to "GARP", root_path, class: 'navbar-brand'
@@ -12,7 +12,7 @@
         %li= link_to "Sign In", login_path
     -if logged_in?
       #user_links.pull-right
-        %ul.nav.navbar-nav.navbar-right
+        %ul.nav.navbar-nav.navbar-right.hidden-xs
           %li.dropdown
             %a(href="#" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" data-target="#")
               Welcome, #{ current_user.name }
