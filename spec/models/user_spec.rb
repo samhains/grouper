@@ -121,6 +121,9 @@ describe User do
     end
   end
 
+  describe "#get_messages" do
+   
+  end
 
   describe "#created_post?" do
     it "returns true if the user created the comment" do
@@ -135,12 +138,6 @@ describe User do
     end
   end
 
-
-  describe "#recent_discussions" do
-  end
-
-  describe "#discussion_feed" do
-  end
 
 end
 

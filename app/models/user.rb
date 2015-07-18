@@ -31,8 +31,10 @@ class User < ActiveRecord::Base
   end
 
   def is_read?(message, placeholder)
-    
-    message = MessageUser.where(user: self, placeholder: placeholder, message: message).first
+    message = MessageUser.where(
+      user: self, 
+      placeholder: placeholder, 
+      message: message).first
     message.is_read? if message
   end
 
@@ -45,7 +47,10 @@ class User < ActiveRecord::Base
   end
 
   def mark_as_read(message)
-    message_user =  message.message_users.where(is_read: false, user_id: self).first
+    message_user =  message.message_users.where(
+      is_read: false, 
+      user_id: self).first
+
     if message_user &&  !message_user.is_read 
       message_user.is_read = true
       message_user.save
@@ -55,7 +60,8 @@ class User < ActiveRecord::Base
   def recent_discussions
     recent_discussions_count = 6 - discussions.count
     if recent_discussions_count > 0
-      return Discussion.where('last_updated IS NOT NULL').order('last_updated DESC').limit(recent_discussions_count)
+      return Discussion.where('last_updated IS NOT NULL')
+      .order('last_updated DESC').limit(recent_discussions_count)
     end
   end
 

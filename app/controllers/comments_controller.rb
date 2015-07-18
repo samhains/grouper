@@ -15,8 +15,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+
     @comment = Comment.find(params[:id])
-    @discussion = Discussion.find(params[:discussion_id])
+    @discussion = Discussion.find(params[:thread_id])
     @comment.destroy if current_user.created_comment?(@comment.id)
     flash[:success] = "You have deleted your comment!"
     redirect_to :back

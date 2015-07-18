@@ -9,19 +9,19 @@
             %small #{ @discussion.description }
           .col-md-2
             -unless current_user.belongs_to_discussion?(@discussion.id)
-              =link_to discussion_join_path(@discussion), method: :put do
+              =link_to thread_join_path(@discussion), method: :put do
                 %button.btn.btn-default.pull-right.button-top-padding
                   %span.glyphicon.glyphicon-plus 
                     Join Thread
             -else 
-              =link_to discussion_leave_path(@discussion), method: :delete do
+              =link_to thread_leave_path(@discussion), method: :delete do
                 %button.btn.btn-default.pull-right.button-top-padding
                   %span.glyphicon.glyphicon-minus
                     Leave Thread
         %br
         -if current_user.belongs_to_discussion?(@discussion.id)
           .well
-            =bootstrap_form_for [@discussion, @post] do |f|
+            =bootstrap_form_for( @post, url: thread_posts_path(@discussion)) do |f|
               =f.text_field :title, placeholder: 'Enter title', hide_label: true
               =f.text_area :body, placeholder: 'Write something...',  hide_label: true
               =f.submit "Post"

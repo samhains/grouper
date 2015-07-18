@@ -1,13 +1,13 @@
 .div.span9.well
   -if current_user.created_post?(post.id)
-    =link_to discussion_post_path(post.discussion, post), method: :delete, data: { confirm: "Are you sure?" },  class:'remove-link-color' do
+    =link_to thread_post_path(post.discussion, post), method: :delete, data: { confirm: "Are you sure?" },  class:'remove-link-color' do
       %span.glyphicon.glyphicon-remove.pull-right
   
   %h3
     =post.title
     - if page == 'portal' || page == 'user_profile'
       %small in 
-      =link_to post.discussion do
+      =link_to thread_path post.discussion do
         %small #{ post.discussion.name }
   -#%span in
   
@@ -20,13 +20,13 @@
     %br
     %br
   -unless page == 'user_profile'
-    = bootstrap_form_for @comment, url: discussion_post_comments_path( post.discussion, post, @comment) do |f|
+    = bootstrap_form_for @comment, url: thread_post_comments_path( post.discussion, post, @comment) do |f|
       -f.text_field :body, placeholder:"enter comment here" , hide_label: true 
     .list-group
       -post.comments.each do |comment| 
         .list-group-item 
           -if current_user.created_comment?(comment.id)
-            =link_to discussion_post_comment_path(post.discussion, post, comment), method: :delete, data: { confirm: "Are you sure?" },  class:'remove-link-color' do
+            =link_to thread_post_comment_path(post.discussion, post, comment), method: :delete, data: { confirm: "Are you sure?" },  class:'remove-link-color' do
               %span.glyphicon.glyphicon-remove.pull-right
           =link_to comment.user.name
           %span.list-group-item-text #{comment.body_html} 

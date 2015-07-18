@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       get 'search' 
     end
   end
-  resources :discussions, except: [:index] do
+  resources :threads, :controller => "discussions", except: [:index] do
     put '/join', to: "discussions#join"
     delete '/leave', to: "discussions#leave"
     resources :posts, except: [:new, :index] do

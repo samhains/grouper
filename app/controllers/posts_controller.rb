@@ -13,7 +13,7 @@ class PostsController < ApplicationController
       @discussion.last_updated = Time.now
       @discussion.save
       flash[:success] = "Post created!"
-      redirect_to discussion_path(@discussion)
+      redirect_to thread_path(@discussion)
     else
       flash[:danger] = "There was a problem with your Post!"
       render 'discussions/show'
@@ -29,7 +29,7 @@ class PostsController < ApplicationController
 
   private
   def set_discussion
-    @discussion = Discussion.find(params[:discussion_id])
+    @discussion = Discussion.find(params[:thread_id])
   end
 
   def post_params

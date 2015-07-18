@@ -22,7 +22,7 @@ class DiscussionsController < ApplicationController
     @discussion.last_updated = Time.now
     if @discussion.save
       flash[:success] = "New Discussion Created!"
-      redirect_to discussion_path(@discussion)
+      redirect_to thread_path(@discussion)
     else
       flash[:danger] = "There was a problem with your new discussion"
       render 'discussions/new'
@@ -40,7 +40,7 @@ class DiscussionsController < ApplicationController
     current_user.discussions << @discussion 
     current_user.save
     flash[:success] = "Welcome to #{ @discussion.name }"
-    redirect_to discussion_path(@discussion)
+    redirect_to thread_path(@discussion)
   end
 
   def leave
@@ -50,7 +50,7 @@ class DiscussionsController < ApplicationController
 
   private
   def find_discussion
-    @discussion = Discussion.find(params[:discussion_id])
+    @discussion = Discussion.find(params[:thread_id])
   end
 
   def discussion_params

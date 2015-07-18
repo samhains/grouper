@@ -36,17 +36,17 @@ describe DiscussionsController do
   describe 'PUT #join' do
     
     it_behaves_like "requires sign in" do
-      let(:action) { put :join, discussion_id: discussion.id }
+      let(:action) { put :join, thread_id: discussion.id }
     end
 
     it "associates a user with a discussion" do
-      put :join, discussion_id: discussion.id 
+      put :join, thread_id: discussion.id 
       expect(discussion.reload.users).to include(user)
     end
 
     it "redirects user to the discussion path" do
-      put :join, discussion_id: discussion.id 
-      expect(response).to redirect_to(discussion_path(discussion))
+      put :join, thread_id: discussion.id 
+      expect(response).to redirect_to(thread_path(discussion))
     end
   end
 
@@ -72,7 +72,7 @@ describe DiscussionsController do
       end
 
       it "redirects user to the discussion page" do
-        expect(response).to redirect_to discussion_path(Discussion.first)
+        expect(response).to redirect_to thread_path(Discussion.first)
       end
     end
 
@@ -125,7 +125,7 @@ describe DiscussionsController do
     before do 
       user.discussions << discussion
       user.save
-      delete :leave, discussion_id: discussion.id 
+      delete :leave, thread_id: discussion.id 
     end
 
     it "removes the current users association with discussion" do

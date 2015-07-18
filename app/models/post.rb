@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :discussion
   has_many :comments
-  validates_presence_of :user, :discussion
+  validates_presence_of :user, :discussion, :body
   auto_html_for :body do
     html_escape
     image
