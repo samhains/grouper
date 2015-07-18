@@ -142,47 +142,5 @@ describe User do
   describe "#discussion_feed" do
   end
 
-  #describe "#recent_posts" do
-    #before do
-      #user.discussions << [discussion, discussion2]
-    #end
-
-    #it "gets all of the posts from discussions user is involved with" do
-      #user2 = Fabricate(:user)
-      #new_post2 = Fabricate(:post, user: user2)
-      #discussion2.posts << new_post2
-      #discussion.posts << new_post
-      #expect(user.reload.recent_posts).to include(new_post, new_post2)
-    #end
-
-    #it "limits the posts to 10" do
-      #12.times do
-        #new_post = Fabricate(:post, user: user)
-        #discussion.posts << new_post
-      #end
-
-      #expect(user.recent_posts.count).to eq(10)
-    #end
-
-    #it "returns only the 10 most recent" do
-      #older_post = Fabricate(:post, created_at: 1.week.ago)
-      #older_post2 = Fabricate(:post, created_at: 1.week.ago)
-
-      #12.times do
-        #new_post = Fabricate(:post, user: user, created_at: 1.day.ago)
-        #discussion.posts << new_post
-      #end
-
-      #expect(user.recent_posts).to_not include(older_post, older_post2)
-    #end
-
-    #it "returns them in reverse chronological order" do
-      #newest_post = Fabricate(:post, created_at: 1.week.ago, user: user)
-      #newer_post = Fabricate(:post, created_at: 2.week.ago, user: user)
-      #new_post = Fabricate(:post, created_at: 3.week.ago, user: user)
-      #discussion.posts << [new_post, newer_post, newest_post]
-      #expect(user.recent_posts).to eq([newest_post, newer_post, new_post])
-    #end
-  #end
 end
 
