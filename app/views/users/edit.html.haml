@@ -1,0 +1,13 @@
+%section.register.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      =bootstrap_form_for(@user, url: user_edit_path) do |f|
+        %header
+          %h1 Edit Profile
+        %br
+        =f.text_field :username
+        =f.password_field :password
+        =f.text_field :name
+        =f.text_area :bio
+        =f.submit "Update"
+

@@ -29,18 +29,18 @@ describe UsersController do
 
   end
 
-  describe "PUT #update" do
+  describe "PATCH #update" do
 
     before { set_current_user user }
 
     it "sets @user to current_user" do
-      put :update, user: Fabricate.attributes_for(:user)
+      patch :update, user: Fabricate.attributes_for(:user)
       expect(assigns[:user]).to eq(user)
     end
 
     context "validation successful" do
       before do
-        put :update, user: { bio: 'new bio' }
+        patch :update, user: { bio: 'new bio' }
       end
       it "updates @user with new params" do
         expect(User.first.bio).to eq('new bio')
@@ -56,7 +56,7 @@ describe UsersController do
     end
 
     context "validation unsuccessful" do
-      before { put :update, user: { username: nil } }
+      before { patch :update, user: { username: nil } }
       it "does not update user" do
         expect(User.first.username).to_not be_nil
       end
