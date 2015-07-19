@@ -16,6 +16,8 @@ describe DiscussionsController do
 
   describe 'GET #my' do
     it "sets @discussions variable" do
+      discussion.creator = user
+      discussion.save
       user.discussions << discussion
       get :my
       expect(assigns(:discussions)).to include(discussion)
