@@ -24,6 +24,11 @@ describe User do
       expect(User.search_by_name('Sa')).to include(sam, sam2)
     end
 
+    it "should limit searches to 5" do
+      6.times { Fabricate(:user, name: "Sam Hains") }
+      expect(User.search_by_name('Sa').count).to eq(5)
+    end
+
     it "returns array of users that contain query in their username" do
       sam = Fabricate(:user, username: "sdhains")
       sam2 = Fabricate(:user, username: "2_sdhains")

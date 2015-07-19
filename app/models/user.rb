@@ -11,7 +11,9 @@ class User < ActiveRecord::Base
 
   def self.search_by_name(query)
     return [] if query.blank?
-    where("LOWER(name) LIKE ? OR LOWER(username) LIKE ?", "%#{query.downcase}%", "%#{query.downcase}%").order('created_at DESC')
+    where("LOWER(name) LIKE ? OR LOWER(username) LIKE ?",
+          "%#{query.downcase}%",
+          "%#{query.downcase}%").order('created_at DESC').limit(5)
   end
 
   def get_followed_discussions
