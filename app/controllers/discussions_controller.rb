@@ -9,8 +9,12 @@ class DiscussionsController < ApplicationController
     @discussions = Discussion.all.order('last_updated DESC').page params[:page]
   end
 
-  def my_discussions
-    @discussions = current_user.get_discussions.page params[:page]
+  def my
+    @discussions = current_user.get_my_discussions.page params[:page]
+  end
+
+  def following
+    @discussions = current_user.get_followed_discussions.page params[:page]
   end
 
   def new
@@ -20,6 +24,7 @@ class DiscussionsController < ApplicationController
   def create
     @discussion = Discussion.new(discussion_params)
     @discussion.last_updated = Time.now
+    @discussion.creator = current_user
     if @discussion.save
       flash[:success] = "New Discussion Created!"
       redirect_to thread_path(@discussion)

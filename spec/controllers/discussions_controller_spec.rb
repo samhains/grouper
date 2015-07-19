@@ -14,14 +14,21 @@ describe DiscussionsController do
     end
   end
 
-  describe 'GET #my_discussions' do
-    it "sets @my_discussions variable" do
+  describe 'GET #my' do
+    it "sets @discussions variable" do
       user.discussions << discussion
-      get :my_discussions
+      get :my
       expect(assigns(:discussions)).to include(discussion)
     end
   end
 
+  describe 'GET #following' do
+    it "sets @discussions variable" do
+      user.discussions << discussion
+      get :following
+      expect(assigns(:discussions)).to include(discussion)
+    end
+  end
   describe 'GET #new' do
     it_behaves_like "requires sign in" do
       let(:action) { post :create }
@@ -55,6 +62,7 @@ describe DiscussionsController do
       let(:action) { post :create }
     end
 
+
     it "sets @discussion instance variable" do
       post :create, discussion: Fabricate.attributes_for(:discussion)
       expect(assigns(:discussion)).to be_instance_of(Discussion)
@@ -65,6 +73,10 @@ describe DiscussionsController do
 
       it "saves discussion to database" do
         expect(Discussion.count).to eq(1)
+      end
+
+      it "sets the discussion user to the creator of discussion" do
+        expect(Discussion.first.creator).to eq(user)
       end
 
       it "sets flash message" do

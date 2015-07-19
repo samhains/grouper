@@ -48,7 +48,7 @@ describe User do
     end
   end
 
-  describe "get_discussions" do
+  describe "get_followed_discussions" do
     let(:user) { Fabricate(:user) }
     let(:discussion1) { Fabricate(:discussion, last_updated: 2.days.ago) }
     let(:discussion2) { Fabricate(:discussion, last_updated: 1.day.ago) }
@@ -57,18 +57,37 @@ describe User do
     before { user.discussions << [discussion1, discussion2] }
     
     it "gets a list of all of the discussions threads the user belongs to" do
-      expect(user.get_discussions).to include(discussion1, discussion2)
+      expect(user.get_followed_discussions).to include(discussion1, discussion2)
     end
 
     it "does not return discussions that the user is not involved with" do
-      expect(user.get_discussions).to_not include(discussion3)
+      expect(user.get_followed_discussions).to_not include(discussion3)
     end
 
     it "returns the discussions in reverse last_updated order" do
-      expect(user.get_discussions).to eq([discussion2, discussion1])
+      expect(user.get_followed_discussions).to eq([discussion2, discussion1])
     end
   end
 
+  describe "#get_my_discussions" do
+    it "gets all the discussions which the current user created" do
+      discussion1 = Fabricate(:discussion, creator: user)
+      discussion2 = Fabricate(:discussion)
+      discussion3 = Fabricate(:discussion, creator: user)
+      expect(user.get_my_discussions).to include(discussion1, discussion3)
+      expect(user.get_my_discussions).to_not include(discussion2)
+
+    end
+
+    it "returns discussions in reverse chronological order" do
+
+      discussion1 = Fabricate(:discussion, last_updated: 1.day.ago, creator: user)
+      discussion2 = Fabricate(:discussion, last_updated: 3.days.ago, creator: user)
+      discussion3 = Fabricate(:discussion, last_updated: 2.days.ago, creator: user)
+      expect(user.get_my_discussions).to eq([discussion1, discussion3, discussion2])
+    end
+  end
+  
   describe "#is_read?" do
     before do
       sender_message = MessageUser.create(message: message, placeholder: "Sent", is_read: true, user_id: sender.id)

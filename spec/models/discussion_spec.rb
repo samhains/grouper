@@ -6,6 +6,7 @@ describe Discussion do
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:description) }
   it { should validate_length_of(:description).is_at_most(150) }
+  it { should belong_to(:creator) }
 
   describe "#last_post_author" do
     it "should retun the user of the last posts author" do

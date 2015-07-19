@@ -8,9 +8,10 @@ Rails.application.routes.draw do
   get '/logout', to: "sessions#destroy"
   get '/inbox', to: "messages#index"
   get '/sent', to: "messages#sent"
-  get '/my', to: "discussions#my_discussions"
+  get '/my', to: "discussions#my"
   get '/all', to: "discussions#index"
   get '/user/edit', to: "users#edit"
+  get '/following', to: "discussions#following"
   patch '/user/edit', to: "users#update"
 
   resources :messages, except: [:destroy, :index]
