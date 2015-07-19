@@ -13,7 +13,7 @@
           -#=link_to "next page", root_path(offset: offset_calculate(params[:offset]))
       .col-lg-4.fixed.hidden-md.hidden-xs.hidden-sm
         .row.well
-          %h4.header-bottom-padding.text-center My Threads
+          %h4.header-bottom-padding.text-center Followed Threads
           -@discussions.each do |discussion|
             .span8
               =link_to thread_path(discussion) do
