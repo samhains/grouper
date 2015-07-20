@@ -20,8 +20,6 @@
     %br
     %br
   -unless page == 'user_profile'
-    = bootstrap_form_for @comment, url: thread_post_comments_path( post.discussion, post, @comment) do |f|
-      -f.text_field :body, placeholder:"enter comment here" , hide_label: true 
     .list-group
       -post.comments.each do |comment| 
         .list-group-item 
@@ -32,3 +30,5 @@
           %span.list-group-item-text #{comment.body_html} 
           %div
             %small #{time_ago_in_words comment.created_at }
+    = bootstrap_form_for @comment, url: thread_post_comments_path( post.discussion, post, @comment) do |f|
+      -f.text_field :body, placeholder:"enter comment here" , hide_label: true, :autocomplete => :off
