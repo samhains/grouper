@@ -4,7 +4,8 @@ var SearchResult = React.createClass({
   },
   render (){
     return (
-          <a onClick={this.handleClick} className="list-group-item" >
+          <a onClick={this.handleClick} 
+            className="list-group-item cursor-pointer" >
               {this.props.user.name} ( {this.props.user.username} )
           </a>
     );
