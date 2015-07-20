@@ -4,6 +4,8 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @discussion = @post.discussion
     @comment = Comment.new(comment_params)
+    @post.updated_at = Time.now
+    @post.save
     @discussion.last_updated = Time.now
     @discussion.save
     @comment.user = current_user
