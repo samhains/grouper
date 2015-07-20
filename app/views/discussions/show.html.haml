@@ -4,9 +4,10 @@
 
       %h1
         .row
-          .col-md-10
+          .col-md-9
             =@discussion.name
             %small #{ @discussion.description }
+          .col-md-1
           .col-md-2
             -unless current_user.belongs_to_discussion?(@discussion.id)
               =link_to thread_join_path(@discussion), method: :put do

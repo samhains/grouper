@@ -17,7 +17,7 @@ gem 'kaminari'
 gem 'spring',        group: :development
 gem 'haml-rails', '>= 0.3.4' 
 gem 'react-rails', '~> 1.0'
-
+gem 'autogrow-textarea-rails'
 
 group :development do
   gem 'thin'

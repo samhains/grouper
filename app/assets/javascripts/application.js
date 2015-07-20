@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require react
+//= require jquery.shiftenter
+//= require "jquery.autogrowtextarea"
 //= require react_ujs
 //= require jquery.jscroll.min
 //= require components
