@@ -2,13 +2,14 @@
   .header
     .h2 
       %span ALL THREADS
-      =link_to following_path do
-        %small  FOLLOWED THREADS
-      %small /
-      =link_to my_path do
-        %small.black MY THREADS
-      =link_to new_thread_path do
-        %button.btn.btn-default.pull-right Create Thread
+      -if logged_in?
+        =link_to following_path do
+          %small  FOLLOWED THREADS
+        %small /
+        =link_to my_path do
+          %small.black MY THREADS
+        =link_to new_thread_path do
+          %button.btn.btn-default.pull-right Create Thread
       
   %br
 

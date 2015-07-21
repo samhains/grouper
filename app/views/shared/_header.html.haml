@@ -2,8 +2,8 @@
   .container
     %ul.col-md-7.col-sm-7.col-xs-12.nav.navbar-nav
       %li= link_to "GARP", root_path, class: 'navbar-brand'
+      %li= link_to "Threads", all_path
       -if logged_in?
-        %li= link_to "Threads", all_path
         %li= link_to "Friends", friendships_path
         %li= link_to "Inbox (#{current_user.unread_email_count})", inbox_path
 
