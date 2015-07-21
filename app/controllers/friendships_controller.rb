@@ -9,7 +9,7 @@ class FriendshipsController < ApplicationController
     @friendship = current_user.friendships.build(friend_id: params[:friend_id])
     @user = User.find(params[:friend_id])
     if @friendship.save
-      flash.now[:success] = "You have added a friend!"
+      flash[:success] = "You have added a friend!"
       redirect_to user_path(@user)
     else
       @posts = @user.posts

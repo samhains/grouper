@@ -11,7 +11,7 @@
               %button.btn.btn-sm.btn-default
                 Add Friend
           -else
-            =link_to friendships_path(friend_id: params[:id]), method: :destroy do
+            =link_to friendship_path(@user), method: :delete do
               %button.btn.btn-sm.btn-default
                 Remove Friend
       %em #{ @user.bio }
