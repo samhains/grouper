@@ -6,14 +6,7 @@ class DiscussionsController < ApplicationController
   #for the purpose of this app threads and discussions are the same thing
 
   def index
-    case params[:type]
-    when 'all'
-      @discussions = Discussion.all.order('last_updated DESC').page params[:page]
-    when 'my'
-      @discussions = current_user.get_my_discussions.page params[:page]
-    when 'following'
-      @discussions = current_user.get_followed_discussions.page params[:page]
-    end
+    set_discussions_by_type params[:type]
   end
 
   def new
@@ -53,6 +46,18 @@ class DiscussionsController < ApplicationController
   end
 
   private
+  
+  def set_discussions_by_type(type)
+    case type
+    when 'all'
+      @discussions = Discussion.all.order('last_updated DESC').page type
+    when 'my'
+      @discussions = current_user.get_my_discussions.page type
+    when 'following'
+      @discussions = current_user.get_followed_discussions.page type
+    end
+  end
+
   def find_discussion
     @discussion = Discussion.find(params[:thread_id])
   end

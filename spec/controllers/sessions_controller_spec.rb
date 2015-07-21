@@ -25,9 +25,6 @@ describe SessionsController do
         expect(response).to redirect_to root_path
       end
 
-      it "sets successful flash notice" do
-        expect(flash[:success]).not_to be_blank
-      end
     end
 
     context "if authentication is unsuccessful" do

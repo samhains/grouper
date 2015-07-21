@@ -9,7 +9,7 @@ def sign_in(user=nil)
   fill_in "Username", :with => user.username
   fill_in "Password", :with => user.password
   click_button "Sign In"
-  expect(page).to have_content 'You have successfully logged in!'
+  expect(page).to have_content "Welcome, #{ user.name }"
 end
 
 
