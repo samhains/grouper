@@ -4,6 +4,17 @@
       MY FRIENDS
       
   %br
-  -@friendships.each do |friendship|
-    .section.well 
-      =link_to friendship.friend.name, friendship.friend
+  -@friendships.each_with_index do |friendship, index|
+    -if index % 2 ==0
+      .row
+    .col-md-6
+      .section.well
+        =link_to friendship.friend.name, friendship.friend
+        -unless friendship.friend.posts.empty?
+          %em active in:
+          -friendship.friend.posts.limit(3).each do |post|
+            .btn-default.btn-md.btn-block 
+              =link_to thread_path(post.discussion), class: 'black-link' do
+                %span #{ post.discussion.name }  #{ time_ago_in_words post.created_at } ago
+        -else
+          .btn-default.btn-md.btn-block no recent activity
