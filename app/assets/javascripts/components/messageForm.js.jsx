@@ -42,8 +42,8 @@ var MessageForm = React.createClass({
       url: '/messages.json',
       data: data,
       success: function(value){
-        console.log('succes');
-        window.location.href = "/inbox";
+        console.log('success');
+        window.location.href = "/messages/inbox";
       },
       error: function(value){
         console.log("ERROR");

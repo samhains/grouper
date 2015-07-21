@@ -20,6 +20,7 @@ class MessagesController < ApplicationController
 
         create_message_users(@message, receiver)
 
+
         flash[:success] = "Your message has been sent!"
         format.html { redirect_to inbox_messages_path } 
         format.json {  render json: @message  }
