@@ -7,7 +7,7 @@ class Message < ActiveRecord::Base
 
   auto_html_for :body do
     html_escape
-    image
+    image('max-width'=> '400px')
     youtube(:width => 400, :height => 250)
     soundcloud
     link :target => "_blank", :rel => "nofollow"

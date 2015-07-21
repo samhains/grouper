@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user, except: [:portal, :new, :create]
+  before_action :require_user, except: [:new, :create]
 
   def new
     redirect_to root_path if logged_in?
@@ -48,17 +48,6 @@ class UsersController < ApplicationController
    @posts = @user.posts.page params[:page]
   end
 
-  def portal
-    if current_user
-      @discussions = current_user.discussions.limit(10)
-      @recent_discussions = current_user.recent_discussions
-      @posts = Post.where(discussion_id: current_user.discussions).order('updated_at DESC').page params[:page]
-      @comment = Comment.new
-    
-    else
-      @recent_discussions = Discussion.order('last_updated DESC').limit(6)
-    end
-  end
 
   private
 

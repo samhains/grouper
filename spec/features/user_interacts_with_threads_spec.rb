@@ -38,7 +38,7 @@ feature 'User Interacts With Threads' do
     discussion3.posts << [post1, post2]
     sign_in sam
 
-    click_link("#{discussion3.name} by #{discussion3.last_post_author.name}")
+    click_link("#{discussion3.name}")
     expect(page).to have_content(discussion3.description)
     click_link("Join Thread")
 

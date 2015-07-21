@@ -54,7 +54,7 @@ describe MessagesController do
       end
 
       it "redirects to inbox" do
-        expect(response).to redirect_to inbox_path
+        expect(response).to redirect_to inbox_messages_path
       end
     end
 

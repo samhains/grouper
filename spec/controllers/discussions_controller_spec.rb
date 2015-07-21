@@ -109,10 +109,6 @@ describe DiscussionsController do
 
   describe "GET #show" do
 
-    it_behaves_like "requires sign in" do
-      let(:action) { get :show, id: discussion.id  }
-    end
-
     it "sets @posts to posts of the discussion" do
       post1 = Fabricate(:post, discussion: discussion)
       post2 = Fabricate(:post, discussion: discussion)
