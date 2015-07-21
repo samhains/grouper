@@ -37,6 +37,8 @@ p {
 .navbar-right {
   float: right!important;
 }
+
+
 @media (max-width: 490px) { 
 
 .video.youtube{
@@ -46,6 +48,7 @@ p {
    height: 0;
    overflow: hidden;
 }
+
 
 iframe {
   position: absolute;
@@ -100,3 +103,9 @@ body {
   padding-top: 70px
 }
 
+
+@media (max-width: 768px) { 
+  body {
+    padding-top:100px;
+  }
+}
