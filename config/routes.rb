@@ -6,8 +6,6 @@ Rails.application.routes.draw do
   post '/login', to: "sessions#create"
   get '/register', to: "users#new"
   get '/logout', to: "sessions#destroy"
-  get '/my', to: "discussions#my"
-  get '/all', to: "discussions#index"
   get '/user/edit', to: "users#edit"
   get '/following', to: "discussions#following"
   patch '/user/edit', to: "users#update"
@@ -24,6 +22,10 @@ Rails.application.routes.draw do
     end
   end
   resources :threads, :controller => "discussions", except: [:index] do
+    get :all, action: :index, type: 'all', on: :collection
+    get :my, action: :index, type: 'my', on: :collection
+    get :following, action: :index, type: 'following', on: :collection
+
     put '/join', to: "discussions#join"
     delete '/leave', to: "discussions#leave"
     resources :posts, except: [:new, :index] do

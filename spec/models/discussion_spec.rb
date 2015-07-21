@@ -10,7 +10,6 @@ describe Discussion do
 
   describe "#followers" do
     it "should return the number of people who have joined group" do
-      
     end
   end
 

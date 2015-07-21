@@ -7,30 +7,33 @@ describe DiscussionsController do
   before { set_current_user user}
 
   describe 'GET #index' do
-    it "sets @discussions variable " do
+    it "sets @discussions for all " do
       discussion2 = Fabricate(:discussion)
-      get :index
+      get :index, type: 'all'
       expect(assigns(:discussions)).to include(discussion, discussion2)
+    end
+
+    it "sets @discussions variable for my" do
+      user.discussions << discussion
+      get :index, type: :following
+      expect(assigns(:discussions)).to include(discussion)
+    end
+
+    it "sets @discussions variable for following" do
+      discussion.creator = user
+      discussion.save
+      user.discussions << discussion
+      get :index, type: :my
+      expect(assigns(:discussions)).to include(discussion)
     end
   end
 
   describe 'GET #my' do
-    it "sets @discussions variable" do
-      discussion.creator = user
-      discussion.save
-      user.discussions << discussion
-      get :my
-      expect(assigns(:discussions)).to include(discussion)
-    end
   end
 
   describe 'GET #following' do
-    it "sets @discussions variable" do
-      user.discussions << discussion
-      get :following
-      expect(assigns(:discussions)).to include(discussion)
-    end
   end
+
   describe 'GET #new' do
     it_behaves_like "requires sign in" do
       let(:action) { post :create }
