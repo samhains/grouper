@@ -12,11 +12,14 @@ describe User do
   let(:user) { Fabricate(:user) }
   let(:new_post) { Fabricate(:post) }
   let(:new_comment) { Fabricate(:comment) }
-  let(:discussion) { Fabricate(:discussion) }
-  let(:discussion2) { Fabricate(:discussion) }
   let(:sender) { Fabricate(:user) }
   let(:receiver) { Fabricate(:user) }
   let(:message) { Fabricate(:message, author: sender) }
+  let(:discussion) { Fabricate(:discussion) }
+  let(:discussion1) { Fabricate(:discussion, last_updated: 2.days.ago) }
+  let(:discussion2) { Fabricate(:discussion, last_updated: 1.day.ago) }
+  let(:discussion3) { Fabricate(:discussion) }
+  let(:friend) { Fabricate(:user) }
 
   describe ".search_by_name" do
     it "returns array of users that contain query in their name" do
@@ -54,11 +57,14 @@ describe User do
     end
   end
 
-  describe "get_followed_discussions" do
-    let(:user) { Fabricate(:user) }
-    let(:discussion1) { Fabricate(:discussion, last_updated: 2.days.ago) }
-    let(:discussion2) { Fabricate(:discussion, last_updated: 1.day.ago) }
-    let(:discussion3) { Fabricate(:discussion) }
+  describe "#frienship" do
+    it "returns friendship for current_user " do
+      friendship = Friendship.create(user: user, friend: friend)
+      expect(friend.friendship(user)).to eq(friendship)
+    end
+  end
+
+  describe "#get_followed_discussions" do
 
     before { user.discussions << [discussion1, discussion2] }
     

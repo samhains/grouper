@@ -9,6 +9,14 @@ describe FriendshipsController do
     set_current_user user
   end
 
+  describe "GET #index" do
+    it "sets @friendships to the current users friendships" do
+      friendship = Friendship.create(user: user, friend: friend)
+      get :index
+      expect(assigns[:friendships]).to eq([friendship])
+    end
+  end
+
   describe "POST #create" do
 
     it_behaves_like "requires sign in" do
@@ -66,9 +74,10 @@ describe FriendshipsController do
   describe "DELETE #destroy" do
     
     let! (:friendship) { Friendship.create(user: user, friend: friend) }
+    let! (:friendship2) { Fabricate(:friendship) }
 
     before do
-      delete :destroy, id: friend.id
+      delete :destroy, id: friendship.id
     end
 
     it "sets @friendship" do
@@ -76,7 +85,7 @@ describe FriendshipsController do
     end
 
     it "destroys @friendship from db" do
-      expect(Friendship.count).to eq(0)
+      expect(Friendship.count).to eq(1)
     end
 
     it "sets flash message" do
@@ -85,6 +94,11 @@ describe FriendshipsController do
 
     it "redirects to user_path" do
       expect(response).to redirect_to(user_path(friend))
+    end
+
+    it "does not delete friendship if user is not current_user" do
+      delete :destroy, id: friendship2.id
+      expect(Friendship.count).to eq(1)
     end
   end
 end

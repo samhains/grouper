@@ -26,6 +26,10 @@ class User < ActiveRecord::Base
     Discussion.where(creator: self).order('last_updated DESC')
   end
 
+  def friendship(current_user)
+    Friendship.where(user: current_user, friend_id: self).first
+  end
+
   def unread_email_count
     MessageUser.where(is_read: false, user: self, placeholder: "Inbox").count
   end

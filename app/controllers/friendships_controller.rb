@@ -23,11 +23,12 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-    @friendship = Friendship.find_by(friend_id: params[:id])
-    @user = @friendship.friend
+    @friendship = Friendship.find_by(id: params[:id])
+    @friend = @friendship.friend
+    return redirect_to user_path(@friend) unless current_user == @friendship.user
     @friendship.destroy
     flash[:success] = "You have deleted friend!"
-    redirect_to user_path(@user)
+    redirect_to user_path(@friend)
   end
 
 

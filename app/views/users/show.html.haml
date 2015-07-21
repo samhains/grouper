@@ -7,12 +7,12 @@
           %small (#{ @user.username })
         .col-md-1
         .col-md-3
-          -unless is_friend?(params[:id])
-            =link_to friendships_path(friend_id: params[:id]), method: :post do
+          -unless is_friend? @user.id
+            =link_to friendships_path(friend_id: @user.id), method: :post do
               %button.btn.btn-sm.btn-default
                 Add Friend
           -else
-            =link_to friendship_path(@user), method: :delete do
+            =link_to friendship_path(@user.friendship(current_user)), method: :delete do
               %button.btn.btn-sm.btn-default
                 Remove Friend
       %br
