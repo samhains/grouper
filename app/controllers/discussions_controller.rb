@@ -33,17 +33,6 @@ class DiscussionsController < ApplicationController
     @comment = Comment.new
   end
 
-  def join
-    current_user.discussions << @discussion 
-    current_user.save
-    flash[:success] = "Welcome to #{ @discussion.name }"
-    redirect_to thread_path(@discussion)
-  end
-
-  def leave
-    current_user.discussions.delete @discussion
-    redirect_to root_path
-  end
 
   private
   

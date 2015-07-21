@@ -22,12 +22,12 @@ Rails.application.routes.draw do
     end
   end
   resources :threads, :controller => "discussions", except: [:index] do
+    post :create, to: "discussion_members#create"
+    delete :destroy, to: "discussion_members#destroy"
     get :all, action: :index, type: 'all', on: :collection
     get :my, action: :index, type: 'my', on: :collection
     get :following, action: :index, type: 'following', on: :collection
 
-    put '/join', to: "discussions#join"
-    delete '/leave', to: "discussions#leave"
     resources :posts, except: [:new, :index] do
         resources :comments, except: [:new, :index, :show]
     end
