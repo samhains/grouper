@@ -1,4 +1,5 @@
 class Friendship < ActiveRecord::Base
+  paginates_per 6
   belongs_to :user
   belongs_to :friend, class_name: 'User'
   validates_presence_of :friend
