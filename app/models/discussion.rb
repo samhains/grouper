@@ -7,6 +7,9 @@ class Discussion < ActiveRecord::Base
   validates_length_of :description, :maximum => 150
   validates_presence_of :name, :description
 
+  def followers
+  end
+
   def last_post_author
     unless posts.empty?
       posts.first.user

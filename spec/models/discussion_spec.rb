@@ -8,6 +8,12 @@ describe Discussion do
   it { should validate_length_of(:description).is_at_most(150) }
   it { should belong_to(:creator) }
 
+  describe "#followers" do
+    it "should return the number of people who have joined group" do
+      
+    end
+  end
+
   describe "#last_post_author" do
     it "should retun the user of the last posts author" do
       user = Fabricate(:user)
