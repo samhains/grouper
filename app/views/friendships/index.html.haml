@@ -6,27 +6,35 @@
         MY FRIENDS
     .col-md-2
   %br
-  -@friends.each_with_index do |friend, index|
+  -if @friends.count > 0
+    -@friends.each_with_index do |friend, index|
+      .row
+        .col-md-2
+        .col-md-8
+          .section.well
+            =link_to friend.name, friend
+            %span (#{ friend.username })
+            -unless friend.posts.empty?
+              %em , active in:
+              -friend.posts.limit(3).each do |post|
+                .btn-default.btn-md.btn-block 
+                  =link_to thread_path(post.discussion), class: 'black-link' do
+                    %span #{ post.discussion.name }  
+                    %em , #{ time_ago_in_words post.created_at } ago
+            -else
+              .btn-default.btn-md.btn-block no recent activity
+        .col-md-2
+
     .row
       .col-md-2
       .col-md-8
-        .section.well
-          =link_to friend.name, friend
-          %span (#{ friend.username })
-          -unless friend.posts.empty?
-            %em , active in:
-            -friend.posts.limit(3).each do |post|
-              .btn-default.btn-md.btn-block 
-                =link_to thread_path(post.discussion), class: 'black-link' do
-                  %span #{ post.discussion.name }  
-                  %em , #{ time_ago_in_words post.created_at } ago
-          -else
-            .btn-default.btn-md.btn-block no recent activity
+        =link_to_previous_page @friendships, 'Previous', class: 'pull-left'
+        =link_to_next_page @friendships, 'Next', class: 'pull-left' 
       .col-md-2
-
-  .row
-    .col-md-2
-    .col-md-8
-      =link_to_previous_page @friendships, 'Previous', class: 'pull-left'
-      =link_to_next_page @friendships, 'Next', class: 'pull-left' 
-    .col-md-2
+  -else
+    .row
+      .col-md-2
+      .col-md-8
+        .span8.well
+          %h3 You don't have any friends yet!
+      .col-md-2
