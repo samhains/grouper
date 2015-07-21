@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_many :discussions, through: :discussion_users
   has_many :posts, ->{ order('created_at DESC') }
   has_many :comments
+  has_many :friendships
+  has_many :friends, through: :friendships
   validates_presence_of :name, :username
   validates_uniqueness_of :username
 

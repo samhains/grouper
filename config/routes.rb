@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/following', to: "discussions#following"
   patch '/user/edit', to: "users#update"
 
+  resources :friendships, only: [:create, :destroy, :index]
   resources :messages, except: [:destroy, :index]
   resources :users, only: [:create, :show] do
     collection do

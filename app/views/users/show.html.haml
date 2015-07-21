@@ -1,7 +1,19 @@
 .container
   %section.container.row
     .col-md-4.well
-      %h3 #{ @user.name }
+      %h3.row 
+        .col-md-7
+          #{ @user.name }
+        .col-md-1
+        .col-md-3
+          -unless is_friend?(params[:id])
+            =link_to friendships_path(friend_id: params[:id]), method: :post do
+              %button.btn.btn-sm.btn-default
+                Add Friend
+          -else
+            =link_to friendships_path(friend_id: params[:id]), method: :destroy do
+              %button.btn.btn-sm.btn-default
+                Remove Friend
       %em #{ @user.bio }
       %br
       %br

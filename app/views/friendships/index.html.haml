@@ -1,0 +1,9 @@
+.container
+  .header
+    .h2 
+      MY FRIENDS
+      
+  %br
+  -@friendships.each do |friendship|
+    .section.well 
+      =link_to friendship.friend.name, friendship.friend

@@ -7,6 +7,7 @@ describe User do
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:username) }
   it { should validate_uniqueness_of(:username) }
+  it { should have_many(:friends).through(:friendships) }
 
   let(:user) { Fabricate(:user) }
   let(:new_post) { Fabricate(:post) }
