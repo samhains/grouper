@@ -1,8 +1,7 @@
 .navbar.navbar-default.navbar-fixed-top
   .container
-    .col-md-2.navbar-header
-      = link_to "GARP", root_path, class: 'navbar-brand'
-    %ul.col-md-4.clearfix.nav.navbar-nav
+    %ul.col-md-7.col-sm-7.col-xs-12.nav.navbar-nav
+      %li= link_to "GARP", root_path, class: 'navbar-brand'
       -if logged_in?
         %li= link_to "Threads", all_path
         %li= link_to "Friends", friendships_path
@@ -12,15 +11,16 @@
         %li= link_to "Register", register_path
         %li= link_to "Sign In", login_path
     -if logged_in?
-      #user_links.pull-right
-        %ul.nav.navbar-nav.navbar-right.hidden-xs
-          %li.dropdown
-            %a(href="#" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" data-target="#")
-              Welcome, #{ current_user.name }
-              %span.caret
-            %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
-              %li
-                =link_to "My Profile", user_path(current_user)
-                = link_to "Edit Profile", user_edit_path
-                =link_to "Sign Out", logout_path
+      .col-md-5.col-sm-5
+        #user_links.pull-right
+          %ul.nav.navbar-nav.navbar-right.hidden-xs
+            %li.dropdown
+              %a(href="#" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" data-target="#")
+                Welcome, #{ current_user.name }
+                %span.caret
+              %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
+                %li
+                  =link_to "My Profile", user_path(current_user)
+                  = link_to "Edit Profile", user_edit_path
+                  =link_to "Sign Out", logout_path
 
