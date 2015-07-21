@@ -21,7 +21,7 @@
       %p Total posts: #{ @user.posts.count} 
     .col-md-8
       .well
-        %h4 #{ @user.name }'s Recent Posts
+        %h4 #{ @user.name }'s Posts
       =render @posts, page: 'user_profile'
       =link_to_previous_page @posts, 'Previous'
       =link_to_next_page @posts, 'Next'
