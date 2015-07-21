@@ -2,9 +2,11 @@ class FriendshipsController < ApplicationController
   before_action :require_user
 
   def index
-    @friendships = current_user.friendships.page params[:page]
+    @friendships = Friendship
+    .joins(:friend)
+    .where(user: current_user)
+    .order('LOWER(name)').page params[:page]
     @friends = @friendships.map(&:friend)
-    @friends.sort_by! { |friend| friend.name.downcase }
   end
 
   def create
