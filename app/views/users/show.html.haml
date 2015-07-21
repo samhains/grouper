@@ -4,6 +4,7 @@
       %h3.row 
         .col-md-7
           #{ @user.name }
+          %small (#{ @user.username })
         .col-md-1
         .col-md-3
           -unless is_friend?(params[:id])
@@ -14,6 +15,7 @@
             =link_to friendship_path(@user), method: :delete do
               %button.btn.btn-sm.btn-default
                 Remove Friend
+      %br
       %em #{ @user.bio }
       %br
       %br
