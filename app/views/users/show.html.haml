@@ -7,7 +7,7 @@
           %small (#{ @user.username })
         .col-md-1
         .col-md-3
-          -unless is_friend? @user.id
+          -unless current_user.is_friend? @user
             =link_to friendships_path(friend_id: @user.id), method: :post do
               %button.btn.btn-sm.btn-default
                 Add Friend

@@ -64,6 +64,20 @@ describe User do
     end
   end
 
+  describe "#is_friend?" do
+    it "returns true if the user is a friend" do
+      Friendship.create(user: user, friend: friend)
+      expect(user.is_friend?(friend)).to eq(true)
+    end
+
+    it "returns false if the user is not a friend" do
+      expect(user.is_friend?(friend)).to eq(false)
+    end
+
+    it "returns false if the user is not a friend" do
+    end
+  end
+
   describe "#get_followed_discussions" do
 
     before { user.discussions << [discussion1, discussion2] }

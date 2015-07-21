@@ -22,6 +22,11 @@ class User < ActiveRecord::Base
     Discussion.where(id: discussions).order('last_updated DESC')
   end
 
+  def is_friend?(friend)
+    return unless friend
+    self.friendships.map(&:friend).include?(friend)
+  end
+
   def get_my_discussions
     Discussion.where(creator: self).order('last_updated DESC')
   end
