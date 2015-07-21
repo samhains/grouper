@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
     current_user.friendships.map(&:friend).include?(friend)
   end
    
+
   def logged_in?
     !!session[:user_id]
   end

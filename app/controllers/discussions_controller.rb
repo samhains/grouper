@@ -1,5 +1,5 @@
 class DiscussionsController < ApplicationController 
-  before_action :require_user
+  before_action :require_user, except: [:index, :show]
   before_action :find_discussion, only: [:leave, :join]
   
   #Thread was a reserved word so discussion was used for controller stuff
