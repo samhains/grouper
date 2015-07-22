@@ -1,6 +1,6 @@
 .container
   %section.container.row
-    .col-md-4.well
+    .col-md-12.col-lg-4.well
       %h3.row 
         .col-md-7
           #{ @user.name }
@@ -21,7 +21,7 @@
       %br
       %p Joined Garp on #{ clean_time(@user.created_at) }
       %p Total posts: #{ @user.posts.count} 
-    .col-md-8
+    .col-md-12.col-lg-7
       .well
         %h4 #{ @user.name }'s Posts
       =render @posts, page: 'user_profile'
