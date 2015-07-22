@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/following', to: "discussions#following"
   patch '/user/edit', to: "users#update"
 
+
   resources :friendships, only: [:create, :destroy, :index]
   resources :messages, except: [:destroy, :index] do
     get :sent, action: :index, placeholder: 'Sent', on: :collection
@@ -28,9 +29,12 @@ Rails.application.routes.draw do
     get :my, action: :index, type: 'my', on: :collection
     get :following, action: :index, type: 'following', on: :collection
 
-    resources :posts, except: [:new, :index] do
-        resources :comments, except: [:new, :index, :show]
-    end
+  end
+
+  resources :posts, except: [:new, :index] do
+    post :create, to: "likes#create"
+    delete :destroy, to: "likes#destroy"
+    resources :comments, except: [:new, :index, :show]
   end
 
 end

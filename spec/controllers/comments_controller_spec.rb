@@ -8,7 +8,7 @@ describe CommentsController do
 
     it_behaves_like "requires sign in" do
       let (:action) do
-        post :create, post_id: new_post.id, thread_id: discussion.id, comment: Fabricate.attributes_for(:comment)
+        post :create, post_id: new_post.id, comment: Fabricate.attributes_for(:comment)
       end
     end
 
@@ -16,7 +16,7 @@ describe CommentsController do
       before do
         set_current_user user
         @request.env['HTTP_REFERER'] = root_path
-        post :create, post_id: new_post.id, thread_id: discussion.id, comment: Fabricate.attributes_for(:comment)
+        post :create, post_id: new_post.id, comment: Fabricate.attributes_for(:comment)
       end
 
       it "creates @comment" do
@@ -44,7 +44,7 @@ describe CommentsController do
     context "invalid input" do
       before do
         set_current_user user
-        post :create, post_id: new_post.id, thread_id: discussion.id, comment: { body: nil } 
+        post :create, post_id: new_post.id, comment: { body: nil } 
       end
 
       it "does not save to database" do
@@ -73,27 +73,27 @@ describe CommentsController do
     end
 
     it_behaves_like "requires sign in" do
-      let(:action) { delete :destroy, thread_id: discussion.id, id: new_comment.id, post_id: new_post }
+      let(:action) { delete :destroy, id: new_comment.id, post_id: new_post }
     end
 
     it "sets successful flash message" do
-      delete :destroy, thread_id: discussion.id, post_id: new_post, id: new_comment.id 
+      delete :destroy, post_id: new_post, id: new_comment.id 
       expect(flash[:success]).to_not be_nil
     end
 
     it "redirects to discussion path" do
-      delete :destroy, thread_id: discussion.id, post_id: new_post, id: new_comment.id
+      delete :destroy, post_id: new_post, id: new_comment.id
       expect(response).to redirect_to thread_path(discussion)
     end
 
     it "does not delete if user did not create comment" do
-      delete :destroy, thread_id: discussion.id, post_id: new_post, id: new_comment.id
+      delete :destroy, post_id: new_post, id: new_comment.id
     end
 
     it "deletes comment from database if user created it" do
       user.comments << new_comment
       user.save
-      delete :destroy, thread_id: discussion.id, post_id: new_post, id: new_comment.id
+      delete :destroy, post_id: new_post, id: new_comment.id
       expect(Comment.count).to eq(0)
     end
   end

@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
   before_action :require_user
-  before_action :set_discussion, only: [:create, :destroy]
 
   def create
+    @discussion = Discussion.find(params[:discussion_id])
     @post = Post.new(post_params)
     @post.user = current_user
     @post.discussion = @discussion
@@ -28,11 +28,8 @@ class PostsController < ApplicationController
   end
 
   private
-  def set_discussion
-    @discussion = Discussion.find(params[:thread_id])
-  end
 
   def post_params
-    params.require(:post).permit(:title, :body, :user_id, :discussion_id)
+    params.require(:post).permit(:title, :body, :user_id)
   end
 end

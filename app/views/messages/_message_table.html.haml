@@ -7,23 +7,24 @@
       %th Received at:
   %tbody
     -messages.each do |message|
-      -if current_user.is_read?(message, placeholder)
-        %tr
-          %td
-            =link_to message.subject, message_path(message), class: 'black-link'
-          %td 
-            =link_to "#{message.author.name} (#{message.author.username})", user_path(message.author), class:'black-link'
-          %td
-            =link_to "#{message.receiver.name} (#{message.receiver.username})", user_path(message.receiver), class:'black-link'
-          %td 
-            = clean_time message.created_at
-      -else
-        %tr.well
-          %td
-            =link_to message.subject, message_path(message), class: 'black-link'
-          %td 
-            =link_to "#{message.author.name} (#{message.author.username})", user_path(message.author), class:'black-link'
-          %td
-            =link_to "#{message.receiver.name} (#{message.receiver.username})", user_path(message.receiver), class:'black-link'
-          %td 
-            = clean_time message.created_at
+      -if message
+        -if current_user.is_read?(message, placeholder)
+          %tr
+            %td
+              =link_to message.subject, message_path(message), class: 'black-link'
+            %td 
+              =link_to "#{message.author.name} (#{message.author.username})", user_path(message.author), class:'black-link'
+            %td
+              =link_to "#{message.receiver.name} (#{message.receiver.username})", user_path(message.receiver), class:'black-link'
+            %td 
+              = clean_time message.created_at
+        -else
+          %tr.well
+            %td
+              =link_to message.subject, message_path(message), class: 'black-link'
+            %td 
+              =link_to "#{message.author.name} (#{message.author.username})", user_path(message.author), class:'black-link'
+            %td
+              =link_to "#{message.receiver.name} (#{message.receiver.username})", user_path(message.receiver), class:'black-link'
+            %td 
+              = clean_time message.created_at

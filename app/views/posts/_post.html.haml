@@ -1,6 +1,6 @@
-.div.span9.well
+.div.span10.well
   -if current_user && current_user.created_post?(post.id)
-    =link_to thread_post_path(post.discussion, post), method: :delete, data: { confirm: "Are you sure?" },  class:'remove-link-color' do
+    =link_to post_path(post), method: :delete, data: { confirm: "Are you sure?" },  class:'remove-link-color' do
       %span.glyphicon.glyphicon-remove.pull-right
   
   %h3
@@ -24,14 +24,14 @@
       -post.comments.each do |comment| 
         .list-group-item 
           -if current_user && current_user.created_comment?(comment.id)
-            =link_to thread_post_comment_path(post.discussion, post, comment), method: :delete, data: { confirm: "Are you sure?" },  class:'remove-link-color' do
+            =link_to post_comment_path(post, comment), method: :delete, data: { confirm: "Are you sure?" },  class:'remove-link-color' do
               %span.glyphicon.glyphicon-remove.pull-right
           =link_to comment.user.name, comment.user
           %span.list-group-item-text #{comment.body_html} 
           %div
             %small #{time_ago_in_words comment.created_at }
     -if logged_in?
-      = bootstrap_form_for @comment, url: thread_post_comments_path( post.discussion, post, @comment) do |f|
+      = bootstrap_form_for [post, @comment] do |f|
         -f.text_area :body, placeholder:"enter comment here" , hide_label: true, :autocomplete => :off, class: 'comment-box'
 
 %script

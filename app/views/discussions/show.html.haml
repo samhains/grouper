@@ -22,7 +22,8 @@
         %br
         -if current_user && current_user.belongs_to_discussion?(@discussion.id)
           .well
-            =bootstrap_form_for( @post, url: thread_posts_path(@discussion)) do |f|
+            =bootstrap_form_for(@post) do |f|
+              =hidden_field_tag :discussion_id, @discussion.id
               =f.text_field :title, placeholder: 'Enter title', hide_label: true
               =f.text_area :body, placeholder: 'Write something...',  hide_label: true
               =f.submit "Post"
