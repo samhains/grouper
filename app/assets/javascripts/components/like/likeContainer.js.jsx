@@ -2,8 +2,7 @@ var likeContainer = React.createClass({
   getInitialState(){
     console.log("initial liked state is", this.props.liked);
     return {
-      liked: this.props.liked,
-      likers: this.props.likers
+      liked: this.props.liked
     };
   },
   clickHandler(){
@@ -37,7 +36,6 @@ var likeContainer = React.createClass({
                 clickHandler={this.clickHandler}
                 liked={this.state.liked}
                 />
-              <LikeContainer likers={this.state.likers} />
                
             </div>);
   }
