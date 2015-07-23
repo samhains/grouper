@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   get '/following', to: "discussions#following"
   patch '/user/edit', to: "users#update"
 
+  post '/post/:id/like', as: 'post_like', type: 'Post',  to: "likes#create"
+  post '/comment/:id/like', as: 'comment_like', type: 'Comment', to: "likes#create"
+  delete '/post/:id/like', as: 'delete_post_like', type: 'Post',  to: "likes#destroy"
+  delete '/comment/:id/like', as: 'delete_comment_like', type: 'Comment', to: "likes#destroy"
 
   resources :friendships, only: [:create, :destroy, :index]
   resources :messages, except: [:destroy, :index] do
@@ -32,8 +36,6 @@ Rails.application.routes.draw do
   end
 
   resources :posts, except: [:new, :index] do
-    post :create, to: "likes#create"
-    delete :destroy, to: "likes#destroy"
     resources :comments, except: [:new, :index, :show]
   end
 

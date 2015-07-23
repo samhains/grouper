@@ -8,6 +8,7 @@ describe User do
   it { should validate_presence_of(:username) }
   it { should validate_uniqueness_of(:username) }
   it { should have_many(:friends).through(:friendships) }
+  it { should have_many(:likes) }
 
   let(:user) { Fabricate(:user) }
   let(:new_post) { Fabricate(:post) }
@@ -51,6 +52,7 @@ describe User do
       expect(User.search_by_name('am').count).to eq(2)
     end
 
+
     it "does not return users that do not contain query in name" do
       ben = Fabricate(:user, name: "Ben Jones")
       expect(User.search_by_name('sa')).to_not include(ben)
@@ -61,6 +63,42 @@ describe User do
     it "returns friendship for current_user " do
       friendship = Friendship.create(user: user, friend: friend)
       expect(friend.friendship(user)).to eq(friendship)
+    end
+  end
+
+  describe "#get_like" do
+    it "returns the like object for a post likeable" do
+        like = Like.create(likeable_id: new_post.id, likeable_type: 'Post', user: user) 
+        expect(user.get_like(new_post)).to eq(like)
+    end
+
+    it "returns the like object for a comment likeable" do
+        like = Like.create(likeable_id: new_comment.id, likeable_type: 'Comment', user: user) 
+        expect(user.get_like(new_comment)).to eq(like)
+    end
+  end
+
+  describe "#likes?" do
+    context "likeable is post" do
+      it "returns true if user has liked" do
+        Like.create(likeable_id: new_post.id, likeable_type: 'Post', user: user) 
+        expect(user.likes?(new_post)).to eq(true)
+      end
+
+      it "returns false if user has not liked" do
+        expect(user.likes?(new_post)).to eq(false)
+      end
+    end
+
+    context "likeable is comment" do
+      it "returns true if user has liked" do
+        Like.create(likeable_id: new_comment.id, likeable_type: 'Comment', user: user) 
+        expect(user.likes?(new_comment)).to eq(true)
+      end
+
+      it "returns false if user has not liked" do
+        expect(user.likes?(new_comment)).to eq(false)
+      end
     end
   end
 

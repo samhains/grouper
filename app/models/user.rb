@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :discussions, through: :discussion_users
   has_many :posts, ->{ order('created_at DESC') }
   has_many :comments
+  has_many :likes
   has_many :friendships
   has_many :friends, through: :friendships
   validates_presence_of :name, :username
@@ -20,6 +21,14 @@ class User < ActiveRecord::Base
 
   def get_followed_discussions
     Discussion.where(id: discussions).order('last_updated DESC')
+  end
+
+  def get_like(likeable)
+    Like.find_by(likeable_id: likeable.id, likeable_type: likeable.class.name, user: self)
+  end
+
+  def likes?(likeable)
+    !!self.get_like(likeable)
   end
 
   def is_friend?(friend)
