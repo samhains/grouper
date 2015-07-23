@@ -27,6 +27,7 @@ var LikeContainer = React.createClass({
       });
     }
     $.get(this.props.url, function(likerData) {
+      console.log('setting state');
       this.setState({liked: !liked, likers: likerData.likers});
     }.bind(this));
   },
@@ -37,7 +38,10 @@ var LikeContainer = React.createClass({
                 clickHandler={this.clickHandler}
                 liked={this.state.liked}
                 />
-               <LikerInfoContainer toggleLikers={this.toggleLikers} showLikers={this.state.showLikers} likers={this.state.likers}/>
+               <LikerInfoContainer 
+                 toggleLikers={this.toggleLikers} 
+                 showLikers={this.state.showLikers} 
+                 likers={this.state.likers}/>
             </div>);
   }
 
