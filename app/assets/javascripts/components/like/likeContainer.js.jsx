@@ -16,26 +16,19 @@ var LikeContainer = React.createClass({
       $.ajax({
         method: "POST",
         url: this.props.url,
-        data: { id: this.props.id },
-        success: function(x){
-          console.log('yes', x);
-        }
+        data: { id: this.props.id }
       });
     }
     else{
       $.ajax({
         method: "DELETE",
         url: this.props.url,
-        data: { id: this.props.id },
-        success: function(x){
-          console.log('no', x);
-        }
+        data: { id: this.props.id }
       });
     }
     $.get(this.props.url, function(likerData) {
-      this.setState({likers: likerData.likers});
+      this.setState({liked: !liked, likers: likerData.likers});
     }.bind(this));
-    this.setState({liked: !liked});
   },
 
   render(){
