@@ -34,6 +34,24 @@ p {
   margin-top: 5px;
 }
 
+.btn-black{
+  background-color: #333333;
+  color: white;
+}
+.btn-black:hover
+{
+  background-color: #333333;
+  color: white;
+  // Hover state styling
+}
+
+.btn-black:active
+{
+  background-color: #333333;
+  color: white;
+}
+  // Active state styling
+
 .likers-dropdown{
   position: absolute;
   background-color: white;
