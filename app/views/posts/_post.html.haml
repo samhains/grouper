@@ -17,9 +17,11 @@
     -else
       =link_to post.user.name, user_path(post.user)
     %span, on  #{ clean_time(post.created_at) }
-    =react_component('LikeContainer', id: post.id, url: post_like_path(post), liked: current_user.likes?(post), likers: post.likers)
   %br
   %p.lead #{post.body_html}
+  -if logged_in?
+    =react_component('LikeContainer', id: post.id, url: post_like_path(post), liked: current_user.likes?(post), likers: post.likers)
+    %br
   -unless page == 'user_profile'
     .list-group
       -post.comments.each do |comment| 
