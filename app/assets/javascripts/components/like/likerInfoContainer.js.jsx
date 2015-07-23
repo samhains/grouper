@@ -23,9 +23,7 @@ var LikerInfoContainer = React.createClass({
     else if(numOfLikes > 3) {
       return (<span> 
                 <a onClick={this.props.toggleLikers}>{`${numOfLikes} likes`}</a>
-                <div className='panel panel-default'>
                   <LikerInfoDropDown showLikers={this.props.showLikers} likers={this.props.likers}/>
-                </div>
              </span>);
     }
     else{

@@ -7,7 +7,7 @@ var LikeButton = React.createClass({
     return (
             <button 
               onClick={this.props.clickHandler} 
-              className={`btn btn-default btn-xs ${classes}`}>
+              className={`btn btn-default btn-xs like-btn ${classes}`}>
                 <i className="glyphicon glyphicon-thumbs-up"></i>
               Like
             </button>

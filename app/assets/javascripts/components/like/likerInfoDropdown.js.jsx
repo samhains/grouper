@@ -1,15 +1,17 @@
 LikerInfoDropDown = React.createClass({
   render(){
-    var LikerInfoDropItems;
+    var LikerInfoDropItems = this.props.likers.map(
+      function(liker){
+        return (<LikerInfoDropItem liker={liker}/>);
+    });
     if (this.props.showLikers) {
-      LikerInfoDropItems = this.props.likers.map(
-        function(liker){
-          return (<LikerInfoDropItem liker={liker}/>);
-      });
+      return (<div className='panel panel-default likers-dropdown'>
+                {LikerInfoDropItems}
+              </div>);
+    }
+    else {
+      return (<span></span>);
     }
 
-    return (<div >
-              {LikerInfoDropItems}
-            </div>);
   }
 });

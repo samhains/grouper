@@ -26,6 +26,20 @@ p {
   display: block!important;
 }
 
+.like-btn{
+  margin-right: 5px;
+}
+
+.like-container{
+  margin-top: 5px;
+}
+
+.likers-dropdown{
+  position: absolute;
+  background-color: white;
+  z-index:100;
+  padding: 5px;
+}
 .navbar-nav>li, .navbar-nav {
   float: left !important;
 }
