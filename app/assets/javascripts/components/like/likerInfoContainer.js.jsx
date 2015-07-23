@@ -39,7 +39,7 @@ var LikerInfoContainer = React.createClass({
       
       return (<span >
                 <span>{likeUsers}</span>
-                <span> like this</span>
+                <span> likes this</span>
               </span>);
     }
   }
