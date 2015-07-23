@@ -30,7 +30,6 @@ var LikeContainer = React.createClass({
       this.setState({liked: !liked, likers: likerData.likers});
     }.bind(this));
   },
-
   render(){
 
     return (<div className='like-container'>
