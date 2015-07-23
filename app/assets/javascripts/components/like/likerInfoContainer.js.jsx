@@ -16,12 +16,16 @@ function intersperse(arr, sep) {
 var LikerInfoContainer = React.createClass({
   render(){
     var numOfLikes = this.props.likers.length;
+    
     if(numOfLikes === 0) {
       return (<span></span>);
     }
     else if(numOfLikes > 3) {
       return (<span> 
                 <a onClick={this.props.toggleLikers}>{`${numOfLikes} likes`}</a>
+                <div className='panel panel-default'>
+                  <LikerInfoDropDown showLikers={this.props.showLikers} likers={this.props.likers}/>
+                </div>
              </span>);
     }
     else{
