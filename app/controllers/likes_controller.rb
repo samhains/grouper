@@ -1,6 +1,14 @@
 class LikesController < ApplicationController 
   before_action :require_user
 
+  def index
+    if params[:type] == 'Post' 
+      @post = Post.find(params[:id])
+      render json: { likers: @post.likers }
+    elsif params[:type] == 'Comment'
+    end
+  end
+
   def create
     get_likeable(params[:id], params[:type])
     @like = Like.new(user_id: current_user.id)

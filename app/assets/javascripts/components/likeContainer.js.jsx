@@ -1,6 +1,5 @@
 var likeContainer = React.createClass({
   getInitialState(){
-    console.log("initial liked state is", this.props.liked);
     return {
       liked: this.props.liked,
       likers: this.props.likers
@@ -28,16 +27,20 @@ var likeContainer = React.createClass({
         }
       });
     }
+    $.get(this.props.url, function(likersData) {
+      var likers = likersData.likers;
+      this.setState({likers: likers});
+    }.bind(this));
     this.setState({liked: !liked});
   },
 
   render(){
     return (<div >
+              <LikerInfoContainer likers={this.state.likers} />
               <LikeButton 
                 clickHandler={this.clickHandler}
                 liked={this.state.liked}
                 />
-              <LikeContainer likers={this.state.likers} />
                
             </div>);
   }
