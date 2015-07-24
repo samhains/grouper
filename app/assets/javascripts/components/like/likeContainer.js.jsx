@@ -16,19 +16,24 @@ var LikeContainer = React.createClass({
       $.ajax({
         method: "POST",
         url: this.props.url,
-        data: { id: this.props.id }
+        data: { id: this.props.id },
+        success: function(){
+          this.setState({liked: !liked});
+        }.bind(this)
       });
     }
     else{
       $.ajax({
         method: "DELETE",
         url: this.props.url,
-        data: { id: this.props.id }
+        data: { id: this.props.id },
+        success: function(){
+          this.setState({liked: !liked});
+        }.bind(this)
       });
     }
     $.get(this.props.url, function(likerData) {
-      console.log('setting state');
-      this.setState({liked: !liked, likers: likerData.likers});
+      this.setState({ likers: likerData.likers});
     }.bind(this));
   },
   render(){
