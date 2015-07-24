@@ -60,6 +60,20 @@ describe User do
     end
   end
 
+  describe "#new_notifications_count" do
+    it "returns the number of unchecked notifications from the user" do
+      notification1 = Fabricate(:notification, user:user, user_checked: true)
+      notification2 = Fabricate(:notification, user:user)
+      notification3 = Fabricate(:notification, user:user)
+      expect(user.new_notifications_count).to eq(2)
+     
+    end
+
+    it "returns 0 if user doesn't have any" do
+      expect(user.new_notifications_count).to eq(0)
+    end
+  end
+
   describe "#frienship" do
     it "returns friendship for current_user " do
       friendship = Friendship.create(user: user, friend: friend)

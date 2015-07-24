@@ -20,6 +20,11 @@ class User < ActiveRecord::Base
           "%#{query.downcase}%").order('created_at DESC').limit(5)
   end
 
+  def new_notifications_count 
+    notifications.where('user_checked' => false).count
+    
+  end
+
   def get_followed_discussions
     Discussion.where(id: discussions).order('last_updated DESC')
   end
