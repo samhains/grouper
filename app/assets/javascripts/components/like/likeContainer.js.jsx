@@ -17,11 +17,9 @@ var LikeContainer = React.createClass({
         method: "POST",
         url: this.props.url,
         data: { id: this.props.id },
-        success: function(){
-          this.setState({liked: !liked});
-          $.get(this.props.url, function(likerData) {
-            this.setState({ likers: likerData.likers});
-          }.bind(this));
+        success: function(likersData){
+          var likers = likersData.likers;
+          this.setState({liked: !liked, likers: likers});
         }.bind(this)
       });
     }
@@ -30,14 +28,16 @@ var LikeContainer = React.createClass({
         method: "DELETE",
         url: this.props.url,
         data: { id: this.props.id },
-        success: function(){
-          this.setState({liked: !liked});
-          $.get(this.props.url, function(likerData) {
-            this.setState({ likers: likerData.likers});
-          }.bind(this));
+        success: function(likersData){
+          
+          var likers = likersData.likers;
+          this.setState({liked: !liked, likers: likers});
         }.bind(this)
       });
     }
+    //$.get(this.props.url, function(likerData) {
+      //this.setState({ likers: likerData.likers});
+    //}.bind(this));
   },
   render(){
 

@@ -2,11 +2,6 @@ class LikesController < ApplicationController
   before_action :require_user
 
   def index
-    if params[:type] == 'Post' 
-      @post = Post.find(params[:id])
-      render json: { likers: @post.likers }
-    elsif params[:type] == 'Comment'
-    end
   end
 
   def create
@@ -14,7 +9,7 @@ class LikesController < ApplicationController
     @like = Like.new(user_id: current_user.id)
     @like.likeable = @likeable
     if @like.save
-      render json: {like: @like}
+      render json: {likers: @like.likeable.likers}
     end
   end
 
@@ -23,7 +18,7 @@ class LikesController < ApplicationController
     if @like
       @like.destroy
     end
-    render json: {like: @like}
+    render json: {likers: @like.likeable.reload.likers}
   end
 
   private
