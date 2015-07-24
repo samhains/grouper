@@ -4,31 +4,6 @@ describe LikesController do
     let(:post1) { Fabricate(:post) }
     let(:comment1) { Fabricate(:comment) }
     let(:user) { Fabricate(:user) }
-
-  #describe "GET #index" do
-    #it_behaves_like "requires sign in" do
-      #let(:action) { get :index, id: post1.id, type: 'Post'}
-    #end
-
-    #context "like type is post " do
-      #it "sets @post" do
-        #set_current_user user
-        #get :index, type: 'Post', id: post1.id
-        #expect(assigns(:post)).to be_instance_of(Post)
-      #end
-
-      #it "renders the users who liked the post" do
-        #set_current_user user
-        #user2 = Fabricate(:user)
-        #like = Like.create(likeable: post1, user: user, created_at: 1.day.ago)
-        #like2 = Like.create(likeable: post1, user: user2, created_at: 2.days.ago)
-        #get :index, type: 'Post', id: post1.id
-        #expect(response.body).to eq({ "likers"=>[user, user2] }.to_json)
-
-      #end
-    #end
-  #end
-
   describe "POST #create" do
     context "user likes a post" do
 
@@ -61,7 +36,7 @@ describe LikesController do
       end
 
       it "renders json @like in response" do
-        expect(response.body).to eq({ "like"=> Like.first}.to_json)
+        expect(response.body).to eq({ "likers"=> Like.first.likeable.likers}.to_json)
       end
 
     end

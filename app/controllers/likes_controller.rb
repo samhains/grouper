@@ -1,8 +1,6 @@
 class LikesController < ApplicationController 
   before_action :require_user
 
-  def index
-  end
 
   def create
     get_likeable(params[:id], params[:type])

@@ -14,8 +14,6 @@ Rails.application.routes.draw do
   post '/comment/:id/like', as: 'comment_like', type: 'Comment', to: "likes#create"
   delete '/post/:id/like', as: 'delete_post_like', type: 'Post',  to: "likes#destroy"
   delete '/comment/:id/like', as: 'delete_comment_like', type: 'Comment', to: "likes#destroy"
-  get '/post/:id/like', type: 'Post',  to: "likes#index"
-  get '/comment/:id/like', type: 'Comment', to: "likes#index"
 
   resources :friendships, only: [:create, :destroy, :index]
   resources :messages, except: [:destroy, :index] do

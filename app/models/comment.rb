@@ -13,4 +13,7 @@ class Comment < ActiveRecord::Base
     simple_format
   end
 
+  def likers 
+    likes.map(&:user)
+  end
 end
