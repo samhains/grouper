@@ -19,6 +19,9 @@ var LikeContainer = React.createClass({
         data: { id: this.props.id },
         success: function(){
           this.setState({liked: !liked});
+          $.get(this.props.url, function(likerData) {
+            this.setState({ likers: likerData.likers});
+          }.bind(this));
         }.bind(this)
       });
     }
@@ -29,12 +32,12 @@ var LikeContainer = React.createClass({
         data: { id: this.props.id },
         success: function(){
           this.setState({liked: !liked});
+          $.get(this.props.url, function(likerData) {
+            this.setState({ likers: likerData.likers});
+          }.bind(this));
         }.bind(this)
       });
     }
-    $.get(this.props.url, function(likerData) {
-      this.setState({ likers: likerData.likers});
-    }.bind(this));
   },
   render(){
 
