@@ -2,36 +2,36 @@
   .header
     .h2 
       -if params[:type] == 'all'
-        %span ALL THREADS
+        %span all threads
         -if logged_in?
           =link_to following_threads_path do
-            %small  FOLLOWED THREADS
+            %small  followed threads
           %small /
           =link_to my_threads_path do
-            %small.black MY THREADS
+            %small.black my threads
           =link_to new_thread_path do
-            %button.btn.btn-default.pull-right Create Thread
+            %button.btn.btn-default.pull-right create thread
       -if params[:type] == 'following'
-        %span FOLLOWED THREADS
+        %span followed threads
         -if logged_in?
           =link_to all_threads_path do
-            %small  ALL THREADS
+            %small  all threads
           %small /
           =link_to my_threads_path do
-            %small.black MY THREADS
+            %small.black my threads
           =link_to new_thread_path do
-            %button.btn.btn-default.pull-right Create Thread
+            %button.btn.btn-default.pull-right create thread
       
       -if params[:type] == 'my'
-        %span MY THREADS
+        %span my threads
         -if logged_in?
           =link_to following_threads_path do
-            %small  FOLLOWED THREADS
+            %small  followed threads
           %small /
           =link_to all_threads_path do
-            %small.black ALL THREADS
+            %small.black all threads
           =link_to new_thread_path do
-            %button.btn.btn-default.pull-right Create Thread
+            %button.btn.btn-default.pull-right create thread
   %br
 
   =render 'discussions', discussions: @discussions

@@ -14,6 +14,6 @@ class Comment < ActiveRecord::Base
   end
 
   def likers 
-    likes.map(&:user)
+a   likes.map(&:user)
   end
 end

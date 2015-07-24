@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :likes
   has_many :friendships
   has_many :friends, through: :friendships
+  has_many :notifications, ->{ order('created_at DESC') }  
   validates_presence_of :name, :username
   validates_uniqueness_of :username
 

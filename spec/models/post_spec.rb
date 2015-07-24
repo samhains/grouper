@@ -8,6 +8,7 @@ describe Post do
   it { should validate_presence_of(:body) }
   it { should validate_presence_of(:discussion) }
   it { should have_many(:likes) }
+  it { should have_many(:notifications) }
 
   let(:user1) { Fabricate(:user) }
   let(:user2) { Fabricate(:user) }

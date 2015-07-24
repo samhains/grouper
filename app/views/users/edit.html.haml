@@ -6,8 +6,8 @@
           %h1 Edit Profile
         %br
         =f.text_field :username
-        =f.password_field :password
         =f.text_field :name
         =f.text_area :bio
+        =f.time_zone_select :time_zone, ActiveSupport::TimeZone.all, default: Time.zone.name
         =f.submit "Update"
 

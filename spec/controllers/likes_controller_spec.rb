@@ -24,6 +24,21 @@ describe LikesController do
         expect(Like.first.user).to eq(user)
       end
 
+      it "creates a @notification" do
+        expect(assigns[:notification]).to be_instance_of Notification
+      end
+
+      it "saves @notification to db" do
+        expect(Notification.count).to eq(1)
+      end
+
+      it "associates @notification with post author" do
+        expect(Notification.first.user).to eq(post1.user)
+      end
+
+      it "associates @notification with post" do
+        expect(Notification.first.notifiable).to eq(post1)
+      end
       it "sets likeable_id to post id" do
         expect(Like.first.likeable_id).to eq(post1.id)
       end
@@ -41,11 +56,15 @@ describe LikesController do
 
     end
 
-    it "sets likeable to comment object if likeable is comment" do
+    xit "sets likeable to comment object if likeable is comment" do
       set_current_user user
       post :create, id: comment1.id, type: 'Comment'
       expect(assigns[:likeable]).to be_instance_of Comment
     end
+
+    xit "associates @notification with comment author" do
+    end
+
   end
 
   describe "DELETE #destroy" do

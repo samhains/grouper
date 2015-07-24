@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     get :inbox, action: :index, placeholder: 'Inbox', on: :collection
   end
   
+  resources :notifications, only: [:index]
+
   resources :users, only: [:create, :show] do
     collection do
       get 'search' 

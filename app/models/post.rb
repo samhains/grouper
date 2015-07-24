@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :discussion
   has_many :comments
+  has_many :notifications, as: :notifiable
   has_many :likes, ->{ order('created_at DESC') }, as: :likeable
   validates_presence_of :user, :discussion, :body
 
