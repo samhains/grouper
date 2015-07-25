@@ -41,7 +41,6 @@ describe PostsController do
       end
 
       it "saves post to database" do
-        
         expect(Post.count).to eq(1)
       end
 
@@ -69,19 +68,18 @@ describe PostsController do
         expect(Notification.count).to eq(1)
       end
 
-      it "associates @notification with current user" do
-        expect(Notification.first.user).to eq(user)
+      it "associates @notification creator with current user" do
+        expect(Notification.first.creator).to eq(user)
       end
 
-      it "associates @notification with like" do
-        expect(Notification.first.notifiable).to eq(Like.first)
+      it "associates @notifications user with thread owner" do
+        expect(Notification.first.user).to eq(Post.first.discussion.creator)
       end
-      it "sets likeable_id to post id" do
-        expect(Like.first.likeable_id).to eq(post1.id)
+
+      it "associates @notification with post" do
+        expect(Notification.first.notifiable).to eq(Post.first)
       end
-      it "creates saves like to db" do
-        expect(Like.count).to eq(1)
-      end
+
     end
 
     context "invalid input " do
