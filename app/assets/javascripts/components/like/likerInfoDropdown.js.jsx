@@ -5,7 +5,7 @@ LikerInfoDropDown = React.createClass({
         return (<LikerInfoDropItem liker={liker}/>);
     });
     if (this.props.showLikers) {
-      return (<div className='panel panel-default likers-dropdown'>
+      return (<div className='panel panel-default likers-dropdown custom-dropdown'>
                 {LikerInfoDropItems}
               </div>);
     }
