@@ -36,6 +36,7 @@ class CommentsController < ApplicationController
     @post.updated_at = Time.now
     @post.save
     @discussion.last_updated = Time.now
+    @discussion.last_author = current_user
     @discussion.save
   end
 

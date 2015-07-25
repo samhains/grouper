@@ -17,6 +17,7 @@ class PostsController < ApplicationController
     if current_user.belongs_to_discussion?(@discussion.id) && @post.save
       create_notification(current_user, thread_creator, @post)
       @discussion.last_updated = Time.now
+      @discussion.last_author = current_user
       @discussion.save
       flash[:success] = "Post created!"
       redirect_to thread_path(@discussion)

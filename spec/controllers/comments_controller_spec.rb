@@ -36,6 +36,10 @@ describe CommentsController do
         expect(Comment.first.post).to eq(new_post)
       end
 
+      it "sets last_author of discussion to current_user" do
+        expect(Discussion.first.last_author).to eq(user)
+      end
+
       it "redirects to thread_path" do
         expect(response).to redirect_to root_path
       end

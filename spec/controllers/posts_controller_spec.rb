@@ -60,6 +60,10 @@ describe PostsController do
         expect(Post.first.discussion.id).to be(discussion.id)
       end
 
+      it "sets last_author of discussion to current_user" do
+        expect(Discussion.first.last_author).to eq(user)
+      end
+
       it "creates a @notification" do
         expect(assigns[:notification]).to be_instance_of Notification
       end
