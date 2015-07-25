@@ -31,9 +31,13 @@
               %span.glyphicon.glyphicon-remove.pull-right
           =link_to comment.user.name, comment.user
           %span.list-group-item-text #{comment.body_html} 
-          =react_component('LikeContainer', id: comment.id, type:'Comment', url: comment_like_path(comment), liked: current_user.likes?(comment), likers: comment.likers)
-          %div
-            %small #{time_ago_in_words comment.created_at }
+          .row
+            .col-md-6.col-sm-6.col-xs-6
+              %div.lower-time
+                %small #{time_ago_in_words comment.created_at }
+            .col-md-6.col-sm-6.col-xs-6
+              .div.small-like.pull-right
+                =react_component('LikeContainer', id: comment.id, type:'Comment', url: comment_like_path(comment), liked: current_user.likes?(comment), likers: comment.likers)
     -if logged_in?
       = bootstrap_form_for [post, @comment] do |f|
         -f.text_area :body, placeholder:"enter comment here" , hide_label: true, :autocomplete => :off, class: 'comment-box'

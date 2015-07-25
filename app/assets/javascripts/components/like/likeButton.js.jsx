@@ -2,7 +2,8 @@ var LikeButton = React.createClass({
   render(){
     var cx = React.addons.classSet;
     var classes = cx({
-      'btn-primary': this.props.liked
+      'btn-primary': this.props.liked,
+      'btn-small-like': (this.props.type === 'Comment') ? true : false
     });
     var likeText = (this.props.type === 'Post') ? 'Like' : '';
     return (

@@ -1,20 +1,37 @@
 =link_to notification.creator.name, user_path(notification.creator)
 -if notification.notifiable.class == Like
-  %span liked your
-  -unless notification.notifiable.likeable.title.empty?
-    %span Post,
-    =link_to notification.notifiable.likeable.title, post_path(id: notification.notifiable.likeable_id)
-  -else
-    =link_to notification.notifiable.likeable.class, post_path(notification.notifiable.likeable_id)
-  %span, #{ time_ago_in_words notification.created_at } ago
-  %br
-  %br
+  -if notification.notifiable.likeable.class == Post
+    %span liked your
+    -unless notification.notifiable.likeable.title.empty?
+      %span Post,
+      =link_to notification.notifiable.likeable.title, 
+        post_path(id: notification.notifiable.likeable_id)
+    -else
+      =link_to notification.notifiable.likeable.class, 
+        post_path(notification.notifiable.likeable_id)
+    %span, #{ time_ago_in_words notification.created_at } ago
+    %br
+    %br
+  -elsif notification.liked_class == Comment
+    %span liked your Comment on
+    -unless notification.notifiable.likeable.post.title.empty?
+      %span Post,
+      =link_to notification.notifiable.likeable.post.title, 
+        post_path(notification.notifiable.likeable.post)
+    -else
+      =link_to notification.notifiable.likeable.post.class, 
+        post_path(notification.notifiable.likeable.post)
+    %span, #{ time_ago_in_words notification.created_at } ago
+    %br
+    %br
+
   .panel.panel-default
     .panel-body
       =notification.notifiable.likeable.body
 -if notification.notifiable.class == Post
   %span posted in 
-  =link_to notification.notifiable.discussion.name, thread_path(notification.notifiable.discussion)
+  =link_to notification.notifiable.discussion.name, 
+    thread_path(notification.notifiable.discussion)
   %span, #{ time_ago_in_words notification.created_at } ago
   %br
   %br
@@ -26,10 +43,12 @@
   %span commented on
   -unless notification.notifiable.post.title.empty?
     %span your Post,
-    =link_to notification.notifiable.post.title, post_path(notification.notifiable.post)
+    =link_to notification.notifiable.post.title, 
+      post_path(notification.notifiable.post)
   -else
     %span your
-    =link_to notification.notifiable.post.class, post_path(notification.notifiable.post)
+    =link_to notification.notifiable.post.class, 
+      post_path(notification.notifiable.post)
   %span, #{ time_ago_in_words notification.created_at } ago
   %br
   %br
