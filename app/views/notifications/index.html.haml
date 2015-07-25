@@ -5,8 +5,13 @@
       .h2 
         Notifications
     .col-md-2
+  %br
   .row
     .col-md-2
     .col-md-8
       =render @notifications
+      =link_to_previous_page @notifications, 'Previous', class: 'pull-left'
+      =link_to_next_page @notifications, 'Next', class: 'pull-left' 
+      %br
+      %br
     .col-md-2

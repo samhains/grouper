@@ -60,6 +60,28 @@ describe PostsController do
       it "associates @post with discussion" do
         expect(Post.first.discussion.id).to be(discussion.id)
       end
+
+      it "creates a @notification" do
+        expect(assigns[:notification]).to be_instance_of Notification
+      end
+
+      it "saves @notification to db" do
+        expect(Notification.count).to eq(1)
+      end
+
+      it "associates @notification with current user" do
+        expect(Notification.first.user).to eq(user)
+      end
+
+      it "associates @notification with like" do
+        expect(Notification.first.notifiable).to eq(Like.first)
+      end
+      it "sets likeable_id to post id" do
+        expect(Like.first.likeable_id).to eq(post1.id)
+      end
+      it "creates saves like to db" do
+        expect(Like.count).to eq(1)
+      end
     end
 
     context "invalid input " do

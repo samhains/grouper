@@ -33,8 +33,12 @@ describe LikesController do
         expect(Notification.count).to eq(1)
       end
 
-      it "associates @notification with current user" do
-        expect(Notification.first.user).to eq(user)
+      it "associates @notification creator with current user" do
+        expect(Notification.first.creator).to eq(user)
+      end
+
+      it "associates @notifications user with likeable user" do
+        expect(Notification.first.user).to eq(post1.user)
       end
 
       it "associates @notification with like" do
@@ -55,6 +59,13 @@ describe LikesController do
         expect(response.body).to eq({ "likers"=> Like.first.likeable.likers}.to_json)
       end
 
+    end
+    
+    it "does not create a notification if user likes their own content" do
+        set_current_user user
+        post2 = Fabricate(:post, user: user)
+        post :create, id: post2.id, type: 'Post'
+        expect(Notification.count).to eq(0)
     end
 
     xit "sets likeable to comment object if likeable is comment" do

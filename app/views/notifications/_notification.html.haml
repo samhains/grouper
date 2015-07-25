@@ -1,4 +1,16 @@
 -if notification.user_checked
+  .div.span8.well.white-well
+    =link_to notification.creator.name, user_path(notification.creator)
+    -if notification.notifiable.class == Like
+      %span liked your
+      -unless notification.notifiable.likeable.title.empty?
+        %span Post,
+        =link_to notification.notifiable.likeable.title, post_path(id: notification.notifiable.likeable_id)
+      -else
+        =link_to notification.notifiable.likeable.class, post_path(notification.notifiable.likeable_id)
+      %span, #{ time_ago_in_words notification.created_at } ago
+      .panel 
+        =notification.notifiable.likeable.body
 -else
   .div.span8.well
     =link_to notification.creator.name, user_path(notification.creator)

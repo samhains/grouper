@@ -5,7 +5,7 @@
       %li= link_to "Threads", all_threads_path
       -if logged_in?
         %li= link_to "Friends", friendships_path
-        %li= link_to "Inbox (#{current_user.unread_email_count})"
+        %li= link_to "Inbox (#{current_user.unread_email_count})", inbox_messages_path
         %li= link_to "Notifications (#{current_user.new_notifications_count})", 
           notifications_path
 
