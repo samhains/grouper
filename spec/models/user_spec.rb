@@ -60,6 +60,7 @@ describe User do
     end
   end
 
+
   describe "#new_notifications_count" do
     it "returns the number of unchecked notifications from the user" do
       notification1 = Fabricate(:notification, user:user, user_checked: true)
@@ -70,6 +71,18 @@ describe User do
     end
 
     it "returns 0 if user doesn't have any" do
+      expect(user.new_notifications_count).to eq(0)
+    end
+  end
+
+  describe "#check_notifications" do
+    it "should mark all notifications belonging to user as true" do
+      notification = Fabricate(:notification, user: user)
+      notification1 = Fabricate(:notification, user: user)
+      notification3 = Fabricate(:notification, user: user)
+
+      expect(user.new_notifications_count).to eq(3)
+      user.check_notifications
       expect(user.new_notifications_count).to eq(0)
     end
   end

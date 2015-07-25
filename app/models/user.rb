@@ -13,6 +13,14 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :username
   validates_uniqueness_of :username
 
+
+  def check_notifications
+    notifications.each do |notification|
+      notification.user_checked = true
+      notification.save
+    end
+  end
+
   def self.search_by_name(query)
     return [] if query.blank?
     where("LOWER(name) LIKE ? OR LOWER(username) LIKE ?",
