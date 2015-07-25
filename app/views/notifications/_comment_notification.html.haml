@@ -1,0 +1,14 @@
+%span commented on
+-unless notification.post_title?
+  %span your Post,
+  =link_to notification.post.title, post_path(notification.post)
+-else
+  %span your
+  =link_to notification.post.class, post_path(notification.post)
+%span, #{ time_ago_in_words notification.created_at } ago
+%br
+%br
+.panel.panel-default
+  .panel-body 
+    =notification.text
+

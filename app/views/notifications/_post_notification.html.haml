@@ -1,0 +1,9 @@
+%span posted in 
+=link_to notification.discussion.name, 
+  thread_path(notification.discussion)
+%span, #{ time_ago_in_words notification.created_at } ago
+%br
+%br
+.panel.panel-default
+  .panel-body 
+    =notification.text

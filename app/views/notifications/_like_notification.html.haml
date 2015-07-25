@@ -1,0 +1,29 @@
+
+-if notification.liked_class == Post
+  %span liked your
+  -unless notification.post_title?
+    %span Post,
+    =link_to notification.post.title,
+      post_path(notification.post)
+  -else
+    =link_to notification.liked_class, 
+      post_path(notification.post)
+  %span, #{ time_ago_in_words notification.created_at } ago
+  %br
+  %br
+-elsif notification.liked_class == Comment
+  %span liked your Comment on
+  -unless notification.post_title?
+    %span Post,
+    =link_to notification.post.title, 
+      post_path(notification.post)
+  -else
+    =link_to notification.post.class,
+      post_path(notification.post)
+  %span, #{ time_ago_in_words notification.created_at } ago
+  %br
+  %br
+
+.panel.panel-default
+  .panel-body
+    =notification.liked_content
