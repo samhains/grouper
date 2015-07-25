@@ -7,7 +7,7 @@ describe Post do
   it { should validate_presence_of(:user) }
   it { should validate_presence_of(:body) }
   it { should validate_presence_of(:discussion) }
-  it { should have_many(:likes) }
+  it { should have_many(:likes).order('created_at DESC') }
   it { should have_many(:notifications) }
 
   let(:user1) { Fabricate(:user) }
@@ -16,7 +16,6 @@ describe Post do
   let(:post1) { Fabricate(:post) }
 
   describe "#likers" do
-    let(:like) {}
     it "returns array of all users who like post" do
       like1 =  Like.create(likeable_id: post1.id, likeable_type: 'Post', user: user1) 
       like2 =  Like.create(likeable_id: post1.id, likeable_type: 'Post', user: user2) 

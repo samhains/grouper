@@ -68,7 +68,7 @@ describe LikesController do
         expect(Notification.count).to eq(0)
     end
 
-    xit "sets likeable to comment object if likeable is comment" do
+    it "sets likeable to comment object if likeable is comment" do
       set_current_user user
       post :create, id: comment1.id, type: 'Comment'
       expect(assigns[:likeable]).to be_instance_of Comment

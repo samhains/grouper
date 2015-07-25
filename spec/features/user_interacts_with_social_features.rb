@@ -14,7 +14,7 @@ feature 'User Interacts With Social Features' do
     add_user_as_friend(alice, discussion1)
     add_user_as_friend(bob, discussion2)
 
-    click_link("Friends")
+    click_link("friends")
 
     expect(page).to have_link(alice.name)
     expect(page).to have_link(bob.name)
@@ -29,8 +29,8 @@ def add_user_as_friend(user, discussion)
     click_link(discussion.name)
     expect(page).to have_content(discussion.description)
     click_link(user.name)
-    click_link("Add Friend")
-    expect(page).to have_content("You have added a friend!")
+    click_link("add friend")
+    expect(page).to have_content("you have added a friend!")
     click_link("GARP")
 end
 
@@ -38,8 +38,8 @@ def remove_user_as_friend(user, discussion)
     click_link(discussion.name)
     expect(page).to have_content(discussion.description)
     click_link(user.name)
-    click_link("Remove Friend")
-    expect(page).to have_content("You have deleted friend!")
-    click_link("Friends")
+    click_link("remove friend")
+    expect(page).to have_content("you have deleted friend!")
+    click_link("friends")
     expect(page).to_not have_content(user.name)
 end

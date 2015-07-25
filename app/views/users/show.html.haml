@@ -10,21 +10,21 @@
           -unless current_user.is_friend? @user
             =link_to friendships_path(friend_id: @user.id), method: :post do
               %button.btn.btn-sm.btn-default
-                Add Friend
+                add friend
           -else
             =link_to friendship_path(@user.friendship(current_user)), method: :delete do
               %button.btn.btn-sm.btn-default
-                Remove Friend
+                remove friend
       %br
       %em #{ @user.bio }
       %br
       %br
-      %p Joined Garp on #{ clean_time(@user.created_at) }
-      %p Total posts: #{ @user.posts.count} 
+      %p joined garp on #{ clean_time(@user.created_at) }
+      %p total posts: #{ @user.posts.count} 
     .col-md-12.col-lg-7
       .well
-        %h4 #{ @user.name }'s Posts
+        %h4 #{ @user.name }'s posts
       =render @posts, page: 'user_profile'
-      =link_to_previous_page @posts, 'Previous'
-      =link_to_next_page @posts, 'Next'
+      =link_to_previous_page @posts, 'previous'
+      =link_to_next_page @posts, 'next'
 
