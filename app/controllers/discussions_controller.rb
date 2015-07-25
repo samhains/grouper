@@ -39,11 +39,11 @@ class DiscussionsController < ApplicationController
   def set_discussions_by_type(type)
     case type
     when 'all'
-      @discussions = Discussion.all.order('last_updated DESC').page type
+      @discussions = Discussion.all.order('last_updated DESC').page params[:page]
     when 'my'
-      @discussions = current_user.get_my_discussions.page type
+      @discussions = current_user.get_my_discussions.page params[:page]
     when 'following'
-      @discussions = current_user.get_followed_discussions.page type
+      @discussions = current_user.get_followed_discussions.page params[:page]
     end
   end
 
