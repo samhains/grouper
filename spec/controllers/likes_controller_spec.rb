@@ -61,21 +61,32 @@ describe LikesController do
 
     end
     
-    it "does not create a notification if user likes their own content" do
+    context "user likes a comment" do
+      before do
         set_current_user user
-        post2 = Fabricate(:post, user: user)
-        post :create, id: post2.id, type: 'Post'
-        expect(Notification.count).to eq(0)
+        post :create, id: comment1.id, type: 'Comment'
+      end
+
+      it "sets likeable to comment object if likeable is comment" do
+        expect(assigns[:likeable]).to be_instance_of Comment
+      end
+
+      it "saves @notification to db" do
+        expect(Notification.count).to eq(1)
+      end
+
+      it "associates @notification with comment author" do
+        expect(Notification.first.user).to eq(Comment.first.user)
+      end
     end
 
-    it "sets likeable to comment object if likeable is comment" do
+    it "does not create a notification if user likes their own content" do
       set_current_user user
-      post :create, id: comment1.id, type: 'Comment'
-      expect(assigns[:likeable]).to be_instance_of Comment
+      post2 = Fabricate(:post, user: user)
+      post :create, id: post2.id, type: 'Post'
+      expect(Notification.count).to eq(0)
     end
 
-    xit "associates @notification with comment author" do
-    end
 
   end
 
