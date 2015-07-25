@@ -15,7 +15,7 @@ class Notification < ActiveRecord::Base
 
 
   def text
-    notifiable.body
+    notifiable.body_html
   end
 
   def discussion
@@ -47,6 +47,6 @@ class Notification < ActiveRecord::Base
   end
 
   def liked_content
-    notifiable.likeable.body if type == Like
+    notifiable.likeable.body_html if type == Like
   end
 end
