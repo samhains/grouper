@@ -7,13 +7,13 @@
     -if logged_in? && current_user.discussions.count > 0
       .col-lg-8.col-md-12.col-sm-12
         =render @posts, page: 'portal'
-        =link_to_previous_page @posts, 'Previous'
-        =link_to_next_page @posts, 'Next'
+        =link_to_previous_page @posts, 'previous'
+        =link_to_next_page @posts, 'next'
         -#-if more_pages(params[:offset])
           -#=link_to "next page", root_path(offset: offset_calculate(params[:offset]))
       .col-lg-4.fixed.hidden-md.hidden-xs.hidden-sm
         .row.well
-          %h4.header-bottom-padding.text-center Followed Threads
+          %h4.header-bottom-padding.text-center followed threads
           -@discussions.each do |discussion|
             .span8
               =link_to thread_path(discussion) do
@@ -21,7 +21,7 @@
         
         -if @recent_discussions
           .row.well
-            %h4.header-bottom-padding.text-center  Recent Activity
+            %h4.header-bottom-padding.text-center  recent activity
             -@recent_discussions.each do |discussion|
               .span8
                 =link_to thread_path(discussion) do

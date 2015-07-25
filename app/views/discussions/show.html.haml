@@ -13,20 +13,20 @@
               =link_to thread_create_path(@discussion), method: :post do
                 %button.btn.btn-default.pull-right.button-top-padding
                   %span.glyphicon.glyphicon-plus 
-                    Join Thread
+                    join thread
             -elsif current_user
               =link_to thread_destroy_path(@discussion), method: :delete do
                 %button.btn.btn-default.pull-right.button-top-padding
                   %span.glyphicon.glyphicon-minus
-                    Leave Thread
+                    leave thread
         %br
         -if current_user && current_user.belongs_to_discussion?(@discussion.id)
           .well
             =bootstrap_form_for(@post) do |f|
               =hidden_field_tag :discussion_id, @discussion.id
-              =f.text_field :title, placeholder: 'Enter title', hide_label: true
-              =f.text_area :body, placeholder: 'Write something...',  hide_label: true
-              =f.submit "Post"
+              =f.text_field :title, placeholder: 'enter title', hide_label: true
+              =f.text_area :body, placeholder: 'write something...',  hide_label: true
+              =f.submit "post"
       %br
       %br
         =render @posts, page: 'discussion'

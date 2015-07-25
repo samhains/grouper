@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 describe CommentsController do
+  let (:user) { Fabricate(:user) }
+  let (:user2) { Fabricate(:user) }
+  let (:discussion) { Fabricate(:discussion, users: [user]) }
+  let (:new_post) { Fabricate(:post, user: user2, discussion: discussion) }
   describe "POST #create" do
-    let (:user) { Fabricate(:user) }
-    let (:discussion) { Fabricate(:discussion, users: [user]) }
-    let (:new_post) { Fabricate(:post, user: user, discussion: discussion) }
 
     it_behaves_like "requires sign in" do
       let (:action) do
@@ -38,7 +39,35 @@ describe CommentsController do
       it "redirects to thread_path" do
         expect(response).to redirect_to root_path
       end
+
+      it "creates a @notification" do
+        expect(assigns[:notification]).to be_instance_of Notification
+      end
+
+      it "saves @notification to db" do
+        expect(Notification.count).to eq(1)
+      end
+
+      it "associates @notification creator with current user" do
+        expect(Notification.first.creator).to eq(user)
+      end
+
+      it "associates @notifications user with post creator" do
+        expect(Notification.first.user).to eq(new_post.user)
+      end
+
+      it "associates @notification with comment" do
+        expect(Notification.first.notifiable).to eq(Comment.first)
+      end
       
+    end
+
+    it "does not create a notification if user comments on their own post" do
+        set_current_user user
+        my_post = Fabricate(:post, user: user)
+        @request.env['HTTP_REFERER'] = root_path
+        post :create, post_id: my_post.id, comment: Fabricate.attributes_for(:comment)
+        expect(Notification.count).to eq(0)
     end
 
     context "invalid input" do

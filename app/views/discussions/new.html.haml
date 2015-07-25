@@ -3,7 +3,7 @@
     .col-sm-10.col-sm-offset-1
       =bootstrap_form_for(@discussion, url: threads_path) do |f|
         %header
-          %h1 Create Discussion
-        =f.text_field :name
-        =f.text_area :description
-        =f.submit "Create Thread"
+          %h1 create discussion
+        =f.text_field :name, label: 'name'
+        =f.text_area :description, label: 'description'
+        =f.submit "create thread"

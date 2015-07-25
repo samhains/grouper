@@ -82,6 +82,13 @@ describe PostsController do
 
     end
 
+    it "does not create a notification if user posts in their own thread" do
+        set_current_user user
+        discussion2 = Fabricate(:discussion, creator: user)
+        post :create, discussion_id: discussion2.id, post: Fabricate.attributes_for(:post, user: user) 
+        expect(Notification.count).to eq(0)
+    end
+
     context "invalid input " do
       before do
         post :create, discussion_id: discussion.id, post: { body: 'hey' } 

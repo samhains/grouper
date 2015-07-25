@@ -2,27 +2,27 @@
   .container
     %ul.col-md-7.col-sm-7.col-xs-12.nav.navbar-nav
       %li= link_to "GARP", root_path, class: 'navbar-brand'
-      %li= link_to "Threads", all_threads_path
+      %li= link_to "threads", all_threads_path
       -if logged_in?
-        %li= link_to "Friends", friendships_path
-        %li= link_to "Inbox (#{current_user.unread_email_count})", inbox_messages_path
-        %li= link_to "Notifications (#{current_user.new_notifications_count})", 
+        %li= link_to "friends", friendships_path
+        %li= link_to "inbox (#{current_user.unread_email_count})", inbox_messages_path
+        %li= link_to "notifications (#{current_user.new_notifications_count})", 
           notifications_path
 
       -else
-        %li= link_to "Register", register_path
-        %li= link_to "Sign In", login_path
+        %li= link_to "register", register_path
+        %li= link_to "sign In", login_path
     -if logged_in?
       .col-md-5.col-sm-5
         #user_links.pull-right
           %ul.nav.navbar-nav.navbar-right.hidden-xs
             %li.dropdown
               %a(href="#" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" data-target="#")
-                Welcome, #{ current_user.name }
+                greetings, #{ current_user.name }
                 %span.caret
               %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
                 %li
-                  =link_to "My Profile", user_path(current_user)
-                  = link_to "Edit Profile", user_edit_path
-                  =link_to "Sign Out", logout_path
+                  =link_to "my profile", user_path(current_user)
+                  = link_to "edit profile", user_edit_path
+                  =link_to "sign out", logout_path
 

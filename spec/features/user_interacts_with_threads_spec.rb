@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User Interacts With Threads' do
+feature 'User Interacts With threads' do
   scenario 'User creates thread and posts on it' do
     sam = Fabricate(:user)
     discussion1 = Fabricate(:discussion)
@@ -10,22 +10,22 @@ feature 'User Interacts With Threads' do
 
     expect(page).to have_button(discussion1.name)
     expect(page).to have_button(discussion2.name)
-    expect(page).to have_link("Threads")
-    click_link("Threads")
-    expect(page).to have_button("Create Thread")
-    click_link("Create Thread")
+    expect(page).to have_link("threads")
+    click_link("threads")
+    expect(page).to have_button("create thread")
+    click_link("create thread")
 
-    fill_in('Name', with: 'Contemporary Music')
-    fill_in('Description', with: 'discuss music')
-    expect(page).to have_button("Create Thread")
-    click_button("Create Thread")
+    fill_in('name', with: 'Contemporary Music')
+    fill_in('description', with: 'discuss music')
+    expect(page).to have_button("create thread")
+    click_button("create thread")
 
     expect(page).to have_content("New Discussion Created!")
-    expect(page).to have_button("Join Thread")
-    click_link("Join Thread")
+    expect(page).to have_button("join thread")
+    click_link("join thread")
     fill_in('Title', with: "Welcome to my group!")
     fill_in('Body', with: "first post!")
-    click_button('Post')
+    click_button('post')
     expect(page).to have_content("Welcome to my group!")
     expect(page).to have_content("first post!")
   end
@@ -40,7 +40,7 @@ feature 'User Interacts With Threads' do
 
     click_link("#{discussion3.name}")
     expect(page).to have_content(discussion3.description)
-    click_link("Join Thread")
+    click_link("join thread")
 
     click_link("GARP")
     expect(page).to have_content(post1.title)
