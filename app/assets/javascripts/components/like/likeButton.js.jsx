@@ -4,12 +4,13 @@ var LikeButton = React.createClass({
     var classes = cx({
       'btn-primary': this.props.liked
     });
+    var likeText = (this.props.type === 'Post') ? 'Like' : '';
     return (
             <button 
               onClick={this.props.clickHandler} 
               className={`btn btn-default btn-xs like-btn ${classes}`}>
                 <i className="glyphicon glyphicon-thumbs-up"></i>
-              Like
+                {likeText}
             </button>
            );
   }

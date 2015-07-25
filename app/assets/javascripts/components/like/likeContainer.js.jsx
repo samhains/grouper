@@ -41,16 +41,18 @@ var LikeContainer = React.createClass({
   },
   render(){
 
-    return (<div className='like-container'>
-              <LikeButton 
-                clickHandler={this.clickHandler}
-                liked={this.state.liked}
-                />
-               <LikerInfoContainer 
-                 toggleLikers={this.toggleLikers} 
-                 showLikers={this.state.showLikers} 
-                 likers={this.state.likers}/>
-            </div>);
+      return (<div className='like-container'>
+                <LikeButton 
+                  clickHandler={this.clickHandler}
+                  liked={this.state.liked}
+                  type={this.props.type}
+                  />
+                 <LikerInfoContainer 
+                   toggleLikers={this.toggleLikers} 
+                   showLikers={this.state.showLikers} 
+                   likers={this.state.likers}
+                   type={this.props.type}/>
+              </div>);
   }
 
 });
