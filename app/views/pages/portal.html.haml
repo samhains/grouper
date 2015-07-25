@@ -29,13 +29,13 @@
                     =discussion.name 
                     %div
                     -if discussion.last_post_author
-                      %small.text-muted by #{ discussion.last_post_author.name }
-                    %small.text-muted, #{ time_ago_in_words discussion.last_updated } ago
+                      %small.text-muted by #{ discussion.last_post_author.name },
+                    %small.text-muted #{ time_ago_in_words discussion.last_updated } ago
     -else
       .span8.well
-        %h2.text-center You haven't joined any threads yet!
+        %h2.text-center you haven't joined any threads yet!
       .span8.well
-        %h3.header-bottom-padding.text-center  Recent Activity
+        %h3.header-bottom-padding.text-center  recent activity
         -@recent_discussions.each do |discussion|
           .span8
             =link_to thread_path(discussion) do
