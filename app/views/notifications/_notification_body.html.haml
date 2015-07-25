@@ -1,58 +1,56 @@
 =link_to notification.creator.name, user_path(notification.creator)
--if notification.notifiable.class == Like
-  -if notification.notifiable.likeable.class == Post
+-if notification.type == Like
+  -if notification.liked_class == Post
     %span liked your
-    -unless notification.notifiable.likeable.title.empty?
+    -unless notification.post_title?
       %span Post,
-      =link_to notification.notifiable.likeable.title, 
-        post_path(id: notification.notifiable.likeable_id)
+      =link_to notification.post.title,
+        post_path(notification.post)
     -else
-      =link_to notification.notifiable.likeable.class, 
-        post_path(notification.notifiable.likeable_id)
+      =link_to notification.liked_class, 
+        post_path(notification.post)
     %span, #{ time_ago_in_words notification.created_at } ago
     %br
     %br
   -elsif notification.liked_class == Comment
     %span liked your Comment on
-    -unless notification.notifiable.likeable.post.title.empty?
+    -unless notification.post_title?
       %span Post,
-      =link_to notification.notifiable.likeable.post.title, 
-        post_path(notification.notifiable.likeable.post)
+      =link_to notification.post.title, 
+        post_path(notification.post)
     -else
-      =link_to notification.notifiable.likeable.post.class, 
-        post_path(notification.notifiable.likeable.post)
+      =link_to notification.post.class,
+        post_path(notification.post)
     %span, #{ time_ago_in_words notification.created_at } ago
     %br
     %br
 
   .panel.panel-default
     .panel-body
-      =notification.notifiable.likeable.body
--if notification.notifiable.class == Post
+      =notification.liked_content
+-if notification.type == Post
   %span posted in 
-  =link_to notification.notifiable.discussion.name, 
-    thread_path(notification.notifiable.discussion)
+  =link_to notification.discussion.name, 
+    thread_path(notification.discussion)
   %span, #{ time_ago_in_words notification.created_at } ago
   %br
   %br
   .panel.panel-default
     .panel-body 
-      =notification.notifiable.body
+      =notification.text
 
--if notification.notifiable.class == Comment
+-if notification.type == Comment
   %span commented on
-  -unless notification.notifiable.post.title.empty?
+  -unless notification.post_title?
     %span your Post,
-    =link_to notification.notifiable.post.title, 
-      post_path(notification.notifiable.post)
+    =link_to notification.post.title, post_path(notification.post)
   -else
     %span your
-    =link_to notification.notifiable.post.class, 
-      post_path(notification.notifiable.post)
+    =link_to notification.post.class, post_path(notification.post)
   %span, #{ time_ago_in_words notification.created_at } ago
   %br
   %br
   .panel.panel-default
     .panel-body 
-      =notification.notifiable.body
+      =notification.text
 
