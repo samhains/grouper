@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :discussions, through: :discussion_users
   has_many :posts, ->{ order('created_at DESC') }
   has_many :comments
-  has_many :likes
+  has_many :likes, -> { order('created_at DESC') }
   has_many :friendships
   has_many :friends, through: :friendships
   has_many :notifications, ->{ order('created_at DESC') }  

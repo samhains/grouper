@@ -1,26 +1,35 @@
 .container
   %section.container.row
-    .col-md-12.col-lg-4.well
-      %h3.row 
-        .col-md-7
-          #{ @user.name }
-          %small (#{ @user.username })
-        .col-md-1
-        .col-md-3
-          -unless current_user.is_friend? @user
-            =link_to friendships_path(friend_id: @user.id), method: :post do
-              %button.btn.btn-sm.btn-default
-                add friend
-          -else
-            =link_to friendship_path(@user.friendship(current_user)), method: :delete do
-              %button.btn.btn-sm.btn-default
-                remove friend
-      %br
-      %em #{ @user.bio }
-      %br
-      %br
-      %p joined garp on #{ clean_time(@user.created_at) }
-      %p total posts: #{ @user.posts.count} 
+    .col-md-12.col-lg-4
+      .well
+        %h3.row 
+          .col-md-7
+            #{ @user.name }
+            %small (#{ @user.username })
+              
+          .col-md-1
+          .col-md-3
+            -unless current_user.is_friend? @user
+              =link_to friendships_path(friend_id: @user.id), method: :post do
+                %button.btn.btn-sm.btn-default
+                  add friend
+            -else
+              =link_to friendship_path(@user.friendship(current_user)), method: :delete do
+                %button.btn.btn-sm.btn-default
+                  remove friend
+        %br
+        %em #{ @user.bio }
+        %br
+        %br
+        %p joined garp on #{ clean_time(@user.created_at) }
+        %p total posts: #{ @user.posts.count} 
+      -if @likes.count >0
+        .row
+          .col-md-12.col-lg-12
+            .well
+              %h4.header
+                #{@user.name}'s recent likes
+        =render @likes, user: @user
     .col-md-12.col-lg-7
       .well
         %h4 #{ @user.name }'s posts

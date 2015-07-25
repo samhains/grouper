@@ -8,7 +8,7 @@ describe User do
   it { should validate_presence_of(:username) }
   it { should validate_uniqueness_of(:username) }
   it { should have_many(:friends).through(:friendships) }
-  it { should have_many(:likes) }
+  it { should have_many(:likes).order('created_at DESC') }
   it { should have_many(:notifications).order('created_at DESC') }
 
   let(:user) { Fabricate(:user) }

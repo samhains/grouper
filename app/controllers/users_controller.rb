@@ -46,6 +46,7 @@ class UsersController < ApplicationController
   def show
    @user = User.find(params[:id])
    @posts = @user.posts.page params[:page]
+   @likes = @user.likes.limit(6)
   end
 
 

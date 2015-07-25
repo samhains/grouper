@@ -1,0 +1,27 @@
+.row
+  .col-md-12.col-lg-12
+    .well
+      %span #{user.name} liked
+      -if like.likeable.class == Post
+        -unless like.likeable.title.empty?
+          %span Post,
+          =link_to like.likeable.title,
+            post_path(like.likeable)
+        -else
+          =link_to like.likeable.class,
+            post_path(like.likeable)
+      -elsif like.likeable.class == Comment
+        -unless like.likeable.post.title.empty?
+          %span Post,
+          =link_to like.likeable.post.title,
+            post_path(like.likeable.post)
+        -else
+          =link_to like.likeable.post.class,
+            post_path(like.likeable.post)
+      %span, #{ time_ago_in_words like.created_at } ago
+      %br
+      %br
+
+      .panel.panel-default
+        .panel-body
+          =like.likeable.body
