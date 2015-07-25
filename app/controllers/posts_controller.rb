@@ -15,13 +15,7 @@ class PostsController < ApplicationController
     thread_creator = @post.discussion.creator
 
     if current_user.belongs_to_discussion?(@discussion.id) && @post.save
-      unless current_user == thread_creator
-        @notification = Notification.create(
-          user: thread_creator, 
-          notifiable: @post, 
-          creator: current_user,
-          user_checked: false)
-      end
+      create_notification(current_user, thread_creator, @post)
       @discussion.last_updated = Time.now
       @discussion.save
       flash[:success] = "Post created!"

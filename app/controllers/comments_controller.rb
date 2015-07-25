@@ -13,14 +13,8 @@ class CommentsController < ApplicationController
     post_creator = @post.user
 
     if @comment.save
-      unless current_user == post_creator
-        @notification = Notification.create(
-          user: post_creator, 
-          notifiable: @comment, 
-          creator: current_user,
-          user_checked: false)
-      end
 
+      create_notification(current_user, post_creator, @comment)
       redirect_to :back
     else
       flash[:danger] = "Your comment needs text"

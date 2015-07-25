@@ -6,13 +6,7 @@ class LikesController < ApplicationController
     @like = Like.new(user_id: current_user.id)
     @like.likeable = @likeable
     if @like.save
-      unless current_user == @likeable.user
-        @notification = Notification.create(
-          user: @likeable.user, 
-          notifiable:@like, 
-          creator: current_user,
-          user_checked: false)
-      end
+      create_notification(current_user, @likeable.user, @like)
       render json: {likers: @like.likeable.likers}
     end
   end

@@ -7,6 +7,16 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if logged_in?
   end
 
+  def create_notification(creator, user, notifiable) 
+    unless creator  == user
+      @notification = Notification.create(
+        user: user, 
+        notifiable: notifiable, 
+        creator: creator,
+        user_checked: false)
+    end
+  end
+
 
   def logged_in?
     !!session[:user_id]
