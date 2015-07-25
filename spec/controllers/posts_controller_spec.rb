@@ -4,6 +4,15 @@ describe PostsController do
 
   let(:discussion) { Fabricate(:discussion) }
   let(:user) { Fabricate(:user) }
+  let(:post1) { Fabricate(:post) }
+
+  describe "GET #show" do
+
+    it "sets @post" do
+      get :show, id: post1.id
+      expect(assigns[:post]).to be_instance_of(Post)
+    end
+  end
 
   describe 'POST #create' do
 

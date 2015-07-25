@@ -1,5 +1,9 @@
 class PostsController < ApplicationController
-  before_action :require_user
+  before_action :require_user, except: [:show]
+  def show
+    @post = Post.find(params[:id])
+    @comment = Comment.new
+  end
 
   def create
     @discussion = Discussion.find(params[:discussion_id])

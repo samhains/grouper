@@ -4,6 +4,7 @@ describe LikesController do
     let(:post1) { Fabricate(:post) }
     let(:comment1) { Fabricate(:comment) }
     let(:user) { Fabricate(:user) }
+
   describe "POST #create" do
     context "user likes a post" do
 
@@ -32,12 +33,12 @@ describe LikesController do
         expect(Notification.count).to eq(1)
       end
 
-      it "associates @notification with post author" do
-        expect(Notification.first.user).to eq(post1.user)
+      it "associates @notification with current user" do
+        expect(Notification.first.user).to eq(user)
       end
 
-      it "associates @notification with post" do
-        expect(Notification.first.notifiable).to eq(post1)
+      it "associates @notification with like" do
+        expect(Notification.first.notifiable).to eq(Like.first)
       end
       it "sets likeable_id to post id" do
         expect(Like.first.likeable_id).to eq(post1.id)

@@ -5,7 +5,11 @@ class LikesController < ApplicationController
     get_likeable(params[:id], params[:type])
     @like = Like.new(user_id: current_user.id)
     @like.likeable = @likeable
-    @notification = Notification.create(user: @likeable.user, notifiable:@likeable)
+    @notification = Notification.create(
+      user: @likeable.user, 
+      notifiable:@like, 
+      creator: current_user,
+      user_checked: false)
     if @like.save
       render json: {likers: @like.likeable.likers}
     end
