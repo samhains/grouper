@@ -20,7 +20,6 @@
         %br
         %em #{ @user.bio }
         %br
-        %br
         %p joined garp on #{ clean_time(@user.created_at) }
         %p total posts: #{ @user.posts.count} 
       -if @likes.count >0
