@@ -8,7 +8,7 @@ class Comment < ActiveRecord::Base
   auto_html_for :body do
     html_escape
     image
-    youtube(:width => 400, :height => 250)
+    youtube(:width => 340, :height => 212)
     soundcloud
     link :target => "_blank", :rel => "nofollow"
     simple_format

@@ -5,13 +5,12 @@
       .h2 
         friends
     .col-md-2
-  %br
   -if @friends.count > 0
     -@friends.each_with_index do |friend, index|
       .row
         .col-md-2
         .col-md-8
-          .section.well
+          .section.well.friend-container
             =link_to friend.name, friend
             %span (#{ friend.username })
             -unless friend.posts.empty?

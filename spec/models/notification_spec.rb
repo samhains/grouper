@@ -30,11 +30,11 @@ describe Notification do
 
   describe "#notification_text" do
     it "returns the body of text for the post notification" do
-      expect(post_notification.text).to eq(post_notification.notifiable.body)
+      expect(post_notification.text).to eq(post_notification.notifiable.body_html)
     end
 
     it "returns the body of text for the comment notification" do
-      expect(comment_notification.text).to eq(comment_notification.notifiable.body)
+      expect(comment_notification.text).to eq(comment_notification.notifiable.body_html)
     end
   end
 
@@ -64,7 +64,7 @@ describe Notification do
 
   describe "#body" do
     it "returns liked context/text if notification is a like" do
-      expect(like_notification.liked_content).to eq(like_notification.notifiable.likeable.body)
+      expect(like_notification.liked_content).to eq(like_notification.notifiable.likeable.body_html)
     end
 
     it "returns nil if notification is not a like" do

@@ -1,6 +1,5 @@
-%br
 -discussions.each do |discussion|
-  .span8.well
+  .span8.well.discussion-container
     =link_to thread_path(discussion), class: 'black-link' do
       %h4  
         =discussion.name

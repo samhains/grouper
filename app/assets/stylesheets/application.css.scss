@@ -19,13 +19,18 @@
 
 p {
   img {
-  width:100%;
+    width:100%;
+    max-width: 340px;
  }
 }
+
 .navbar-collapse.collapse {
   display: block!important;
 }
 
+.header-padding{
+  padding-bottom: 7px;
+}
 .lower-time{
   padding-top: 10px;
 }
@@ -44,6 +49,9 @@ p {
   margin-right: 5px;
 }
 
+.notification-container{
+  margin-bottom: 9px;
+}
 .like-container{
   margin-top: 5px;
 }
@@ -151,13 +159,42 @@ iframe {
   margin-top: 4px;
 }
 
-body {
-  padding-top: 70px
+.post-title{
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
-p {
-  img{
-    max-width: 400px;
+body {
+  padding-top: 70px;
+  word-wrap: break-word;
+}
+
+.recent-threads{
+  margin-bottom: 9px;
+  margin-top: 9px;
+}
+.comments-container {
+  margin-top: 14px;
+}
+
+.discussion-container{
+  margin-bottom: 9px;
+  margin-top: 9px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.friend-container{
+  margin-bottom: 9px;
+  margin-top: 0px9
+
+}
+
+.post-container{
+  margin-bottom: 9px;
+  margin-top: 9px;
+  .form-group{
+    margin-bottom: 0px;
   }
 }
 

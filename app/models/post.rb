@@ -12,7 +12,7 @@ class Post < ActiveRecord::Base
     html_escape
     image
     soundcloud
-    youtube(:width => 400, :height => 250)
+    youtube(:width => 340, :height => 212)
     link :target => "_blank", :rel => "nofollow"
     simple_format
   end

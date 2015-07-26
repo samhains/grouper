@@ -11,7 +11,7 @@
         =link_to_next_page @posts, 'next'
         -#-if more_pages(params[:offset])
           -#=link_to "next page", root_path(offset: offset_calculate(params[:offset]))
-      .col-lg-4.fixed.hidden-md.hidden-xs.hidden-sm
+      .col-lg-4.fixed.hidden-md.hidden-xs.hidden-sm.recent-threads
         .row.well
           %h4.header-bottom-padding.text-center followed threads
           -@discussions.each do |discussion|

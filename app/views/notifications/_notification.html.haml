@@ -1,7 +1,7 @@
 -if notification.user_checked
-  .div.span8.well.white-well
+  .div.span8.well.white-well.notification-container
     =render 'notification_body', notification: notification
 
 -else
-  .div.span8.well
+  .div.span8.well.notification-container
     =render 'notification_body', notification: notification
