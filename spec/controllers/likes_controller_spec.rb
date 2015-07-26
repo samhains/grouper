@@ -44,6 +44,7 @@ describe LikesController do
       it "associates @notification with like" do
         expect(Notification.first.notifiable).to eq(Like.first)
       end
+
       it "sets likeable_id to post id" do
         expect(Like.first.likeable_id).to eq(post1.id)
       end
@@ -101,6 +102,14 @@ describe LikesController do
       expect(Like.count).to eq(1)
       delete :destroy, id: post1.id, type: 'Post'
       expect(Like.count).to eq(0)
+    end
+
+    it "deletes notification from database" do
+      set_current_user user
+      post :create, id: comment1.id, type: 'Comment'
+      expect(Notification.count).to eq(1)
+      delete :destroy, id: comment1.id, type: 'Comment'
+      expect(Notification.count).to eq(0)
     end
   end
 end

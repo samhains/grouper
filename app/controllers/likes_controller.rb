@@ -17,8 +17,7 @@ class LikesController < ApplicationController
       likeable_id: params[:id], 
       user: current_user).first
     if @like
-      @notification = Notification.find_by(notifiable: @like)
-      @notification.destroy if @notification
+      delete_notification(@like)
       @like.destroy
     end
     render json: {likers: @like.likeable.reload.likers}

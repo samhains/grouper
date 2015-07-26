@@ -125,6 +125,13 @@ describe PostsController do
       let(:action) { delete :destroy, discussion_id: discussion.id, id: new_post.id }
     end
 
+    it "deletes notification from database" do
+      discussion.users << user
+      post :create, discussion_id: discussion.id, post: Fabricate.attributes_for(:post, user: nil) 
+      expect(Notification.count).to eq(1)
+      delete :destroy, discussion_id: discussion.id, id: Post.first.id
+      expect(Notification.count).to eq(0)
+    end
 
     it "sets successful flash message" do
       delete :destroy, discussion_id: discussion.id, id: new_post.id 

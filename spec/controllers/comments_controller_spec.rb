@@ -114,8 +114,16 @@ describe CommentsController do
       expect(flash[:success]).to_not be_nil
     end
 
+    it "deletes notification from database" do
+      post :create, post_id: new_post.id, comment: Fabricate.attributes_for(:comment)
+      expect(Notification.count).to eq(1)
+      delete :destroy, id: Comment.first.id, post_id: new_post.id
+      expect(Notification.count).to eq(0)
+    end
+
     it "redirects to discussion path" do
       delete :destroy, post_id: new_post, id: new_comment.id
+    
       expect(response).to redirect_to thread_path(discussion)
     end
 

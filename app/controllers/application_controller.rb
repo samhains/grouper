@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find(session[:user_id]) if logged_in?
   end
+  
+  def delete_notification(notifiable)
+    @notification = Notification.find_by(notifiable: notifiable)
+    @notification.destroy if @notification
+  end
 
   def create_notification(creator, user, notifiable) 
     unless creator  == user

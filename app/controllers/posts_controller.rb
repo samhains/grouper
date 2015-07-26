@@ -31,6 +31,7 @@ class PostsController < ApplicationController
 
     @post = Post.find(params[:id])
     @post.destroy if current_user.created_post?(@post.id)
+    delete_notification(@post)
     flash[:success] = "You have deleted your post!"
     redirect_to :back
   end
