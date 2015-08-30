@@ -8,6 +8,13 @@ class Post < ActiveRecord::Base
   has_many :likes, ->{ order('created_at DESC') }, as: :likeable
   validates_presence_of :user, :discussion, :body
 
+  searchable do
+    text :title, :body
+    #text :comments do
+      #comments.map{ |comment| comment.body }
+    #end
+  end
+
   auto_html_for :body do
     html_escape
     image

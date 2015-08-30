@@ -16,6 +16,15 @@
           %li= link_to "notifications (#{current_user.new_notifications_count})", 
           notifications_path
 
+        =form_tag users_path, method: 'get', class: 'navbar-form' do
+          =text_field_tag :search, params[:search], class: 'form-control', placeholder: 'search'
+        -#%form.navbar-form.pull-right
+          -#.input-group
+            -#%input.form-control
+            -#.input-group-btn
+              -#%button.btn.btn-default
+                -#%i.glyphicon.glyphicon-search
+
       -else
         %li= link_to "register", register_path
         %li= link_to "sign In", login_path

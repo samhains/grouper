@@ -18,9 +18,11 @@ gem 'spring',        group: :development
 gem 'haml-rails', '>= 0.3.4' 
 gem 'react-rails', '~> 1.0'
 gem 'autogrow-textarea-rails'
+gem 'sunspot_rails'
 
 group :development do
   gem 'thin'
+  gem 'sunspot_solr'
   gem "better_errors"
   gem "binding_of_caller"
   gem "letter_opener"
